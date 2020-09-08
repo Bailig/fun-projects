@@ -3,10 +3,6 @@
 # dependencies
 **/node_modules
 
-# generated
-# **/generated
-# *.generated.ts
-# *.generated.tsx
 
 # testing
 **/coverage
@@ -35,7 +31,6 @@ lerna-error.log*
 
 # data
 **/data
-*.sqlite
 
 # cache
 **/.cache

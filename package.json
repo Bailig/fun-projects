@@ -1,0 +1,11 @@
+{
+  "name": "fun-projects",
+  "version": "0.0.1",
+  "description": "Some web projects for fun",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Bailig",
+  "license": "ISC"
+}

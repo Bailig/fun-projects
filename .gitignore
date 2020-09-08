@@ -12,7 +12,7 @@
 **/coverage
 
 # production
-**/build
+**/dist
 
 # misc
 .DS_Store
@@ -36,3 +36,6 @@ lerna-error.log*
 # data
 **/data
 *.sqlite
+
+# cache
+**/.cache

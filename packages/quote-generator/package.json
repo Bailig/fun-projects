@@ -1,0 +1,7 @@
+{
+  "name": "@fun-projects/quote-generator",
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": "Bailig",
+  "license": "MIT"
+}

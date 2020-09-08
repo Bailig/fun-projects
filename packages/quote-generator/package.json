@@ -1,7 +1,17 @@
 {
   "name": "@fun-projects/quote-generator",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "src/index.tsx",
   "author": "Bailig",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^16.9.49",
+    "@types/react-dom": "^16.9.8",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
 }

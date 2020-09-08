@@ -28,10 +28,12 @@ module.exports = {
   ],
   rules: {
     "import/prefer-default-export": "off",
-    "import/no-default-export": "error",
+    "import/no-default-export": "off",
     "no-use-before-define": "error",
     "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/no-use-before-define": "error",
+    "@typescript-eslint/explicit-function-return-type": "off",
     "react/prop-types": "off",
+    "unicorn/prevent-abbreviations": "off",
   },
 };

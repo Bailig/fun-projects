@@ -36,4 +36,10 @@ module.exports = {
     "react/prop-types": "off",
     "unicorn/prevent-abbreviations": "off",
   },
+  overrides: {
+    files: ["*.spec.tsx"],
+    rules: {
+      "import/no-extraneous-dependencies": "off",
+    },
+  },
 };

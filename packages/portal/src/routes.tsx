@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 
 const Quote = React.lazy(() => import("@fun-projects/quote-generator"));
 
-const About: FC = () => <Quote text="hi" author="Dave" />;
+const About: FC = () => <Quote />;
 const Home: FC = () => (
   <>
     home <Link to="/about">about</Link>

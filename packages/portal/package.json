@@ -10,9 +10,11 @@
     "build": "parcel build public/index.html"
   },
   "alias": {
-    "@fun-projects/quote-generator": "../quote-generator"
+    "@fun-projects/quote-generator": "../quote-generator",
+    "@fun-projects/infinite-scroll": "../infinite-scroll"
   },
   "dependencies": {
+    "@fun-projects/infinite-scroll": "^0.0.0",
     "@fun-projects/quote-generator": "^0.0.0",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",

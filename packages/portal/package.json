@@ -13,6 +13,9 @@
     "@fun-projects/quote-generator": "../quote-generator",
     "@fun-projects/infinite-scroll": "../infinite-scroll"
   },
+  "browserslist": [
+    "last 1 Chrome version"
+  ],
   "dependencies": {
     "@fun-projects/infinite-scroll": "^0.0.0",
     "@fun-projects/quote-generator": "^0.0.0",

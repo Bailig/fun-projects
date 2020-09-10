@@ -14,7 +14,7 @@ export const QuoteContainer: FC = () => {
     fetch("https://type.fit/api/quotes")
       .then((res) => res.json())
       .then((data) => setQuotes(data))
-      .catch((err) => setError(err));
+      .catch((error_) => setError(error_));
   }, []);
 
   if (error) return <>Oops! something went wrong</>;

@@ -13,6 +13,7 @@ module.exports = {
     "plugin:promise/recommended",
     "plugin:unicorn/recommended",
     "plugin:monorepo/recommended",
+    "plugin:react-hooks/recommended",
     "prettier",
     "prettier/react",
     "prettier/@typescript-eslint",
@@ -36,10 +37,12 @@ module.exports = {
     "react/prop-types": "off",
     "unicorn/prevent-abbreviations": "off",
   },
-  overrides: {
-    files: ["*.spec.tsx"],
-    rules: {
-      "import/no-extraneous-dependencies": "off",
+  overrides: [
+    {
+      files: ["*.spec.tsx"],
+      rules: {
+        "import/no-extraneous-dependencies": "off",
+      },
     },
-  },
+  ],
 };

@@ -7,11 +7,10 @@ const fetcher = async (url: string) => {
   return res.json();
 };
 
+const url = "https://type.fit/api/quotes";
+
 export const QuoteContainer: FC = () => {
-  const { data: quotes, error, mutate } = useSWR<ApiQuote[]>(
-    "https://type.fit/api/quotes",
-    fetcher,
-  );
+  const { data: quotes, error, mutate } = useSWR<ApiQuote[]>(url, fetcher);
 
   if (error) return <>Oops! something went wrong</>;
   if (!quotes) return <>loading...</>;

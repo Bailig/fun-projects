@@ -1,34 +1,41 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import { flatten, map, pipe } from "ramda";
+import React, { FC, useEffect, useMemo, useRef, useState } from "react";
+import { useSWRInfinite } from "swr";
 
-const fetchPhotos = async (count: number): Promise<Photo[]> => {
-  const response = await fetch(
-    `https://api.unsplash.com/photos/random?client_id=jFgS8tteGD425f4oZfygQVaVnD6gt6GucN2yyz3xFek&count=${count}`,
-  );
-  const data: ApiPhoto[] = await response.json();
-  return data.map((photo) => ({
-    id: photo.id,
-    url: photo.urls.small,
-    alt: photo.alt_description,
-    loaded: false,
-  }));
+const fetchPhotos = async (...args: Parameters<typeof fetch>) => {
+  const response = await fetch(...args);
+  return response.json();
 };
 
 export const ImageListContainer: FC = () => {
-  const [photos, setPhotos] = useState<Photo[]>();
-  const [error, setError] = useState<Error>();
+  const { data, error, setSize } = useSWRInfinite<ApiPhoto[]>(
+    (index) =>
+      `https://api.unsplash.com/photos/random?client_id=jFgS8tteGD425f4oZfygQVaVnD6gt6GucN2yyz3xFek&count=${
+        index === 0 ? 5 : 20
+      }`,
+    fetchPhotos,
+  );
+
   const imagesLoadedRef = useRef<boolean>(false);
+  const [imagesLoadedCount, setImagesLoadedCount] = useState<number>(0);
+
+  const photos = useMemo(() => {
+    if (!data) return;
+    return pipe<ApiPhoto[][], ApiPhoto[], Photo[]>(
+      flatten,
+      map((d) => ({
+        id: d.id,
+        url: d.urls.regular,
+        alt: d.alt_description,
+      })),
+    )(data);
+  }, [data]);
 
   useEffect(() => {
-    const photosFetched = photos !== undefined;
-    const imageNotLoaded = photos?.find((p) => p.loaded === false);
-    imagesLoadedRef.current = photosFetched && !imageNotLoaded;
-  }, [photos]);
-
-  useEffect(() => {
-    fetchPhotos(5)
-      .then((fetchedPhotos) => setPhotos(fetchedPhotos))
-      .catch((error_) => setError(error_));
-  }, []);
+    if (imagesLoadedCount > 0 && imagesLoadedCount === photos?.length) {
+      imagesLoadedRef.current = true;
+    }
+  }, [imagesLoadedCount, photos?.length]);
 
   useEffect(() => {
     const listenScroll = () => {
@@ -38,31 +45,19 @@ export const ImageListContainer: FC = () => {
         imagesLoadedRef.current
       ) {
         imagesLoadedRef.current = false;
-        fetchPhotos(20)
-          .then((newPhotos) =>
-            setPhotos((oldPhotos) => [...oldPhotos!, ...newPhotos]),
-          )
-          .catch((error_) => setError(error_));
+        setSize((s) => s + 1);
       }
     };
 
     window.addEventListener("scroll", listenScroll);
     return () => window.removeEventListener("scroll", listenScroll);
-  }, []);
+  }, [setSize]);
 
   if (!photos) return <>loading...</>;
   if (error) return <>Oops!</>;
 
-  const handleImageLoad = (id: string) => {
-    setPhotos((ps) => {
-      return ps?.map((p) => {
-        if (p.id !== id) return p;
-        return {
-          ...p,
-          loaded: true,
-        };
-      });
-    });
+  const handleImageLoad = () => {
+    setImagesLoadedCount((c) => c + 1);
   };
 
   return (
@@ -71,7 +66,7 @@ export const ImageListContainer: FC = () => {
         <img
           key={id}
           src={url}
-          onLoad={() => handleImageLoad(id)}
+          onLoad={() => handleImageLoad()}
           alt={alt}
           width="100%"
         />
@@ -98,5 +93,4 @@ export interface Photo {
   id: string;
   url: string;
   alt: string;
-  loaded: boolean;
 }

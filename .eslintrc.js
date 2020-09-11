@@ -36,6 +36,7 @@ module.exports = {
     "@typescript-eslint/explicit-function-return-type": "off",
     "react/prop-types": "off",
     "unicorn/prevent-abbreviations": "off",
+    "consistent-return": "off",
   },
   overrides: [
     {

@@ -13,5 +13,8 @@
   "peerDependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
+  },
+  "dependencies": {
+    "swr": "^0.3.2"
   }
 }

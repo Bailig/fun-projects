@@ -1,31 +1,33 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
+import useSWR from "swr";
 import { Quote } from "./quote";
 
-interface ApiQuote {
-  text: string;
-  author: string;
-}
+const fetcher = async (url: string) => {
+  const res = await fetch(url);
+  return res.json();
+};
 
 export const QuoteContainer: FC = () => {
-  const [quotes, setQuotes] = useState<ApiQuote[]>();
-  const [error, setError] = useState<Error>();
-
-  useEffect(() => {
-    fetch("https://type.fit/api/quotes")
-      .then((res) => res.json())
-      .then((data) => setQuotes(data))
-      .catch((error_) => setError(error_));
-  }, []);
+  const { data: quotes, error, mutate } = useSWR<ApiQuote[]>(
+    "https://type.fit/api/quotes",
+    fetcher,
+  );
 
   if (error) return <>Oops! something went wrong</>;
   if (!quotes) return <>loading...</>;
   if (quotes.length === 0) return <>out of quotes</>;
 
   const handleNew = () => {
-    setQuotes((q) => q?.slice(1, Infinity));
+    mutate((q) => q.slice(1, Infinity), false);
   };
 
   return (
     <Quote text={quotes[0].text} author={quotes[0].author} onNew={handleNew} />
   );
 };
+
+// types
+interface ApiQuote {
+  text: string;
+  author: string;
+}

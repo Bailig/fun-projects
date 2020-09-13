@@ -37,6 +37,9 @@ module.exports = {
     "react/prop-types": "off",
     "unicorn/prevent-abbreviations": "off",
     "consistent-return": "off",
+    "jsx-a11y/media-has-caption": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/interactive-supports-focus": "off",
   },
   overrides: [
     {

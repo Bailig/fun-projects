@@ -1,5 +1,5 @@
 {
-  "name": "@fun-projects/quote-generator",
+  "name": "@fun-projects/joke-teller",
   "version": "0.0.0",
   "main": "src/index.tsx",
   "author": "Bailig",

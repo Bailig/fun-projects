@@ -13,6 +13,7 @@ module.exports = {
     "plugin:promise/recommended",
     "plugin:unicorn/recommended",
     "plugin:monorepo/recommended",
+    "plugin:react-hooks/recommended",
     "prettier",
     "prettier/react",
     "prettier/@typescript-eslint",
@@ -35,5 +36,17 @@ module.exports = {
     "@typescript-eslint/explicit-function-return-type": "off",
     "react/prop-types": "off",
     "unicorn/prevent-abbreviations": "off",
+    "consistent-return": "off",
+    "jsx-a11y/media-has-caption": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/interactive-supports-focus": "off",
   },
+  overrides: [
+    {
+      files: ["*.spec.tsx"],
+      rules: {
+        "import/no-extraneous-dependencies": "off",
+      },
+    },
+  ],
 };

@@ -2,7 +2,7 @@ import { flatten, map, pipe } from "ramda";
 import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import { useSWRInfinite } from "swr";
 
-const fetchPhotos = async (...args: Parameters<typeof fetch>) => {
+const fetcher = async (...args: Parameters<typeof fetch>) => {
   const response = await fetch(...args);
   return response.json();
 };
@@ -13,7 +13,7 @@ export const ImageListContainer: FC = () => {
       `https://api.unsplash.com/photos/random?client_id=jFgS8tteGD425f4oZfygQVaVnD6gt6GucN2yyz3xFek&count=${
         index === 0 ? 5 : 20
       }`,
-    fetchPhotos,
+    fetcher,
   );
 
   const imagesLoadedRef = useRef<boolean>(false);

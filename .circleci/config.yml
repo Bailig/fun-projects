@@ -1,21 +1,38 @@
 version: 2.1
+
 orbs:
   node: circleci/node@3.0.0
+
 jobs:
   test:
+    executor:
+      name: node/default
+      tag: "12"
     steps:
       - checkout
-      - run yarn install
+      - node/with-cache:
+          steps:
+            - run: yarn install
       - run yarn lint
       - run yarn test
+      - persist_to_workspace:
+        root: .
+        paths:
+          - .
   build:
+    executor:
+      name: node/default
+      tag: "12"
     steps:
-      - checkout
-      - yarn install
-      - yarn build
+      - attach_workspace:
+        at: .
+      - run yarn build
 
 workflows:
-  build-test:
+  version: 2.1
+  build_test:
     jobs:
       - test
-      - build
+      - build:
+        requires:
+          - test

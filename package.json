@@ -10,7 +10,7 @@
     "start": "yarn clean && lerna run start --stream",
     "build": "yarn clean && lerna run build --stream",
     "clean": "lerna run clean --stream",
-    "test": "jest",
+    "test": "echo \"Don't forget to add test!\"",
     "lint": "eslint --ext '.js,.jsx,.ts,.tsx' .",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"

@@ -1,38 +1,21 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@3.0.0
+executors:
+  nodejs:
+    docker:
+      - image: circleci/node:14
 
 jobs:
   test:
-    executor:
-      name: node/default
-      tag: "12"
+    executor: nodejs
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: yarn install
-      - run yarn lint
-      - run yarn test
-      - persist_to_workspace:
-        root: .
-        paths:
-          - .
-  build:
-    executor:
-      name: node/default
-      tag: "12"
-    steps:
-      - attach_workspace:
-        at: .
-      - run yarn build
+      - run: yarn install
+      - run: yarn lint
+      - run: yarn test
+      - run: yarn build
 
 workflows:
-  version: 2.1
-  build_test:
+  test:
     jobs:
       - test
-      - build:
-        requires:
-          - test

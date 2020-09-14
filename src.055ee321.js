@@ -5,4 +5,4 @@ parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcel
 },{"react":"SAdv","swr":"OaRa","./config":"qnuM"}],"IESY":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e=require("./joke-teller-container");Object.defineProperty(exports,"default",{enumerable:!0,get:function(){return e.JokeTellerContainer}});
 },{"./joke-teller-container":"VwYd"}]},{},[], null)
-//# sourceMappingURL=https://bailig.github.io/fun-projects/src.055ee321.js.map
+//# sourceMappingURL=src.055ee321.js.map

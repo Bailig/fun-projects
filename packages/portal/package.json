@@ -12,7 +12,8 @@
   "alias": {
     "@fun-projects/quote-generator": "../quote-generator",
     "@fun-projects/infinite-scroll": "../infinite-scroll",
-    "@fun-projects/joke-teller": "../joke-teller"
+    "@fun-projects/joke-teller": "../joke-teller",
+    "@fun-projects/music-player": "../music-player"
   },
   "browserslist": [
     "last 1 Chrome version"
@@ -20,6 +21,7 @@
   "dependencies": {
     "@fun-projects/infinite-scroll": "^0.0.0",
     "@fun-projects/joke-teller": "^0.0.0",
+    "@fun-projects/music-player": "^0.0.0",
     "@fun-projects/quote-generator": "^0.0.0",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",

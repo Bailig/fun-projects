@@ -52,9 +52,7 @@ export const JokeTellerContainer: FC = () => {
       <button type="button" onClick={handleClick}>
         Tell me a joke
       </button>
-      <audio ref={audioRef} hidden src={jokeAudio} onEnded={handleEnded}>
-        <track kind="captions" />
-      </audio>
+      <audio ref={audioRef} src={jokeAudio} onEnded={handleEnded} />
     </>
   );
 };

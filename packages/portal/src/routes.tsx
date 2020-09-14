@@ -1,5 +1,5 @@
 import React, { FC, Suspense } from "react";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Link, Route, Switch } from "react-router-dom";
 
 const Quote = React.lazy(() => import("@fun-projects/quote-generator"));
 const InfiniteScroll = React.lazy(

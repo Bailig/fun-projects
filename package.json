@@ -14,7 +14,8 @@
     "lint": "eslint --ext '.js,.jsx,.ts,.tsx' .",
     "format": "prettier --ignore-path '.gitignore' --write '**/*.{ts,tsx,js,jsx}'",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "precommit": "yarn format"
   },
   "author": "Bailig",
   "license": "MIT",

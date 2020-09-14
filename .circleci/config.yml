@@ -13,46 +13,8 @@ jobs:
       - run: yarn install
       - run: yarn lint
       - run: yarn test
-      - persist_to_workspace:
-          root: .
-          paths:
-            - node_modules
-  build:
-    executor: nodejs
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - run: yarn build
-      - run: mkdir html
-      - persist_to_workspace:
-          root: .
-          paths:
-            - packages/portal/dist
-  deploy:
-    executor: nodejs
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - run: yarn deploy
 
 workflows:
   test:
     jobs:
-      - test:
-          filters:
-            branches:
-              ignore: master
-  build_deploy:
-    jobs:
-      - test:
-          filters:
-            branches:
-              only: master
-      - build:
-          requires:
-            - test
-      - deploy:
-          requires:
-            - build
+      - test

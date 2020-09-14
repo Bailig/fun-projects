@@ -12,6 +12,7 @@
     "clean": "lerna run clean --stream",
     "test": "echo \"Don't forget to add test!\"",
     "lint": "eslint --ext '.js,.jsx,.ts,.tsx' .",
+    "format": "prettier --ignore-path '.gitignore' --write '**/*.{ts,tsx,js,jsx}'",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

@@ -31,7 +31,7 @@ export const JokeTellerContainer: FC = () => {
 
   const { data: jokeAudio } = useSWR<string>(
     jokeString
-      ? `http://api.voicerss.org/?key=${TEXT_TO_SPEECH_API_KEY}&hl=en-us&c=MP3&b64=true&src=${jokeString}`
+      ? `https://api.voicerss.org/?key=${TEXT_TO_SPEECH_API_KEY}&hl=en-us&c=MP3&b64=true&src=${jokeString}`
       : null,
     fetchText,
     options,

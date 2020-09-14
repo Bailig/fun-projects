@@ -3,7 +3,7 @@ version: 2.1
 executors:
   nodejs:
     docker:
-      - image: circleci/node:14
+      - image: circleci/node:14.10.1
 
 jobs:
   test:
@@ -21,8 +21,19 @@ jobs:
       - run: yarn build
 
 workflows:
-  test:
+  test_build:
     jobs:
+      - test:
+          filters:
+            branches:
+              only:
+                - master
+                - develop
       - build:
           requires:
             - test
+          filters:
+            branches:
+              only:
+                - master
+                - develop

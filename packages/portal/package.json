@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf dist .cache",
-    "start": "parcel public/index.html",
-    "build": "parcel build public/index.html"
+    "start": "parcel public/index.html --open",
+    "build": "parcel build public/index.html --public-url ./"
   },
   "alias": {
     "@fun-projects/quote-generator": "../quote-generator",

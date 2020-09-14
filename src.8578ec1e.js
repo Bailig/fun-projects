@@ -87,4 +87,4 @@ module.exports=function(n){return new Promise(function(e,o){var r=document.creat
 },{}],0:[function(require,module,exports) {
 var b=require("U3OY");b.register("js",require("C1LB"));
 },{}]},{},[0,"wGC4"], null)
-//# sourceMappingURL=/src.8578ec1e.js.map
+//# sourceMappingURL=fun-projects/src.8578ec1e.js.map

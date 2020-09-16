@@ -3,35 +3,29 @@ import { AppBar, ToolType } from "./app-bar";
 import { appBarVariables } from "./app-bar.styled";
 import { Canvas, MobileMessage } from "./paint-clone.styled";
 
-interface StrokeBase {
-  x: number;
-  y: number;
-  size: number;
-}
+const STROKES_STORAGE_KEY = "canvasStrokes";
 
-interface BrushStoke extends StrokeBase {
-  color: string;
-  type: "brush";
-}
-interface EraserStoke extends StrokeBase {
-  type: "eraser";
-}
-
-type Stroke = BrushStoke | EraserStoke;
+const setStrokes = (strokes: Stroke[]) =>
+  localStorage.setItem(STROKES_STORAGE_KEY, JSON.stringify(strokes));
+const getStrokes = (): Stroke[] =>
+  JSON.parse(localStorage.getItem(STROKES_STORAGE_KEY) || "[]");
+const clearStrokes = () => localStorage.removeItem(STROKES_STORAGE_KEY);
 
 export const PaintCloneContainer: FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const contextRef = useRef<CanvasRenderingContext2D>();
   const isDrawingRef = useRef<boolean>(false);
-  const drawnStokesRef = useRef<Stroke[]>([]);
+  const stokesRef = useRef<Stroke[]>([]);
   const [backgroundColor, setBackgroundColor] = useState<string>("#ffffff");
   const [brushColor, setBrushColor] = useState<string>("#000000");
   const [brushSize, setBrushSize] = useState<number>(10);
   const [activeTool, setActiveTool] = useState<ToolType>("brush");
+  const [downloadUrl, setDownloadUrl] = useState<string>();
 
   useEffect(() => {
     const canvas = canvasRef.current!;
     contextRef.current = canvas.getContext("2d")!;
+    stokesRef.current = getStrokes();
   }, []);
 
   const initCanvas = useCallback(() => {
@@ -46,7 +40,7 @@ export const PaintCloneContainer: FC = () => {
 
   const restoreDrawing = useCallback(() => {
     const context = contextRef.current!;
-    const drawnStokes = drawnStokesRef.current!;
+    const drawnStokes = stokesRef.current!;
 
     drawnStokes.forEach((stroke, i) => {
       if (i === 0) return;
@@ -64,10 +58,16 @@ export const PaintCloneContainer: FC = () => {
     });
   }, [backgroundColor]);
 
+  const getCanvasImageUrl = useCallback(
+    () => canvasRef.current?.toDataURL("image/jpeg", 1),
+    [],
+  );
+
   useEffect(() => {
     initCanvas();
     restoreDrawing();
-  }, [initCanvas, restoreDrawing]);
+    setDownloadUrl(getCanvasImageUrl());
+  }, [getCanvasImageUrl, initCanvas, restoreDrawing]);
 
   const getMousePosition = (
     event: React.MouseEvent<HTMLCanvasElement, MouseEvent>,
@@ -121,16 +121,20 @@ export const PaintCloneContainer: FC = () => {
             size: 50,
             type: activeTool,
           };
-    drawnStokesRef.current.push(stroke);
+    stokesRef.current.push(stroke);
   };
 
   const handleMouseUp = () => {
     isDrawingRef.current = false;
+    setStrokes(stokesRef.current);
+    setDownloadUrl(getCanvasImageUrl());
   };
 
   const handleCanvasClear = () => {
-    drawnStokesRef.current = [];
+    stokesRef.current = [];
+    clearStrokes();
     initCanvas();
+    setDownloadUrl(getCanvasImageUrl());
   };
 
   return (
@@ -140,11 +144,13 @@ export const PaintCloneContainer: FC = () => {
         backgroundColor={backgroundColor}
         brushColor={brushColor}
         brushSize={brushSize}
+        downloadUrl={downloadUrl}
         onBackgroundColorChange={setBackgroundColor}
         onBrushColorChange={setBrushColor}
         onToolSelect={setActiveTool}
         onBrushSizeChange={setBrushSize}
         onCanvasClear={handleCanvasClear}
+        onCacheClear={clearStrokes}
       />
       <Canvas
         ref={canvasRef}
@@ -156,3 +162,20 @@ export const PaintCloneContainer: FC = () => {
     </>
   );
 };
+
+// types
+interface StrokeBase {
+  x: number;
+  y: number;
+  size: number;
+}
+
+interface BrushStoke extends StrokeBase {
+  color: string;
+  type: "brush";
+}
+interface EraserStoke extends StrokeBase {
+  type: "eraser";
+}
+
+type Stroke = BrushStoke | EraserStoke;

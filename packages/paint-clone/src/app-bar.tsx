@@ -3,12 +3,12 @@ import { AppBarRoot } from "./app-bar.styled";
 
 export type ToolType = "brush" | "eraser";
 
-interface AppBarProps {
+export interface AppBarProps {
   activeTool: ToolType;
   backgroundColor: string;
   brushColor: string;
   brushSize: number;
-  onDownload?: () => void;
+  downloadUrl?: string;
   onCacheClear?: () => void;
   onCanvasClear?: () => void;
   onToolSelect?: (toolType: ToolType) => void;
@@ -23,7 +23,7 @@ export const AppBar: FC<AppBarProps> = (props) => {
     backgroundColor,
     brushColor,
     brushSize,
-    onDownload,
+    downloadUrl,
     onCacheClear,
     onCanvasClear,
     onToolSelect = () => {},
@@ -49,8 +49,10 @@ export const AppBar: FC<AppBarProps> = (props) => {
         type="range"
         min="1"
         max="50"
-        value={brushSize}
-        onChange={(e) => onBrushSizeChange(parseInt(e.target.value, 10))}
+        defaultValue="10"
+        onMouseUp={(e) =>
+          onBrushSizeChange(parseInt(e.currentTarget.value, 10))
+        }
       />
       <input
         value={backgroundColor}
@@ -70,9 +72,9 @@ export const AppBar: FC<AppBarProps> = (props) => {
       <button type="button" title="Clear cache" onClick={onCacheClear}>
         clear cache
       </button>
-      <button type="button" title="Save image file" onClick={onDownload}>
+      <a title="Save image file" href={downloadUrl} download="paint.jpg">
         save image file
-      </button>
+      </a>
     </AppBarRoot>
   );
 };

@@ -32,6 +32,7 @@ lerna-error.log*
 
 # data
 **/data
+**/assets
 
 # cache
 **/.cache

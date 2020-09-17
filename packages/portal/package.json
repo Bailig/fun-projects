@@ -14,7 +14,8 @@
     "@fun-projects/infinite-scroll": "../infinite-scroll",
     "@fun-projects/joke-teller": "../joke-teller",
     "@fun-projects/music-player": "../music-player",
-    "@fun-projects/paint-clone": "../paint-clone"
+    "@fun-projects/paint-clone": "../paint-clone",
+    "@fun-projects/video-player": "../video-player"
   },
   "browserslist": [
     "last 1 Chrome version"
@@ -25,6 +26,7 @@
     "@fun-projects/music-player": "^0.0.0",
     "@fun-projects/paint-clone": "^0.0.0",
     "@fun-projects/quote-generator": "^0.0.0",
+    "@fun-projects/video-player": "^0.0.0",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",

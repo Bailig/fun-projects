@@ -8,6 +8,7 @@ const InfiniteScroll = React.lazy(
 const JokeTeller = React.lazy(() => import("@fun-projects/joke-teller"));
 const MusicPlayer = React.lazy(() => import("@fun-projects/music-player"));
 const PaintClone = React.lazy(() => import("@fun-projects/paint-clone"));
+const VideoPlayer = React.lazy(() => import("@fun-projects/video-player"));
 
 const Home: FC = () => (
   <>
@@ -20,12 +21,15 @@ const Home: FC = () => (
     <Link to="/music-player">music-player</Link>
     <br />
     <Link to="/paint-clone">paint-clone</Link>
+    <br />
+    <Link to="/video-player">video-player</Link>
   </>
 );
 
 export const Routes: FC = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
+      <UI value={50} />
       <Router>
         <Switch>
           <Route path="/" exact>
@@ -45,6 +49,9 @@ export const Routes: FC = () => {
           </Route>
           <Route path="/paint-clone">
             <PaintClone />
+          </Route>
+          <Route path="/video-player">
+            <VideoPlayer />
           </Route>
         </Switch>
       </Router>

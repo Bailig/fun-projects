@@ -1,8 +1,8 @@
-import React, { FC, useState, useRef, useEffect, SyntheticEvent } from "react";
+import { ProgressBar } from "@fun-projects/ui";
+import React, { FC, SyntheticEvent, useEffect, useRef, useState } from "react";
 import cantYouSee from "./assets/cant-you-see.mp3";
 import holidayBlues from "./assets/holiday-blues.mp3";
 import strawberry from "./assets/strawberry.mp3";
-import { ProgressBar } from "./progress-bar";
 import { secondsToTime } from "./utils";
 
 const MUSICS = [

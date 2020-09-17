@@ -10,8 +10,8 @@
   "homepage": "https://bailig.github.io/fun-projects",
   "license": "MIT",
   "scripts": {
-    "start": "yarn clean && lerna run start --stream",
-    "build": "yarn clean && lerna run build --stream",
+    "start": "lerna run start --stream",
+    "build": "lerna run build --stream",
     "clean": "lerna run clean --stream",
     "test": "echo \"Don't forget to add test!\"",
     "lint": "eslint --ext '.js,.jsx,.ts,.tsx' .",
@@ -22,6 +22,18 @@
   },
   "engines": {
     "node": "^14.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -36,6 +48,8 @@
     "@typescript-eslint/eslint-plugin": "^2.15.0",
     "@typescript-eslint/parser": "^2.0.0",
     "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "dotenv": "^8.2.0",
     "eslint": "^6.0.0",
     "eslint-config-airbnb-typescript": "^6.3.1",
     "eslint-config-prettier": "^6.9.0",

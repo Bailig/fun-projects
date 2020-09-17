@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
-
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 /* eslint-enable import/no-extraneous-dependencies */
 
 const resolvePackage = (relativePath) =>
@@ -16,26 +16,28 @@ const getPaths = () => {
     root: {
       path: resolveRoot("."),
       tsConfig: resolveRoot("tsconfig.json"),
-      nodeModules: resolveRoot("node_modules"),
+      env: resolveRoot(".env"),
     },
     package: {
+      path: resolvePackage("."),
       indexTsx: resolvePackage("src/index.tsx"),
       dist: resolvePackage("dist"),
-      path: resolvePackage("."),
       public: resolvePackage("public"),
       indexHtml: resolvePackage("public/index.html"),
-      packageJson: resolvePackage("package.json"),
-      src: resolvePackage("src"),
-      tsConfig: resolvePackage("tsconfig.json"),
-      env: resolvePackage("src/config/env"),
     },
   };
 };
 
 const paths = getPaths();
 
+require("dotenv").config({ path: paths.root.env });
+
+const isDev = process.env.NODE_ENV === "development";
+
 const config = {
-  entry: ["react-hot-loader/patch", paths.package.indexTsx],
+  entry: [isDev && "react-hot-loader/patch", paths.package.indexTsx].filter(
+    Boolean,
+  ),
   output: {
     path: paths.package.dist,
     filename: "[name].[contenthash].js",
@@ -44,28 +46,28 @@ const config = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: "babel-loader",
+        loader: "babel-loader",
         exclude: /node_modules/,
       },
       {
         test: /\.svg$/,
-        use: "file-loader",
+        loader: "file-loader",
       },
       {
-        test: /\.png$/,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              mimetype: "image/png",
-            },
-          },
-        ],
+        test: /\.mp3$/,
+        loader: "url-loader",
+        options: {
+          publicPath: "assets",
+          outputPath: "assets",
+          limit: 1000,
+          name: "[name].[hash].[ext]",
+        },
       },
       {
         test: /\.ts(x)?$/,
         loader: "ts-loader",
         exclude: /node_modules/,
+        options: { configFile: paths.root.tsConfig },
       },
     ],
   },
@@ -76,13 +78,18 @@ const config = {
     },
   },
   plugins: [
+    new webpack.DefinePlugin({
+      "process.env": {
+        TEXT_TO_SPEECH_API_KEY: `"${process.env.TEXT_TO_SPEECH_API_KEY}"`,
+      },
+    }),
     new HtmlWebpackPlugin({
+      inject: true,
+      template: paths.package.indexHtml,
       appMountId: "app",
-      filename: "index.html",
+      title: "Fun projects",
     }),
-    new CopyPlugin({
-      patterns: [{ from: paths.package.indexHtml }],
-    }),
+    new CleanWebpackPlugin(),
   ],
   optimization: {
     runtimeChunk: "single",

@@ -5,7 +5,7 @@
   "author": "Bailig",
   "license": "MIT",
   "scripts": {
-    "clean": "rm -rf dist .cache",
+    "clean": "rm -rf dist",
     "start": "webpack-dev-server --hot --mode development",
     "build": "webpack -p --mode production"
   },
@@ -35,8 +35,5 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.0"
-  },
-  "devDependencies": {
-    "copy-webpack-plugin": "^6.1.0"
   }
 }

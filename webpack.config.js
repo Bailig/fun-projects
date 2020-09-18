@@ -54,7 +54,7 @@ const config = {
         loader: "file-loader",
       },
       {
-        test: /\.mp3$/,
+        test: /\.(mp3|mp4)$/,
         loader: "url-loader",
         options: {
           publicPath: "assets",

@@ -15,6 +15,7 @@
     "react-dom": "^16.13.1"
   },
   "dependencies": {
-    "@fun-projects/ui": "^0.0.0"
+    "@fun-projects/ui": "^0.0.0",
+    "@fun-projects/utils": "^0.0.0"
   }
 }

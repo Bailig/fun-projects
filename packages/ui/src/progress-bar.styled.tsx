@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ProgressBarRoot = styled.div`
   height: 12px;
   cursor: pointer;
-  border: black;
+  border: solid 1px black;
 `;
 
 export const ProgressBarProgress = styled.div`

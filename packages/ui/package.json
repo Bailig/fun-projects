@@ -1,14 +1,9 @@
 {
   "name": "@fun-projects/ui",
   "version": "0.0.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "src/index.ts",
   "author": "Bailig",
   "license": "MIT",
-  "scripts": {
-    "clean": "rm -rf dist",
-    "start": "tsc -w -d -p tsconfig.json"
-  },
   "devDependencies": {
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",

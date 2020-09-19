@@ -29,7 +29,6 @@ const Home: FC = () => (
 export const Routes: FC = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <UI value={50} />
       <Router>
         <Switch>
           <Route path="/" exact>

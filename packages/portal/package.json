@@ -27,6 +27,7 @@
     "@fun-projects/music-player": "^0.0.0",
     "@fun-projects/paint-clone": "^0.0.0",
     "@fun-projects/quote-generator": "^0.0.0",
+    "@material-ui/core": "^4.11.0",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",

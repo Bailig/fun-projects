@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { ProgressBarProgress, ProgressBarRoot } from "./progress-bar.styled";
 
 interface ProgressBarProps {
   value: number;
@@ -16,22 +17,12 @@ export const ProgressBar: FC<ProgressBarProps> = (props) => {
   };
 
   return (
-    <div
-      style={{
-        height: 20,
-        cursor: "pointer",
-        border: "1px solid black",
-      }}
-      onClick={handleClick}
-      role="progressbar"
-    >
-      <div
+    <ProgressBarRoot onClick={handleClick} role="progressbar">
+      <ProgressBarProgress
         style={{
           width: `${value * 100}%`,
-          height: "100%",
-          backgroundColor: "black",
         }}
       />
-    </div>
+    </ProgressBarRoot>
   );
 };

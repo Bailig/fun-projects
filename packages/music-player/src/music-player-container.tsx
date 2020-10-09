@@ -1,7 +1,18 @@
-import React, { FC, useState, useRef, useEffect, SyntheticEvent } from "react";
+import React, { FC, SyntheticEvent, useEffect, useRef, useState } from "react";
 import cantYouSee from "./assets/cant-you-see.mp3";
 import holidayBlues from "./assets/holiday-blues.mp3";
+import nextIcon from "./assets/next.svg";
+import pauseIcon from "./assets/pause.svg";
+import playIcon from "./assets/play.svg";
+import previousIcon from "./assets/previous.svg";
 import strawberry from "./assets/strawberry.mp3";
+import {
+  AuthorName,
+  MusicControl,
+  MusicName,
+  MusicPlayerRoot,
+  ProgressLabel,
+} from "./music-player.styled";
 import { ProgressBar } from "./progress-bar";
 import { secondsToTime } from "./utils";
 
@@ -84,28 +95,31 @@ export const MusicPlayerContainer: FC = () => {
     setDuration(e.currentTarget.duration);
   };
   return (
-    <>
-      <div>{name}</div>
-      <div>by {author}</div>
+    <MusicPlayerRoot>
+      <MusicName>{name}</MusicName>
+      <AuthorName>{author}</AuthorName>
       <a href={url} target="_blank" rel="noreferrer">
         link to original music
       </a>
+      <ProgressLabel>
+        <div>{secondsToTime(currentTime)}</div>
+        <div>{secondsToTime(duration)}</div>
+      </ProgressLabel>
       <ProgressBar value={progressValue} onClick={handleProgressBarClick} />
-      <div>
-        <span>{secondsToTime(currentTime)}</span>/
-        <span>{secondsToTime(duration)}</span>
-      </div>
       <button type="button" onClick={handlePrevious}>
-        previous
+        <MusicControl src={previousIcon} alt="previous" />
       </button>
       <button
         type="button"
         onClick={() => (isPlaying ? handlePause() : handlePlay())}
       >
-        {isPlaying ? "pause" : "play"}
+        <MusicControl
+          src={isPlaying ? pauseIcon : playIcon}
+          alt={isPlaying ? "pause" : "play"}
+        />
       </button>
       <button type="button" onClick={handleNext}>
-        next
+        <MusicControl src={nextIcon} alt="next" />
       </button>
       <audio
         src={src}
@@ -117,6 +131,6 @@ export const MusicPlayerContainer: FC = () => {
       <div>
         {musicIndex + 1}/{totalMusicCount}
       </div>
-    </>
+    </MusicPlayerRoot>
   );
 };

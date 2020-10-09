@@ -2,50 +2,59 @@ import { ProgressBar } from "@fun-projects/ui";
 import { secondsToTime } from "@fun-projects/utils";
 import React, { FC, useState } from "react";
 
+const PLAYBACK_SPEED = [0.5, 0.75, 1, 1.5, 2];
+
 interface VideoControlsProps {
-  currentTime: number;
   totalTime: number;
-  volume?: number;
-  onPlay?: () => void;
-  onPause?: () => void;
+  currentTime?: number;
+  isPlaying?: boolean;
+  onToggle?: () => void;
   onVolumeChange?: (value: number) => void;
   onProgressChange?: (value: number) => void;
-  onPlaySpeedChange?: (value: number) => void;
+  onPlaybackSpeedChange?: (value: number) => void;
   onFullScreen?: () => void;
 }
 
 export const VideoControls: FC<VideoControlsProps> = ({
-  volume = 0.5,
-  currentTime,
   totalTime,
-  onPause = () => {},
-  onPlay = () => {},
+  currentTime = 0,
+  isPlaying = false,
+  onToggle = () => {},
   onVolumeChange = () => {},
   onProgressChange = () => {},
-  onPlaySpeedChange = () => {},
+  onPlaybackSpeedChange = () => {},
   onFullScreen = () => {},
 }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(0.5);
   const [isMuted, setIsMuted] = useState(false);
+  const [playbackSpeed, setPlaybackSpeed] = useState(1);
 
-  const handlePlay = () => {
-    setIsPlaying(true);
-    onPlay();
-  };
-  const handlePause = () => {
-    setIsPlaying(false);
-    onPause();
-  };
   const handleMute = () => {
     setIsMuted(true);
     onVolumeChange(0);
   };
+
   const handleUnmute = () => {
     setIsMuted(false);
-    onVolumeChange(1);
+    onVolumeChange(volume);
   };
-  const handlePlaySpeedChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onPlaySpeedChange(parseFloat(e.target.value));
+
+  const handleVolumeChange = (value: number) => {
+    const rounded = (() => {
+      if (value < 0.1) return 0;
+      if (value > 0.9) return 1;
+      return value;
+    })();
+    setVolume(rounded);
+    onVolumeChange(rounded);
+  };
+
+  const handlePlaybackSpeedChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const speed = parseFloat(e.target.value);
+    setPlaybackSpeed(speed);
+    onPlaybackSpeedChange(speed);
   };
 
   return (
@@ -53,28 +62,35 @@ export const VideoControls: FC<VideoControlsProps> = ({
       <ProgressBar value={currentTime / totalTime} onClick={onProgressChange} />
       <button
         type="button"
-        onClick={() => (isPlaying ? handlePause() : handlePlay())}
+        title={isPlaying ? "Pause" : "Play"}
+        onClick={() => onToggle()}
       >
-        {isPlaying ? "play" : "pause"}
+        {isPlaying ? "Pause" : "Play"}
       </button>
       <button
         type="button"
+        title={isMuted ? "Unmute" : "Mute"}
         onClick={() => (isMuted ? handleUnmute() : handleMute())}
       >
-        {isMuted ? "unmute" : " mute"}
+        {isMuted ? "unmute" : "mute"}
       </button>
-      <ProgressBar value={volume} onClick={onVolumeChange} />
-      <select onChange={handlePlaySpeedChange}>
-        <option value="0.5">0.5 x</option>
-        <option value="0.75">0.75 x</option>
-        <option value="1">1.0 x</option>
-        <option value="1.5">1.5 x</option>
-        <option value="2">2.0 x</option>
+      <div>Volume</div>
+      <ProgressBar value={isMuted ? 0 : volume} onClick={handleVolumeChange} />
+      <select
+        title="Playback speed"
+        value={playbackSpeed}
+        onChange={handlePlaybackSpeedChange}
+      >
+        {PLAYBACK_SPEED.map((speed) => (
+          <option key={speed} value={speed}>
+            {speed} x
+          </option>
+        ))}
       </select>
       <div>
         {secondsToTime(currentTime)} / {secondsToTime(totalTime)}
       </div>
-      <button type="button" onClick={() => onFullScreen()}>
+      <button type="button" title="Full screen" onClick={() => onFullScreen()}>
         full screen
       </button>
     </>

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import videoSrc from "./assets/gouqi.mp4";
+import videoSrc from "./assets/travel.mp4";
 import { VideoControls } from "./video-controls";
 import { VideoPlayer, VideoPlayerWrapper } from "./video-player.styled";
 

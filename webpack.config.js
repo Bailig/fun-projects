@@ -50,7 +50,7 @@ const config = {
         exclude: /node_modules/,
       },
       {
-        test: /\.svg$/,
+        test: /\.(svg|png|jpg)$/,
         loader: "file-loader",
       },
       {

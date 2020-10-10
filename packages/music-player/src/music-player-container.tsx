@@ -1,3 +1,6 @@
+
+import { ProgressBar } from "@fun-projects/ui";
+import { secondsToTime } from "@fun-projects/utils";
 import React, { FC, SyntheticEvent, useEffect, useRef, useState } from "react";
 import cantYouSee from "./assets/cant-you-see.mp3";
 import holidayBlues from "./assets/holiday-blues.mp3";
@@ -11,10 +14,11 @@ import {
   MusicControl,
   MusicName,
   MusicPlayerRoot,
-  ProgressLabel,
+  ProgressLabel
 } from "./music-player.styled";
-import { ProgressBar } from "./progress-bar";
-import { secondsToTime } from "./utils";
+
+
+
 
 const MUSICS = [
   {
@@ -43,7 +47,7 @@ const MUSICS = [
 export const MusicPlayerContainer: FC = () => {
   const [musicIndex, setMusicIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [progressValue, setProgressValue] = useState(0);
+  const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const musicRef = useRef<HTMLAudioElement>(null);
@@ -52,7 +56,7 @@ export const MusicPlayerContainer: FC = () => {
   const totalMusicCount = MUSICS.length;
 
   useEffect(() => {
-    setProgressValue(0);
+    setProgress(0);
     if (isPlaying) musicRef.current?.play();
   }, [musicIndex]);
 
@@ -80,12 +84,12 @@ export const MusicPlayerContainer: FC = () => {
   const handleTimeUpdate = (e: SyntheticEvent<HTMLAudioElement, Event>) => {
     if (!isPlaying) return;
     const target = e.currentTarget;
-    setProgressValue(target.currentTime / target.duration);
+    setProgress(target.currentTime / target.duration);
     setCurrentTime(target.currentTime);
   };
 
   const handleProgressBarClick = (value: number) => {
-    setProgressValue(value);
+    setProgress(value);
     const musicEl = musicRef.current!;
     musicEl.currentTime = value * musicEl.duration;
     setCurrentTime(musicEl.currentTime);
@@ -105,7 +109,7 @@ export const MusicPlayerContainer: FC = () => {
         <div>{secondsToTime(currentTime)}</div>
         <div>{secondsToTime(duration)}</div>
       </ProgressLabel>
-      <ProgressBar value={progressValue} onClick={handleProgressBarClick} />
+      <ProgressBar value={progress} onClick={handleProgressBarClick} />
       <button type="button" onClick={handlePrevious}>
         <MusicControl src={previousIcon} alt="previous" />
       </button>

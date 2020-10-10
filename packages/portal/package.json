@@ -9,18 +9,6 @@
     "start": "webpack-dev-server --hot --mode development",
     "build": "webpack -p --mode production"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "dependencies": {
     "@fun-projects/infinite-scroll": "^0.0.0",
     "@fun-projects/joke-teller": "^0.0.0",
@@ -28,6 +16,7 @@
     "@fun-projects/paint-clone": "^0.0.0",
     "@fun-projects/quote-generator": "^0.0.0",
     "@material-ui/core": "^4.11.0",
+    "@fun-projects/video-player": "^0.0.0",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",

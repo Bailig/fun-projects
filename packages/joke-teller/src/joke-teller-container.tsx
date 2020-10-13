@@ -23,19 +23,20 @@ const options = {
 };
 
 export const JokeTellerContainer: FC = () => {
-  const { data: joke, mutate } = useSWR<ApiJoke>(
+  const jokeRes = useSWR<ApiJoke>(
     "https://sv443.net/jokeapi/v2/joke/Programming?blacklistFlags=nsfw,racist,sexist",
     fetchJSON,
     options,
   );
 
   const jokeString = (() => {
-    if (!joke) return;
-    if ("setup" in joke) return `${joke.setup} ${joke.delivery}`;
-    return joke.joke;
+    if (!jokeRes.data) return;
+    const { data } = jokeRes;
+    if ("setup" in data) return `${data.setup} ${data.delivery}`;
+    return data.joke;
   })();
 
-  const { data: jokeAudio } = useSWR<string>(
+  const jokeAudioRes = useSWR<string>(
     jokeString
       ? `https://api.voicerss.org/?key=${TEXT_TO_SPEECH_API_KEY}&hl=en-us&c=MP3&b64=true&src=${jokeString}`
       : null,
@@ -46,7 +47,7 @@ export const JokeTellerContainer: FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState<boolean>(false);
 
-  const loading = !jokeAudio || !joke;
+  const loading = jokeAudioRes.isValidating || jokeRes.isValidating;
 
   const handleClick = () => {
     audioRef.current!.play();
@@ -54,7 +55,7 @@ export const JokeTellerContainer: FC = () => {
   };
 
   const handleEnded = () => {
-    mutate();
+    jokeRes.mutate();
     setPlaying(false);
   };
 
@@ -70,7 +71,7 @@ export const JokeTellerContainer: FC = () => {
           Ask Onigiri for a joke
         </Button>
       </JokeTeller>
-      <audio ref={audioRef} src={jokeAudio} onEnded={handleEnded} />
+      <audio ref={audioRef} src={jokeAudioRes.data} onEnded={handleEnded} />
     </JokeTellerContainerRoot>
   );
 };

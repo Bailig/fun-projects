@@ -14,7 +14,7 @@ const clearStrokes = () => localStorage.removeItem(STROKES_STORAGE_KEY);
 export const PaintCloneContainer: FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const contextRef = useRef<CanvasRenderingContext2D>();
-  const isDrawingRef = useRef<boolean>(false);
+  const drawingRef = useRef<boolean>(false);
   const stokesRef = useRef<Stroke[]>([]);
   const [backgroundColor, setBackgroundColor] = useState<string>("#ffffff");
   const [brushColor, setBrushColor] = useState<string>("#000000");
@@ -82,7 +82,7 @@ export const PaintCloneContainer: FC = () => {
   const handleMouseDown = (
     e: React.MouseEvent<HTMLCanvasElement, MouseEvent>,
   ) => {
-    isDrawingRef.current = true;
+    drawingRef.current = true;
     const context = contextRef.current!;
     const curserPosition = getMousePosition(e);
     context.moveTo(curserPosition.x, curserPosition.y);
@@ -100,7 +100,7 @@ export const PaintCloneContainer: FC = () => {
   const handleMouseMove = (
     e: React.MouseEvent<HTMLCanvasElement, MouseEvent>,
   ) => {
-    if (!isDrawingRef.current) return;
+    if (!drawingRef.current) return;
     const context = contextRef.current!;
 
     const currentPosition = getMousePosition(e);
@@ -125,7 +125,7 @@ export const PaintCloneContainer: FC = () => {
   };
 
   const handleMouseUp = () => {
-    isDrawingRef.current = false;
+    drawingRef.current = false;
     setStrokes(stokesRef.current);
     setDownloadUrl(getCanvasImageUrl());
   };

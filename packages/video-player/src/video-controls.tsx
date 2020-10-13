@@ -7,7 +7,7 @@ const PLAYBACK_SPEED = [0.5, 0.75, 1, 1.5, 2];
 interface VideoControlsProps {
   totalTime: number;
   currentTime?: number;
-  isPlaying?: boolean;
+  playing?: boolean;
   onToggle?: () => void;
   onVolumeChange?: (value: number) => void;
   onProgressChange?: (value: number) => void;
@@ -18,7 +18,7 @@ interface VideoControlsProps {
 export const VideoControls: FC<VideoControlsProps> = ({
   totalTime,
   currentTime = 0,
-  isPlaying = false,
+  playing = false,
   onToggle = () => {},
   onVolumeChange = () => {},
   onProgressChange = () => {},
@@ -62,10 +62,10 @@ export const VideoControls: FC<VideoControlsProps> = ({
       <ProgressBar value={currentTime / totalTime} onClick={onProgressChange} />
       <button
         type="button"
-        title={isPlaying ? "Pause" : "Play"}
+        title={playing ? "Pause" : "Play"}
         onClick={() => onToggle()}
       >
-        {isPlaying ? "Pause" : "Play"}
+        {playing ? "Pause" : "Play"}
       </button>
       <button
         type="button"

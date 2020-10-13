@@ -7,17 +7,17 @@ export const VideoPlayerContainer: FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [totalTime, setTotalTime] = useState<number>(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const isFullscreenRef = useRef<boolean>(false);
+  const [playing, setPlaying] = useState(false);
+  const fullscreenRef = useRef<boolean>(false);
 
   const handleToggle = () => {
     const videoEl = videoRef.current!;
-    if (isPlaying) {
+    if (playing) {
       videoEl.pause();
-      setIsPlaying(false);
+      setPlaying(false);
     } else {
       videoEl.play();
-      setIsPlaying(true);
+      setPlaying(true);
     }
   };
 
@@ -35,13 +35,13 @@ export const VideoPlayerContainer: FC = () => {
 
   const handleFullScreen = () => {
     const videoEl = videoRef.current!;
-    const isFullscreen = isFullscreenRef.current;
-    if (!isFullscreen) {
+    const fullscreen = fullscreenRef.current;
+    if (!fullscreen) {
       videoEl.requestFullscreen();
     } else {
       document.exitFullscreen();
     }
-    isFullscreenRef.current = !isFullscreen;
+    fullscreenRef.current = !fullscreen;
   };
 
   const handleDurationChange = (
@@ -69,7 +69,7 @@ export const VideoPlayerContainer: FC = () => {
       <VideoControls
         currentTime={currentTime}
         totalTime={totalTime}
-        isPlaying={isPlaying}
+        playing={playing}
         onToggle={handleToggle}
         onProgressChange={handleProgressChange}
         onVolumeChange={handleVolumeChange}

@@ -12,7 +12,7 @@
         background-image: url(${d});
       }
     `}
-`,b=r.d.button`
+`,l=r.d.button`
   background: #f48b95;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 3px;
@@ -44,10 +44,10 @@
         font-size: 14px;
       }
     `}
-`,l=r.d.div`
+`,b=r.d.div`
   position: relative;
 
-  ${b} {
+  ${l} {
     position: absolute;
     ${({theme:e})=>r.c`
       right: ${e.spacing(2)}px;
@@ -60,4 +60,4 @@
   align-items: center;
   min-height: 100vh;
   background-color: #67beb1;
-`,h=async(...e)=>(await fetch(...e)).text(),g=async(...e)=>(await fetch(...e)).json(),x={revalidateOnFocus:!1,revalidateOnReconnect:!1},f=()=>{const{data:e,mutate:t}=Object(i.a)("https://sv443.net/jokeapi/v2/joke/Programming?blacklistFlags=nsfw,racist,sexist",g,x),a=(()=>{if(e)return"setup"in e?`${e.setup} ${e.delivery}`:e.joke})(),{data:r}=Object(i.a)(a?`https://api.voicerss.org/?key=${c}&hl=en-us&c=MP3&b64=true&src=${a}`:null,h,x),s=Object(n.useRef)(null),[d,f]=Object(n.useState)(!1),m=!r||!e;return o.a.createElement(u,null,o.a.createElement(l,null,o.a.createElement(p,null),o.a.createElement(b,{type:"button",onClick:()=>{s.current.play(),f(!0)},disabled:d||m},"Ask Onigiri for a joke")),o.a.createElement("audio",{ref:s,src:r,onEnded:()=>{t(),f(!1)}}))}}}]);
+`,g=async(...e)=>(await fetch(...e)).text(),h=async(...e)=>(await fetch(...e)).json(),x={revalidateOnFocus:!1,revalidateOnReconnect:!1},f=()=>{const e=Object(i.a)("https://sv443.net/jokeapi/v2/joke/Programming?blacklistFlags=nsfw,racist,sexist",h,x),t=(()=>{if(!e.data)return;const{data:t}=e;return"setup"in t?`${t.setup} ${t.delivery}`:t.joke})(),a=Object(i.a)(t?`https://api.voicerss.org/?key=${c}&hl=en-us&c=MP3&b64=true&src=${t}`:null,g,x),r=Object(n.useRef)(null),[s,d]=Object(n.useState)(!1),f=a.isValidating||e.isValidating;return o.a.createElement(u,null,o.a.createElement(b,null,o.a.createElement(p,null),o.a.createElement(l,{type:"button",onClick:()=>{r.current.play(),d(!0)},disabled:s||f},"Ask Onigiri for a joke")),o.a.createElement("audio",{ref:r,src:a.data,onEnded:()=>{e.mutate(),d(!1)}}))}}}]);

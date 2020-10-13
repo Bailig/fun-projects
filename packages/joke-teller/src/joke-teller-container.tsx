@@ -1,6 +1,12 @@
-import React, { FC, useRef } from "react";
+import React, { FC, useRef, useState } from "react";
 import useSWR from "swr";
 import { TEXT_TO_SPEECH_API_KEY } from "./config";
+import {
+  Button,
+  JokeTeller,
+  JokeTellerContainerRoot,
+  OnigiriImage,
+} from "./joke-teller.styled";
 
 const fetchText = async (...args: Parameters<typeof fetch>) => {
   const response = await fetch(...args);
@@ -38,22 +44,34 @@ export const JokeTellerContainer: FC = () => {
   );
 
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [playing, setPlaying] = useState<boolean>(false);
 
-  if (!jokeAudio || !joke) return <>loading...</>;
+  const loading = !jokeAudio || !joke;
 
   const handleClick = () => {
-    audioRef.current?.play();
+    audioRef.current!.play();
+    setPlaying(true);
   };
 
-  const handleEnded = () => mutate();
+  const handleEnded = () => {
+    mutate();
+    setPlaying(false);
+  };
 
   return (
-    <>
-      <button type="button" onClick={handleClick}>
-        Tell me a joke
-      </button>
+    <JokeTellerContainerRoot>
+      <JokeTeller>
+        <OnigiriImage />
+        <Button
+          type="button"
+          onClick={handleClick}
+          disabled={playing || loading}
+        >
+          Ask Onigiri for a joke
+        </Button>
+      </JokeTeller>
       <audio ref={audioRef} src={jokeAudio} onEnded={handleEnded} />
-    </>
+    </JokeTellerContainerRoot>
   );
 };
 

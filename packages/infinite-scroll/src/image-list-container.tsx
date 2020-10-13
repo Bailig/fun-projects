@@ -1,6 +1,14 @@
 import { flatten, map, pipe } from "ramda";
 import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import { useSWRInfinite } from "swr";
+import {
+  BowlImage,
+  BowlImageWrapper,
+  ChopsticksImage,
+  ChopsticksImageWrapper,
+  ImageList,
+  ImageListContainerRoot,
+} from "./image-list.styled";
 
 const fetcher = async (...args: Parameters<typeof fetch>) => {
   const response = await fetch(...args);
@@ -14,10 +22,15 @@ export const ImageListContainer: FC = () => {
         index === 0 ? 5 : 20
       }`,
     fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
   );
 
   const imagesLoadedRef = useRef<boolean>(false);
   const [imagesLoadedCount, setImagesLoadedCount] = useState<number>(0);
+  const [windowScrollY, setWindowScrollY] = useState<number>(0);
 
   const photos = useMemo(() => {
     if (!data) return;
@@ -25,7 +38,7 @@ export const ImageListContainer: FC = () => {
       flatten,
       map((d) => ({
         id: d.id,
-        url: d.urls.regular,
+        url: d.urls.small,
         alt: d.alt_description,
       })),
     )(data);
@@ -38,7 +51,7 @@ export const ImageListContainer: FC = () => {
   }, [imagesLoadedCount, photos?.length]);
 
   useEffect(() => {
-    const listenScroll = () => {
+    const handleImageLoad = () => {
       if (
         window.innerHeight + window.scrollY >=
           document.body.offsetHeight - 1000 &&
@@ -47,6 +60,11 @@ export const ImageListContainer: FC = () => {
         imagesLoadedRef.current = false;
         setSize((s) => s + 1);
       }
+    };
+
+    const listenScroll = () => {
+      handleImageLoad();
+      setWindowScrollY(window.scrollY);
     };
 
     window.addEventListener("scroll", listenScroll);
@@ -61,17 +79,29 @@ export const ImageListContainer: FC = () => {
   };
 
   return (
-    <>
-      {photos.map(({ id, url, alt }) => (
-        <img
-          key={id}
-          src={url}
-          onLoad={() => handleImageLoad()}
-          alt={alt}
-          width="100%"
-        />
-      ))}
-    </>
+    <ImageListContainerRoot>
+      <ChopsticksImageWrapper>
+        <ChopsticksImage />
+      </ChopsticksImageWrapper>
+      <ImageList>
+        {photos.map(({ id, url, alt }) => (
+          <img
+            key={id}
+            src={url}
+            onLoad={() => handleImageLoad()}
+            alt={alt}
+            width="100%"
+          />
+        ))}
+      </ImageList>
+      <BowlImageWrapper
+        style={{
+          paddingBottom: `calc(var(--top-bottom-space) - ${windowScrollY}px)`,
+        }}
+      >
+        <BowlImage />
+      </BowlImageWrapper>
+    </ImageListContainerRoot>
   );
 };
 

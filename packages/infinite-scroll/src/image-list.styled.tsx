@@ -9,15 +9,15 @@ import noodlesUpLG from "./assets/noodles-up-lg.png";
 const backgroundColor = "#f2ebdf";
 const chopsticksImage = {
   height: {
-    downMD: 304,
-    upLG: 510,
+    downMD: 290,
+    upLG: 500,
   },
 };
 
 const bowlImage = {
   height: {
-    downMD: 153,
-    upLG: 257,
+    downMD: 150,
+    upLG: 258,
   },
 };
 
@@ -26,17 +26,15 @@ export const ChopsticksImage = styled.div`
   ${({ theme }) =>
     css`
       ${theme.breakpoints.down("md")} {
-        width: 187px;
+        width: 206px;
         height: ${chopsticksImage.height.downMD}px;
         background-image: url(${chopsticksDownMD});
-        transform: translateX(20px);
       }
 
       ${theme.breakpoints.up("lg")} {
-        width: 314px;
+        width: 354px;
         height: ${chopsticksImage.height.upLG}px;
         background-image: url(${chopsticksUpLG});
-        transform: translateX(34px);
       }
     `}
 `;
@@ -45,24 +43,25 @@ export const ChopsticksImageWrapper = styled.div`
   padding-top: var(--top-bottom-space);
 `;
 
-export const ImageList = styled.div`
+export const ImageListRoot = styled.div`
   display: grid;
   background-repeat: repeat-y;
+  justify-items: center;
 
   ${({ theme }) =>
     css`
       ${theme.breakpoints.down("md")} {
-        width: 140px;
+        width: 179px;
         background-image: url(${noodlesDownMD});
         grid-row-gap: ${theme.spacing(1)}px;
       }
 
       ${theme.breakpoints.up("lg")} {
-        width: 240px;
+        width: 308px;
         background-image: url(${noodlesUpLG});
         grid-row-gap: ${theme.spacing(2)}px;
       }
-    `}
+    `};
 `;
 
 export const BowlImage = styled.div`
@@ -71,14 +70,14 @@ export const BowlImage = styled.div`
   ${({ theme }) =>
     css`
       ${theme.breakpoints.down("md")} {
-        width: 193px;
-        height: 153px;
+        width: 180px;
+        height: ${bowlImage.height.downMD}px;
         background-image: url(${bowlDownMd});
       }
 
       ${theme.breakpoints.up("lg")} {
-        width: 325px;
-        height: 257px;
+        width: 309px;
+        height: ${bowlImage.height.upLG}px;
         background-image: url(${bowlUpLg});
       }
     `}

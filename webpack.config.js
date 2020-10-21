@@ -11,24 +11,20 @@ const resolvePackage = (relativePath) =>
 const resolveRoot = (relativePath) =>
   path.resolve(__dirname, `./${relativePath}`);
 
-const getPaths = () => {
-  return {
-    root: {
-      path: resolveRoot("."),
-      tsConfig: resolveRoot("tsconfig.json"),
-      env: resolveRoot(".env"),
-    },
-    package: {
-      path: resolvePackage("."),
-      indexTsx: resolvePackage("src/index.tsx"),
-      dist: resolvePackage("dist"),
-      public: resolvePackage("public"),
-      indexHtml: resolvePackage("public/index.html"),
-    },
-  };
+const paths = {
+  root: {
+    path: resolveRoot("."),
+    tsConfig: resolveRoot("tsconfig.json"),
+    env: resolveRoot(".env"),
+  },
+  package: {
+    path: resolvePackage("."),
+    indexTsx: resolvePackage("src/index.tsx"),
+    dist: resolvePackage("dist"),
+    public: resolvePackage("public"),
+    indexHtml: resolvePackage("public/index.html"),
+  },
 };
-
-const paths = getPaths();
 
 require("dotenv").config({ path: paths.root.env });
 

@@ -2,7 +2,7 @@ import React, { FC, memo, useEffect, useRef, useState } from "react";
 import { ImageListRoot } from "./image-list.styled";
 import { Photo } from "./types";
 
-interface ImageListProps {
+export interface ImageListProps {
   photos: Photo[];
   onScrolledToBottom: () => void;
 }

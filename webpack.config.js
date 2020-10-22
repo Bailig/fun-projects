@@ -46,7 +46,7 @@ const config = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(svg|png|jpg)$/,
+        test: /\.(svg|png|jpg|ttf)$/,
         loader: "file-loader",
       },
       {

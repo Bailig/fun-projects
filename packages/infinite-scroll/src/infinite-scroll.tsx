@@ -6,7 +6,10 @@ import {
   BowlImageWrapper,
   ChopsticksImage,
   ChopsticksImageWrapper,
+  DownArrow,
   InfiniteScrollRoot,
+  ScrollMe,
+  ScrollMeLabel,
 } from "./infinite-scroll.styled";
 
 export type InfiniteScrollProps = ImageListProps;
@@ -37,6 +40,10 @@ export const InfiniteScroll: FC<InfiniteScrollProps> = (props) => {
       <BowlImageWrapper style={bowlImageWrapperStyle}>
         <BowlImage />
       </BowlImageWrapper>
+      <ScrollMe>
+        <ScrollMeLabel>Scroll me</ScrollMeLabel>
+        <DownArrow />
+      </ScrollMe>
     </InfiniteScrollRoot>
   );
 };

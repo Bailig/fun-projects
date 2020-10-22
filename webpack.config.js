@@ -46,11 +46,17 @@ const config = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(svg|png|jpg|ttf)$/,
-        loader: "file-loader",
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(mp3|mp4)$/,
+        test: /\.ts(x)?$/,
+        loader: "ts-loader",
+        exclude: /node_modules/,
+        options: { configFile: paths.root.tsConfig },
+      },
+      {
+        test: /\.(mp3|mp4|png|jpg|gif|ttf|svg)$/,
         loader: "url-loader",
         options: {
           publicPath: "assets",
@@ -58,12 +64,6 @@ const config = {
           limit: 1000,
           name: "[name].[hash].[ext]",
         },
-      },
-      {
-        test: /\.ts(x)?$/,
-        loader: "ts-loader",
-        exclude: /node_modules/,
-        options: { configFile: paths.root.tsConfig },
       },
     ],
   },

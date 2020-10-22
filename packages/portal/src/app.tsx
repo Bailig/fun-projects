@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { SWRConfig } from "swr";
-import { GlobalStyle } from "./global-styles";
+import "./global-styles.css";
 import { Routes } from "./routes";
 import { ThemeProvider } from "./theme-provider";
 
@@ -14,7 +14,6 @@ export const App: FC = () => (
           fetch(...args).then((res) => res.json()),
       }}
     >
-      <GlobalStyle />
       <Routes />
     </SWRConfig>
   </ThemeProvider>

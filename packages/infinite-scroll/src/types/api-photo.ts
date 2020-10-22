@@ -6,7 +6,7 @@ export interface Urls {
   thumb: string;
 }
 
-export interface ApiPhoto {
+export interface APIPhoto {
   id: string;
   urls: Urls;
   alt_description: string;

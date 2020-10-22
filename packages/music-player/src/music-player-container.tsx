@@ -1,24 +1,19 @@
-
 import { ProgressBar } from "@fun-projects/ui";
 import { secondsToTime } from "@fun-projects/utils";
 import React, { FC, SyntheticEvent, useEffect, useRef, useState } from "react";
 import cantYouSee from "./assets/cant-you-see.mp3";
 import holidayBlues from "./assets/holiday-blues.mp3";
-import nextIcon from "./assets/next.svg";
-import pauseIcon from "./assets/pause.svg";
-import playIcon from "./assets/play.svg";
-import previousIcon from "./assets/previous.svg";
 import strawberry from "./assets/strawberry.mp3";
 import {
   AuthorName,
-  MusicControl,
   MusicName,
+  MusicNumber,
   MusicPlayerRoot,
-  ProgressLabel
+  NextButton,
+  PlayButton,
+  PreviousButton,
+  ProgressLabel,
 } from "./music-player.styled";
-
-
-
 
 const MUSICS = [
   {
@@ -100,31 +95,21 @@ export const MusicPlayerContainer: FC = () => {
   };
   return (
     <MusicPlayerRoot>
-      <MusicName>{name}</MusicName>
+      <MusicName href={url} target="_blank">
+        {name}
+      </MusicName>
       <AuthorName>{author}</AuthorName>
-      <a href={url} target="_blank" rel="noreferrer">
-        link to original music
-      </a>
       <ProgressLabel>
         <div>{secondsToTime(currentTime)}</div>
         <div>{secondsToTime(duration)}</div>
       </ProgressLabel>
       <ProgressBar value={progress} onClick={handleProgressBarClick} />
-      <button type="button" onClick={handlePrevious}>
-        <MusicControl src={previousIcon} alt="previous" />
-      </button>
-      <button
-        type="button"
+      <PreviousButton onClick={handlePrevious} />
+      <PlayButton
         onClick={() => (isPlaying ? handlePause() : handlePlay())}
-      >
-        <MusicControl
-          src={isPlaying ? pauseIcon : playIcon}
-          alt={isPlaying ? "pause" : "play"}
-        />
-      </button>
-      <button type="button" onClick={handleNext}>
-        <MusicControl src={nextIcon} alt="next" />
-      </button>
+        isPlaying={isPlaying}
+      />
+      <NextButton onClick={handleNext} />
       <audio
         src={src}
         ref={musicRef}
@@ -132,9 +117,9 @@ export const MusicPlayerContainer: FC = () => {
         onTimeUpdate={handleTimeUpdate}
         onDurationChange={handleDurationChange}
       />
-      <div>
+      <MusicNumber>
         {musicIndex + 1}/{totalMusicCount}
-      </div>
+      </MusicNumber>
     </MusicPlayerRoot>
   );
 };

@@ -12,4 +12,16 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     cursor: pointer;
   }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    &:active {
+      color: inherit
+    }
+    &:focus {
+      outline: none;
+      outline-offset: 0;
+    }
+  }
 `;

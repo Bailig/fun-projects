@@ -7,15 +7,7 @@ import playUpSM from "./assets/play-up-sm.png";
 import playXS from "./assets/play-xs.png";
 import previousUpSM from "./assets/previous-up-sm.png";
 import previousXS from "./assets/previous-xs.png";
-
-export const MusicPlayerRoot = styled.div`
-  background: #f2ebdf;
-  min-height: 100vh;
-
-  font-family: OzCaramel, sans-serif;
-  color: #ffc700;
-  text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-`;
+import { soupImage } from "./soup-image.styled";
 
 export const MusicName = styled.a`
   font-weight: 500;
@@ -148,19 +140,84 @@ export const MusicNumber = styled.div`
     `}
 `;
 
-export const MusicPlayerSoup = styled.div`
+export const MusicControls = styled.div`
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: end;
+  justify-content: center;
+
+  ${({ theme }) => css`
+    ${PreviousButton} {
+      z-index: 100;
+      margin-right: -${theme.spacing(2)}px;
+    }
+    ${NextButton} {
+      z-index: 100;
+      margin-left: -${theme.spacing(2)}px;
+    }
+  `}
+`;
+
+export const MusicContent = styled.div`
+  position: relative;
+
+  ${MusicNumber}, ${MusicName}, ${MusicControls}, ${AuthorName} {
+    position: absolute;
+  }
+
+  ${MusicName}, ${MusicControls}, ${AuthorName} {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
   ${({ theme }) =>
     css`
       ${theme.breakpoints.down("xs")} {
-        width: 290px;
-        height: 290px;
-        background-image: url(${previousUpSM});
+        width: ${soupImage.width.downXS}px;
+        height: ${soupImage.height.downXS}px;
+
+        ${MusicNumber} {
+          top: 88px;
+          left: 76px;
+        }
+        ${MusicName} {
+          top: 127px;
+        }
+        ${MusicControls} {
+          top: 186px;
+        }
+        ${AuthorName} {
+          top: 154px;
+        }
       }
 
       ${theme.breakpoints.up("sm")} {
-        width: 426.24px;
-        height: 426.24px;
-        background-image: url(${previousUpSM});
+        width: ${soupImage.width.upSM}px;
+        height: ${soupImage.height.upSM}px;
+
+        ${MusicNumber} {
+          top: 129px;
+          left: 112px;
+        }
+        ${MusicName} {
+          top: 185px;
+        }
+        ${MusicControls} {
+          top: 278px;
+        }
+        ${AuthorName} {
+          top: 230px;
+        }
       }
     `}
+`;
+
+export const MusicPlayerRoot = styled.div`
+  background: #f2ebdf;
+  color: #ffc700;
+  text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 `;

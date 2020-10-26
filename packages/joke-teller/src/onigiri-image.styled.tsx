@@ -1,10 +1,11 @@
+import { GIF } from "@fun-projects/ui";
 import styled, { css } from "styled-components";
 
 export const onigiriImage = {
   duration: 3000,
 };
 
-export const OnigiriImageRoot = styled.img`
+export const OnigiriGIFRoot = styled(GIF)`
   ${({ theme }) =>
     css`
       ${theme.breakpoints.down("xs")} {

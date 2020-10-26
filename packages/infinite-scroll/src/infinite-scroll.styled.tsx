@@ -153,11 +153,15 @@ export const InfiniteScrollRoot = styled.div`
     ${({ theme }) =>
       css`
         ${theme.breakpoints.down("md")} {
-          left: calc(100vw / 2 + ${bowlImage.width.downMD}px / 2);
+          left: calc(
+            100vw / 2 + ${bowlImage.width.downMD}px / 2 + ${theme.spacing(1)}px
+          );
         }
 
         ${theme.breakpoints.up("lg")} {
-          left: calc(100vw / 2 + ${bowlImage.width.upLG}px / 2);
+          left: calc(
+            100vw / 2 + ${bowlImage.width.upLG}px / 2 + ${theme.spacing(2)}px
+          );
         }
       `}
   }

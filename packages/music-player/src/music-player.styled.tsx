@@ -147,3 +147,20 @@ export const MusicNumber = styled.div`
       }
     `}
 `;
+
+export const MusicPlayerSoup = styled.div`
+  ${({ theme }) =>
+    css`
+      ${theme.breakpoints.down("xs")} {
+        width: 290px;
+        height: 290px;
+        background-image: url(${previousUpSM});
+      }
+
+      ${theme.breakpoints.up("sm")} {
+        width: 426.24px;
+        height: 426.24px;
+        background-image: url(${previousUpSM});
+      }
+    `}
+`;

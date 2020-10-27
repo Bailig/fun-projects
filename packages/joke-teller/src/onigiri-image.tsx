@@ -24,7 +24,7 @@ export const OnigiriImage: FC<OnigiriImageProps> = (props) => {
           animatedSrc: onigiriGIFXS,
         },
         {
-          media: theme.breakpoints.down("sm").replace("@media ", ""),
+          media: theme.breakpoints.up("sm").replace("@media ", ""),
           src: onigiriUpSM,
           animatedSrc: onigiriGIFUpSM,
         },

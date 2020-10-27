@@ -1,4 +1,9 @@
+import {
+  ProgressBar as ProgressBarBase,
+  ProgressBarProgress,
+} from "@fun-projects/ui";
 import styled, { css } from "styled-components";
+import chopstick from "./assets/chopstick.svg";
 import nextUpSM from "./assets/next-up-sm.png";
 import nextXS from "./assets/next-xs.png";
 import pauseUpSM from "./assets/pause-up-sm.png";
@@ -35,19 +40,6 @@ export const AuthorName = styled.div`
 
       ${theme.breakpoints.up("sm")} {
         font-size: 22px;
-      }
-    `}
-`;
-
-export const ProgressLabel = styled.div`
-  ${({ theme }) =>
-    css`
-      ${theme.breakpoints.down("xs")} {
-        font-size: 14px;
-      }
-
-      ${theme.breakpoints.up("sm")} {
-        font-size: 18px;
       }
     `}
 `;
@@ -158,7 +150,7 @@ export const MusicControls = styled.div`
   `}
 `;
 
-export const MusicContent = styled.div`
+export const MusicPlayerSoupRoot = styled.div`
   position: relative;
 
   ${MusicNumber}, ${MusicName}, ${MusicControls}, ${AuthorName} {
@@ -212,12 +204,105 @@ export const MusicContent = styled.div`
     `}
 `;
 
+export const ProgressLabel = styled.div`
+  ${({ theme }) =>
+    css`
+      ${theme.breakpoints.down("xs")} {
+        font-size: 14px;
+      }
+
+      ${theme.breakpoints.up("sm")} {
+        font-size: 18px;
+      }
+    `}
+`;
+
+export const progressBar = {
+  width: {
+    downXS: 262,
+    upSM: 388,
+  },
+  height: {
+    downXS: 8,
+    upSM: 11,
+  },
+};
+
+export const ProgressBar = styled(ProgressBarBase)`
+  clip-path: polygon(0 0, 100% 25%, 100% 75%, 0% 100%);
+  background-color: #c9b9a9;
+
+  ${({ theme }) =>
+    css`
+      ${theme.breakpoints.down("xs")} {
+        width: ${progressBar.width.downXS}px;
+        height: ${progressBar.height.downXS}px;
+      }
+
+      ${theme.breakpoints.up("sm")} {
+        width: ${progressBar.width.upSM}px;
+        height: ${progressBar.height.upSM}px;
+      }
+    `}
+
+  ${ProgressBarProgress} {
+    background-color: #805034;
+  }
+`;
+
+export const chopstickImage = {
+  width: {
+    downXS: 260,
+    upSM: 388,
+  },
+  height: {
+    downXS: 53,
+    upSM: 83,
+  },
+};
+
+export const ChopstickImage = styled.div`
+  background-image: url(${chopstick});
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  ${({ theme }) =>
+    css`
+      ${theme.breakpoints.down("xs")} {
+        width: ${chopstickImage.width.downXS}px;
+        height: ${chopstickImage.height.downXS}px;
+      }
+
+      ${theme.breakpoints.up("sm")} {
+        width: ${chopstickImage.width.upSM}px;
+        height: ${chopstickImage.height.upSM}px;
+      }
+    `}
+`;
+
 export const MusicPlayerRoot = styled.div`
   background: #f2ebdf;
   color: #ffc700;
   text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+
+  ${ProgressLabel} {
+    display: flex;
+    justify-content: space-between;
+
+    ${({ theme }) =>
+      css`
+        ${theme.breakpoints.down("xs")} {
+          width: ${progressBar.width.downXS}px;
+        }
+
+        ${theme.breakpoints.up("sm")} {
+          width: ${progressBar.width.upSM}px;
+        }
+      `}
+  }
 `;

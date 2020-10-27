@@ -1,16 +1,17 @@
-import { ProgressBar } from "@fun-projects/ui";
 import { secondsToTime } from "@fun-projects/utils";
 import React, { FC, SyntheticEvent, useEffect, useRef, useState } from "react";
 import {
   AuthorName,
-  MusicContent,
+  ChopstickImage,
   MusicControls,
   MusicName,
   MusicNumber,
   MusicPlayerRoot,
+  MusicPlayerSoupRoot,
   NextButton,
   PlayButton,
   PreviousButton,
+  ProgressBar,
   ProgressLabel,
 } from "./music-player.styled";
 import { SoupImage } from "./soup-image";
@@ -84,7 +85,7 @@ export const MusicPlayer: FC<MusicPlayerProps> = (props) => {
 
   return (
     <MusicPlayerRoot>
-      <MusicContent>
+      <MusicPlayerSoupRoot>
         <SoupImage animated={playing} />
         <MusicNumber>
           {musicIndex + 1}/{totalMusicCount}
@@ -101,19 +102,20 @@ export const MusicPlayer: FC<MusicPlayerProps> = (props) => {
           />
           <NextButton onClick={handleNext} />
         </MusicControls>
-        <ProgressLabel>
-          <div>{secondsToTime(currentTime)}</div>
-          <div>{secondsToTime(duration)}</div>
-        </ProgressLabel>
-        <ProgressBar value={progress} onClick={handleProgressBarClick} />
-        <audio
-          src={src}
-          ref={musicRef}
-          onEnded={handleNext}
-          onTimeUpdate={handleTimeUpdate}
-          onDurationChange={handleDurationChange}
-        />
-      </MusicContent>
+      </MusicPlayerSoupRoot>
+      <ProgressLabel>
+        <div>{secondsToTime(currentTime)}</div>
+        <div>{secondsToTime(duration)}</div>
+      </ProgressLabel>
+      <ProgressBar value={progress} onClick={handleProgressBarClick} />
+      <ChopstickImage />
+      <audio
+        src={src}
+        ref={musicRef}
+        onEnded={handleNext}
+        onTimeUpdate={handleTimeUpdate}
+        onDurationChange={handleDurationChange}
+      />
     </MusicPlayerRoot>
   );
 };

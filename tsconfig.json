@@ -3,15 +3,14 @@
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
     /* Basic Options */
-    "target": "ESNext",
+    "target": "ES2019",
     "module": "ESNext",
     "allowJs": false,
     "checkJs": false,
     "jsx": "react",
-    "declaration": true,
-    "declarationMap": true,
+    "declaration": false,
+    "declarationMap": false,
     "removeComments": true,
-    "noEmit": true,
     "isolatedModules": true,
 
     /* Strict Type-Checking Options */
@@ -32,5 +31,5 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": ["./packages"],
-  "exclude": ["**/node_modules", "**/build"]
+  "exclude": ["**/node_modules", "**/dist"]
 }

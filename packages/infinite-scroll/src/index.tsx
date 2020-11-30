@@ -1,1 +1,2 @@
-export { ImageListContainer as default } from "./image-list-container";
+export { InfiniteScroll } from "./infinite-scroll";
+export { InfiniteScrollContainer as default } from "./infinite-scroll-container";

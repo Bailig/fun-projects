@@ -1,10 +1,20 @@
 import React, { FC } from "react";
-import { GlobalStyle } from "./global-styles";
+import { SWRConfig } from "swr";
+import "./global-styles.css";
 import { Routes } from "./routes";
+import { ThemeProvider } from "./theme-provider";
 
 export const App: FC = () => (
-  <>
-    <GlobalStyle />
-    <Routes />
-  </>
+  <ThemeProvider>
+    <SWRConfig
+      value={{
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+        fetcher: (...args: Parameters<typeof fetch>) =>
+          fetch(...args).then((res) => res.json()),
+      }}
+    >
+      <Routes />
+    </SWRConfig>
+  </ThemeProvider>
 );

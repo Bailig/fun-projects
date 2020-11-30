@@ -40,12 +40,19 @@ module.exports = {
     "jsx-a11y/media-has-caption": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/interactive-supports-focus": "off",
+    "no-lonely-if": "off",
   },
   overrides: [
     {
       files: ["*.spec.tsx"],
       rules: {
         "import/no-extraneous-dependencies": "off",
+      },
+    },
+    {
+      files: ["*.js"],
+      rules: {
+        "@typescript-eslint/no-var-requires": "off",
       },
     },
   ],

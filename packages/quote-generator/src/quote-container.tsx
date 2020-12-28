@@ -2,18 +2,10 @@ import React, { FC } from "react";
 import useSWR from "swr";
 import { Quote } from "./quote";
 
-const fetcher = async (url: string) => {
-  const res = await fetch(url);
-  return res.json();
-};
-
 const quoteAPIUrl = "https://type.fit/api/quotes";
 
 export const QuoteContainer: FC = () => {
-  const { data: quotes, error, mutate } = useSWR<APIQuote[]>(
-    quoteAPIUrl,
-    fetcher,
-  );
+  const { data: quotes, error, mutate } = useSWR<APIQuote[]>(quoteAPIUrl);
 
   if (error) return <>Oops! something went wrong</>;
   if (!quotes) return <>loading...</>;

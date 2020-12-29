@@ -1,42 +1,21 @@
-import React, { FC, memo, useEffect, useRef, useState } from "react";
+import React, { FC, memo } from "react";
 import { ImageListRoot } from "./image-list.styled";
 import { Photo } from "./types";
+import { useImageList } from "./use-image-list";
 
 export interface ImageListProps {
   photos: Photo[];
+  loading: boolean;
   onScrolledToBottom: () => void;
 }
 
 export const ImageList: FC<ImageListProps> = memo((props) => {
-  const { photos, onScrolledToBottom } = props;
-  const imagesLoadedRef = useRef<boolean>(false);
-  const [imagesLoadedCount, setImagesLoadedCount] = useState<number>(0);
-
-  useEffect(() => {
-    if (imagesLoadedCount > 0 && imagesLoadedCount === photos?.length) {
-      imagesLoadedRef.current = true;
-    }
-  }, [imagesLoadedCount, photos?.length]);
-
-  useEffect(() => {
-    const handleScrolledToBottom = () => {
-      const isScrolledToBottom =
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 1000;
-
-      if (isScrolledToBottom && imagesLoadedRef.current) {
-        imagesLoadedRef.current = false;
-        onScrolledToBottom();
-      }
-    };
-
-    window.addEventListener("scroll", handleScrolledToBottom);
-    return () => window.removeEventListener("scroll", handleScrolledToBottom);
-  }, [onScrolledToBottom]);
-
-  const handleImageLoad = () => {
-    setImagesLoadedCount((c) => c + 1);
-  };
+  const { loading, photos, onScrolledToBottom } = props;
+  const { handleImageLoad } = useImageList(
+    photos.length,
+    loading,
+    onScrolledToBottom,
+  );
 
   return (
     <ImageListRoot>

@@ -1,5 +1,4 @@
-import debounce from "lodash.debounce";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { ImageList, ImageListProps } from "./image-list";
 import {
   BowlImage,
@@ -11,24 +10,16 @@ import {
   ScrollMe,
   ScrollMeLabel,
 } from "./infinite-scroll.styled";
+import { useScrollY } from "./use-scroll-y";
 
 export type InfiniteScrollProps = ImageListProps;
 
 export const InfiniteScroll: FC<InfiniteScrollProps> = (props) => {
-  const { photos, onScrolledToBottom } = props;
-  const [windowScrollY, setWindowScrollY] = useState<number>(0);
-
-  useEffect(() => {
-    const handleWindowScroll = debounce(() => {
-      setWindowScrollY(window.scrollY);
-    }, 15);
-
-    window.addEventListener("scroll", handleWindowScroll);
-    return () => window.removeEventListener("scroll", handleWindowScroll);
-  }, []);
+  const { loading, photos, onScrolledToBottom } = props;
+  const { scrollY } = useScrollY();
 
   const bowlImageWrapperStyle = {
-    paddingBottom: `calc(var(--top-bottom-space) - ${windowScrollY}px)`,
+    paddingBottom: `calc(var(--top-bottom-space) - ${scrollY}px)`,
   };
 
   return (
@@ -36,7 +27,11 @@ export const InfiniteScroll: FC<InfiniteScrollProps> = (props) => {
       <ChopsticksImageWrapper>
         <ChopsticksImage />
       </ChopsticksImageWrapper>
-      <ImageList photos={photos} onScrolledToBottom={onScrolledToBottom} />
+      <ImageList
+        loading={loading}
+        photos={photos}
+        onScrolledToBottom={onScrolledToBottom}
+      />
       <BowlImageWrapper style={bowlImageWrapperStyle}>
         <BowlImage />
       </BowlImageWrapper>

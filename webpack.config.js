@@ -38,6 +38,7 @@ const config = {
     path: paths.package.dist,
     filename: "[name].[contenthash].js",
   },
+  devtool: isDev && "inline-source-map",
   module: {
     rules: [
       {
@@ -77,6 +78,7 @@ const config = {
     new webpack.DefinePlugin({
       "process.env": {
         TEXT_TO_SPEECH_API_KEY: `"${process.env.TEXT_TO_SPEECH_API_KEY}"`,
+        UNSPLASH_ACCESS_KEY: `"${process.env.UNSPLASH_ACCESS_KEY}"`,
       },
     }),
     new HtmlWebpackPlugin({

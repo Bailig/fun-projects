@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "rm -rf dist",
     "start": "webpack-dev-server --hot --mode development",
-    "build": "webpack -p --mode production"
+    "build": "NODE_ENV=production webpack -p --mode production"
   },
   "dependencies": {
     "@fun-projects/infinite-scroll": "^0.0.0",

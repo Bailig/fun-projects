@@ -1,24 +1,29 @@
-import React, { FC, useCallback, useMemo } from "react";
-import { useSWRInfinite } from "swr";
+import React, { FC } from "react";
 import { InfiniteScroll } from "./infinite-scroll";
-import { getAPIUrlByIndex, mapPhotos } from "./infinite-scroll-services";
-import { APIPhoto } from "./types";
+import { useFetchPhotos } from "./use-fetch-photos";
+import { usePhotos } from "./use-photos";
 
 export const InfiniteScrollContainer: FC = () => {
-  const { data, error, setSize } = useSWRInfinite<APIPhoto[]>(getAPIUrlByIndex);
-  const photos = useMemo(() => data && mapPhotos(data), [data]);
+  const {
+    photos: apiPhotos,
+    loading,
+    error,
+    handleFetchMore,
+  } = useFetchPhotos();
+  const { photos } = usePhotos(apiPhotos);
 
-  const handleScrolledToBottom = useCallback(() => {
-    setSize((s) => s + 1);
-  }, [setSize]);
+  if (error) {
+    console.error(error);
+    return <>Oops! {error.message}</>;
+  }
 
-  if (error) return <>Oops!</>;
   if (!photos) return <>loading...</>;
 
   return (
     <InfiniteScroll
+      loading={loading}
       photos={photos}
-      onScrolledToBottom={handleScrolledToBottom}
+      onScrolledToBottom={handleFetchMore}
     />
   );
 };

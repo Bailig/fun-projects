@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { ImageList, ImageListProps } from "./image-list";
+import { ImageList, ImageListProps } from "../image-list/image-list";
 import {
   BowlImage,
   BowlImageWrapper,

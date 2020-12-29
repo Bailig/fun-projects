@@ -1,7 +1,6 @@
 import React, { FC } from "react";
-import { InfiniteScroll } from "./infinite-scroll";
-import { useFetchPhotos } from "./use-fetch-photos";
-import { usePhotos } from "./use-photos";
+import { InfiniteScroll } from "../components";
+import { useFetchPhotos, usePhotos } from "../interactions";
 
 export const InfiniteScrollContainer: FC = () => {
   const {

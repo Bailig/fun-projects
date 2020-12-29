@@ -1,2 +1,2 @@
-export { InfiniteScroll } from "./infinite-scroll";
-export { InfiniteScrollContainer as default } from "./infinite-scroll-container";
+export * from "./components";
+export { InfiniteScrollContainer as default } from "./containers/infinite-scroll";

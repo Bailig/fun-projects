@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
-import bowlDownMd from "./assets/bowl-down-md.png";
-import bowlUpLg from "./assets/bowl-up-lg.png";
-import chopsticksDownMD from "./assets/chopsticks-noodles-down-md.png";
-import chopsticksUpLG from "./assets/chopsticks-noodles-up-lg.png";
-import downArrow from "./assets/down-arrow.gif";
+import bowlDownMd from "../../assets/bowl-down-md.png";
+import bowlUpLg from "../../assets/bowl-up-lg.png";
+import chopsticksDownMD from "../../assets/chopsticks-noodles-down-md.png";
+import chopsticksUpLG from "../../assets/chopsticks-noodles-up-lg.png";
+import downArrow from "../../assets/down-arrow.gif";
 
 const backgroundColor = "#f2ebdf";
 const chopsticksImage = {

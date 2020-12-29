@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSWRInfinite } from "swr";
-import { UNSPLASH_ACCESS_KEY } from "./config";
-import { APIPhoto } from "./types";
+import { UNSPLASH_ACCESS_KEY } from "../config";
+import { APIPhoto } from "../selectors";
 
 const getKey = (index: number) => [
   `https://api.unsplash.com/photos/random?client_id=${UNSPLASH_ACCESS_KEY}&count=${

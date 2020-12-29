@@ -1,6 +1,6 @@
 import React, { FC, memo } from "react";
+import { Photo } from "../../selectors";
 import { ImageListRoot } from "./image-list.styled";
-import { Photo } from "./types";
 import { useImageList } from "./use-image-list";
 
 export interface ImageListProps {

@@ -3,8 +3,7 @@ import bowlDownMd from "./assets/bowl-down-md.png";
 import bowlUpLg from "./assets/bowl-up-lg.png";
 import chopsticksDownMD from "./assets/chopsticks-noodles-down-md.png";
 import chopsticksUpLG from "./assets/chopsticks-noodles-up-lg.png";
-import downArrowDownMD from "./assets/down-arrow-down-md.png";
-import downArrowUpLG from "./assets/down-arrow-up-lg.png";
+import downArrow from "./assets/down-arrow.gif";
 
 const backgroundColor = "#f2ebdf";
 const chopsticksImage = {
@@ -81,22 +80,10 @@ export const BowlImageWrapper = styled.div`
   justify-content: center;
 `;
 
-// TODO: use gif
 export const DownArrow = styled.div`
-  ${({ theme }) =>
-    css`
-      ${theme.breakpoints.down("md")} {
-        width: 14px;
-        height: 38px;
-        background-image: url(${downArrowDownMD});
-      }
-
-      ${theme.breakpoints.up("lg")} {
-        width: 26px;
-        height: 70px;
-        background-image: url(${downArrowUpLG});
-      }
-    `}
+  width: 49px;
+  height: 49px;
+  background-image: url(${downArrow});
 `;
 
 export const ScrollMeLabel = styled.div`

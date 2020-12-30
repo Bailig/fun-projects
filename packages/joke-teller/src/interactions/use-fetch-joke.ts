@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import useSWR from "swr";
-import { APIJoke } from "../selectors";
+import { APIJoke } from "../modules";
 
 const jokeAPIUrl =
   "https://sv443.net/jokeapi/v2/joke/Programming?blacklistFlags=nsfw,racist,sexist";

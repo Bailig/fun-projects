@@ -59,7 +59,11 @@ export const VideoControls: FC<VideoControlsProps> = ({
 
   return (
     <>
-      <ProgressBar value={currentTime / totalTime} onClick={onProgressChange} />
+      <ProgressBar
+        value={currentTime}
+        max={totalTime}
+        onClick={onProgressChange}
+      />
       <button
         type="button"
         title={playing ? "Pause" : "Play"}
@@ -75,7 +79,11 @@ export const VideoControls: FC<VideoControlsProps> = ({
         {isMuted ? "unmute" : "mute"}
       </button>
       <div>Volume</div>
-      <ProgressBar value={isMuted ? 0 : volume} onClick={handleVolumeChange} />
+      <ProgressBar
+        value={isMuted ? 0 : volume}
+        max={1}
+        onClick={handleVolumeChange}
+      />
       <select
         title="Playback speed"
         value={playbackSpeed}

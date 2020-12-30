@@ -1,5 +1,5 @@
 import React, { FC, memo } from "react";
-import { Photo } from "../../selectors";
+import { Photo } from "../../modules";
 import { ImageListRoot } from "./image-list.styled";
 import { useImageList } from "./use-image-list";
 

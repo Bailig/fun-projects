@@ -3,16 +3,16 @@ import {
   ProgressBarProgress,
 } from "@fun-projects/ui";
 import styled, { css } from "styled-components";
-import chopstick from "./assets/chopstick.svg";
-import nextUpSM from "./assets/next-up-sm.png";
-import nextXS from "./assets/next-xs.png";
-import pauseUpSM from "./assets/pause-up-sm.png";
-import pauseXS from "./assets/pause-xs.png";
-import playUpSM from "./assets/play-up-sm.png";
-import playXS from "./assets/play-xs.png";
-import previousUpSM from "./assets/previous-up-sm.png";
-import previousXS from "./assets/previous-xs.png";
-import { soupImage } from "./soup-image.styled";
+import chopstick from "../../assets/chopstick.svg";
+import nextUpSM from "../../assets/next-up-sm.png";
+import nextXS from "../../assets/next-xs.png";
+import pauseUpSM from "../../assets/pause-up-sm.png";
+import pauseXS from "../../assets/pause-xs.png";
+import playUpSM from "../../assets/play-up-sm.png";
+import playXS from "../../assets/play-xs.png";
+import previousUpSM from "../../assets/previous-up-sm.png";
+import previousXS from "../../assets/previous-xs.png";
+import { soupImage } from "../soup-image/soup-image.styled";
 
 export const MusicName = styled.a`
   font-weight: 500;
@@ -44,14 +44,25 @@ export const AuthorName = styled.div`
     `}
 `;
 
-const musicControlEffects = css`
+interface MusicControlBaseStyleProps {
+  disabled: boolean;
+}
+
+const musicControlBaseStyle = ({ disabled }: MusicControlBaseStyleProps) => css`
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   &:active {
     filter: none;
   }
-  &:hover {
-    filter: drop-shadow(0px 4px 4px #ffc700);
-  }
+  ${disabled
+    ? css`
+        opacity: 0.3;
+        cursor: default;
+      `
+    : css`
+        &:hover {
+          filter: drop-shadow(0px 4px 4px #ffc700);
+        }
+      `}
 `;
 
 const previousNextButtonSize = css`
@@ -69,26 +80,30 @@ const previousNextButtonSize = css`
     `}
 `;
 
-export const PlayButton = styled.button<{ isPlaying: boolean }>`
-  ${musicControlEffects}
-  ${({ theme, isPlaying }) =>
+interface PlayButtonProps extends MusicControlBaseStyleProps {
+  playing: boolean;
+}
+
+export const PlayButton = styled.button<PlayButtonProps>`
+  ${musicControlBaseStyle}
+  ${({ theme, playing }) =>
     css`
       ${theme.breakpoints.down("xs")} {
         width: 55px;
         height: 49px;
-        background-image: url(${isPlaying ? pauseXS : playXS});
+        background-image: url(${playing ? pauseXS : playXS});
       }
 
       ${theme.breakpoints.up("sm")} {
         width: 81px;
         height: 71px;
-        background-image: url(${isPlaying ? pauseUpSM : playUpSM});
+        background-image: url(${playing ? pauseUpSM : playUpSM});
       }
     `}
 `;
 
-export const PreviousButton = styled.button`
-  ${musicControlEffects}
+export const PreviousButton = styled.button<MusicControlBaseStyleProps>`
+  ${musicControlBaseStyle}
   ${previousNextButtonSize}
   ${({ theme }) =>
     css`
@@ -102,8 +117,8 @@ export const PreviousButton = styled.button`
     `}
 `;
 
-export const NextButton = styled.button`
-  ${musicControlEffects}
+export const NextButton = styled.button<MusicControlBaseStyleProps>`
+  ${musicControlBaseStyle}
   ${previousNextButtonSize}
   ${({ theme }) =>
     css`

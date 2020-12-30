@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import cantYouSee from "./assets/cant-you-see.mp3";
-import holidayBlues from "./assets/holiday-blues.mp3";
-import strawberry from "./assets/strawberry.mp3";
-import { MusicPlayer } from "./music-player";
+import cantYouSee from "../assets/cant-you-see.mp3";
+import holidayBlues from "../assets/holiday-blues.mp3";
+import strawberry from "../assets/strawberry.mp3";
+import { MusicPlayer } from "../components";
 
 const MUSICS = [
   {

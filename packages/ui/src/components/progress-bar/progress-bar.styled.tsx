@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const ProgressBarRoot = styled.div`
+export const ProgressBarRoot = styled.div<{ disabled: boolean }>`
   height: 12px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
   background-color: lightgrey;
 `;
 

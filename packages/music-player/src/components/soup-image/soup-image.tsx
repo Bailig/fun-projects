@@ -1,9 +1,9 @@
 import { useTheme } from "@material-ui/core";
 import React, { FC, memo } from "react";
-import soupGIFUpSM from "./assets/soup-up-sm.gif";
-import soupUpSM from "./assets/soup-up-sm.png";
-import soupGIFXS from "./assets/soup-xs.gif";
-import soupXS from "./assets/soup-xs.png";
+import soupGIFUpSM from "../../assets/soup-up-sm.gif";
+import soupUpSM from "../../assets/soup-up-sm.png";
+import soupGIFXS from "../../assets/soup-xs.gif";
+import soupXS from "../../assets/soup-xs.png";
 import { SoupImageRoot } from "./soup-image.styled";
 
 export interface SoupImageProps {

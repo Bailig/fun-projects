@@ -1,1 +1,2 @@
-export { MusicPlayerContainer as default } from "./music-player-container";
+export * from "./components";
+export { MusicPlayerContainer as default } from "./containers/music-player";

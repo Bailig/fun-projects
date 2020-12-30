@@ -6,6 +6,7 @@ export const useScrollY = () => {
 
   useEffect(() => {
     const handleWindowScroll = debounce(() => {
+      if (window.scrollY >= window.innerHeight / 2) return;
       setScrollY(window.scrollY);
     }, 15);
 

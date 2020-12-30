@@ -1,1 +1,2 @@
-export { JokeTellerContainer as default } from "./joke-teller-container";
+export * from "./components";
+export { JokeTellerContainer as default } from "./containers/joke-teller";

@@ -1,8 +1,7 @@
+import { ThemeProvider } from "@fun-projects/ui";
 import React, { FC } from "react";
 import { SWRConfig } from "swr";
-import "./global-styles.css";
 import { Routes } from "./routes";
-import { ThemeProvider } from "./theme-provider";
 
 export const App: FC = () => (
   <ThemeProvider>

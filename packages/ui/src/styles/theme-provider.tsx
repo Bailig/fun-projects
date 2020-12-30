@@ -4,17 +4,13 @@ import {
 } from "@material-ui/core";
 import React, { FC } from "react";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
+import "./css/index.css";
 
-const defaultTheme = createMuiTheme();
+const theme = createMuiTheme();
 
-interface ThemeProviderProps {
-  theme?: Record<string, any>;
-}
+export type Theme = typeof theme;
 
-export const ThemeProvider: FC<ThemeProviderProps> = ({
-  theme = defaultTheme,
-  children,
-}) => {
+export const ThemeProvider: FC = ({ children }) => {
   return (
     <MuiThemeProvider theme={theme}>
       <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>

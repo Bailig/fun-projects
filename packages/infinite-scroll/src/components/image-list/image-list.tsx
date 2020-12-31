@@ -1,7 +1,8 @@
-import React, { FC, memo } from "react";
+import React, { FC, memo, useCallback } from "react";
 import { Photo } from "../../modules";
 import { ImageListRoot } from "./image-list.styled";
-import { useImageList } from "./use-image-list";
+import { useImagesLoaded } from "./use-images-loaded";
+import { useScrolledToBottom } from "./use-scrolled-to-bottom";
 
 export interface ImageListProps {
   photos: Photo[];
@@ -11,11 +12,16 @@ export interface ImageListProps {
 
 export const ImageList: FC<ImageListProps> = memo((props) => {
   const { loading, photos, onScrolledToBottom } = props;
-  const { handleImageLoad } = useImageList(
-    photos.length,
-    loading,
-    onScrolledToBottom,
-  );
+  
+  const { isImagesLoaded, handleImageLoad } = useImagesLoaded(photos.length)
+
+  const handleScrolledToBottom = useCallback(() => {
+    if (loading || !isImagesLoaded()) return;
+    onScrolledToBottom()
+  }, [isImagesLoaded, loading, onScrolledToBottom]);
+
+  useScrolledToBottom(handleScrolledToBottom);
+
 
   return (
     <ImageListRoot>

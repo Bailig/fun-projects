@@ -1,15 +1,11 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 export const useJokeTeller = (loading: boolean, onEnded: () => void) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState<boolean>(false);
   const [animated, setAnimated] = useState<boolean>(false);
 
-  const disabled = useMemo(() => animated || playing || loading, [
-    animated,
-    loading,
-    playing,
-  ]);
+  const disabled = animated || playing || loading;
 
   const handleClick = useCallback(() => {
     audioRef.current!.play();

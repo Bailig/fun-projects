@@ -1,4 +1,4 @@
-# Fun Projects
+# Infinite Scroll
 
 [The live site](https://bailig.github.io/fun-projects/#/infinite-scroll)
 

@@ -23,8 +23,10 @@
   "dependencies": {
     "@fun-projects/ui": "^0.0.0",
     "@types/lodash.debounce": "^4.0.6",
+    "@types/lodash.throttle": "^4.1.6",
     "@types/ramda": "^0.27.17",
     "lodash.debounce": "^4.0.8",
+    "lodash.throttle": "^4.1.1",
     "ramda": "^0.27.1"
   }
 }

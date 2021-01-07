@@ -196,11 +196,11 @@ export const SortingVisualizerContainer: FC = () => {
       const bar1 = bars[i];
       const bar2 = result[i - left];
       const bar2Index = bars.indexOf(bar2);
-      await Promise.all([highlight(bar1), highlight(bar2)]);
       if (i !== bar2Index) {
+        await Promise.all([highlight(bar1), highlight(bar2)]);
         await swap(bars, i, bar2Index);
+        await Promise.all([unhighlight(bar1), unhighlight(bar2)]);
       }
-      await Promise.all([unhighlight(bar1), unhighlight(bar2)]);
     }
   };
 

@@ -9,6 +9,9 @@ const JokeTeller = React.lazy(() => import("@fun-projects/joke-teller"));
 const MusicPlayer = React.lazy(() => import("@fun-projects/music-player"));
 const PaintClone = React.lazy(() => import("@fun-projects/paint-clone"));
 const VideoPlayer = React.lazy(() => import("@fun-projects/video-player"));
+const SortingVisualizer = React.lazy(
+  () => import("@fun-projects/sorting-visualizer"),
+);
 
 const Home: FC = () => (
   <>
@@ -23,6 +26,8 @@ const Home: FC = () => (
     <Link to="/paint-clone">paint-clone</Link>
     <br />
     <Link to="/video-player">video-player</Link>
+    <br />
+    <Link to="/sorting-visualizer">sorting-visualizer</Link>
   </>
 );
 
@@ -51,6 +56,9 @@ export const Routes: FC = () => {
           </Route>
           <Route path="/video-player">
             <VideoPlayer />
+          </Route>
+          <Route path="/sorting-visualizer">
+            <SortingVisualizer />
           </Route>
         </Switch>
       </Router>

@@ -55,5 +55,13 @@ module.exports = {
         "@typescript-eslint/no-var-requires": "off",
       },
     },
+    {
+      files: ["packages/sorting-visualizer/**"],
+      rules: {
+        "no-plusplus": "off",
+        "no-await-in-loop": "off",
+        "no-param-reassign": "off",
+      },
+    },
   ],
 };

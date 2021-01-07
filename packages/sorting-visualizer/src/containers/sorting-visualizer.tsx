@@ -260,7 +260,7 @@ export const SortingVisualizerContainer: FC = () => {
   };
 
   return (
-    <>
+    <div style={{ display: "grid", rowGap: 18, width }}>
       <button type="button" onClick={handleBubbleSort}>
         bubble sort
       </button>
@@ -301,7 +301,7 @@ export const SortingVisualizerContainer: FC = () => {
         onMouseUp={(e) => setSpeed(+e.currentTarget.value)}
       />
       <svg ref={svgRef} width={width} height={height} />
-    </>
+    </div>
   );
 };
 

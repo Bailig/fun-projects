@@ -34,7 +34,6 @@ export const SortingVisualizerContainer: FC = () => {
   const waitTime = useMemo(() => scaleLinear([100, 1], [0, 1000])(speed), [
     speed,
   ]);
-  console.log(waitTime);
 
   // initialize bars based on the array
   useEffect(() => {

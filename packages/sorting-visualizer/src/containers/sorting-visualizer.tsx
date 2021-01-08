@@ -31,9 +31,10 @@ export const SortingVisualizerContainer: FC = () => {
   );
   const [speed, setSpeed] = useState(80);
 
-  const waitTime = useMemo(() => scaleLinear([100, 1], [1, 1000])(speed), [
+  const waitTime = useMemo(() => scaleLinear([100, 1], [0, 1000])(speed), [
     speed,
   ]);
+  console.log(waitTime);
 
   // initialize bars based on the array
   useEffect(() => {
@@ -106,10 +107,8 @@ export const SortingVisualizerContainer: FC = () => {
       for (let i = 0; i < bars.length - j; i++) {
         const bar1 = bars[i];
         const bar2 = bars[i + 1];
-        await highlight(bar1);
-        await highlight(bar2);
-
-        if (bar1.value >= bar2.value) {
+        await Promise.all([highlight(bar1), highlight(bar2)]);
+        if (bar1.value > bar2.value) {
           await swap(bars, i, i + 1);
         }
         await Promise.all([unhighlight(bar1), unhighlight(bar2)]);
@@ -304,7 +303,3 @@ export const SortingVisualizerContainer: FC = () => {
     </div>
   );
 };
-
-// 曼听公园 总佛寺
-// 星光夜市 六国水上夜市
-// 勐泐大佛寺

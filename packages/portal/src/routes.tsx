@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@fun-projects/sorting-visualizer";
 import React, { FC, Suspense } from "react";
 import { HashRouter as Router, Link, Route, Switch } from "react-router-dom";
 
@@ -58,7 +59,9 @@ export const Routes: FC = () => {
             <VideoPlayer />
           </Route>
           <Route path="/sorting-visualizer">
-            <SortingVisualizer />
+            <ThemeProvider>
+              <SortingVisualizer />
+            </ThemeProvider>
           </Route>
         </Switch>
       </Router>

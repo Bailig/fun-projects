@@ -27,11 +27,7 @@ export const Button = styled.button<{ disabled: boolean }>`
 
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("xs")} {
-        font-size: 18px;
-      }
-
-      ${theme.breakpoints.up("sm")} {
+      ${theme.mediaQueries.sm} {
         font-size: 26px;
       }
     `}

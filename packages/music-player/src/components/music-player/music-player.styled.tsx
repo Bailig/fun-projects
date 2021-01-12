@@ -19,11 +19,9 @@ export const MusicName = styled.a`
 
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("xs")} {
-        font-size: 20px;
-      }
+      font-size: 20px;
 
-      ${theme.breakpoints.up("sm")} {
+      ${theme.mediaQueries.sm} {
         font-size: 38px;
       }
     `}
@@ -34,11 +32,9 @@ export const AuthorName = styled.div`
 
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("xs")} {
-        font-size: 14px;
-      }
+      font-size: 14px;
 
-      ${theme.breakpoints.up("sm")} {
+      ${theme.mediaQueries.sm} {
         font-size: 22px;
       }
     `}
@@ -68,12 +64,10 @@ const musicControlBaseStyle = ({ disabled }: MusicControlBaseStyleProps) => css`
 const previousNextButtonSize = css`
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("xs")} {
-        width: 28px;
-        height: 24px;
-      }
+      width: 28px;
+      height: 24px;
 
-      ${theme.breakpoints.up("sm")} {
+      ${theme.mediaQueries.sm} {
         width: 40px;
         height: 35px;
       }
@@ -88,13 +82,11 @@ export const PlayButton = styled.button<PlayButtonProps>`
   ${musicControlBaseStyle}
   ${({ theme, playing }) =>
     css`
-      ${theme.breakpoints.down("xs")} {
-        width: 55px;
-        height: 49px;
-        background-image: url(${playing ? pauseXS : playXS});
-      }
+      width: 55px;
+      height: 49px;
+      background-image: url(${playing ? pauseXS : playXS});
 
-      ${theme.breakpoints.up("sm")} {
+      ${theme.mediaQueries.sm} {
         width: 81px;
         height: 71px;
         background-image: url(${playing ? pauseUpSM : playUpSM});
@@ -107,11 +99,9 @@ export const PreviousButton = styled.button<MusicControlBaseStyleProps>`
   ${previousNextButtonSize}
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("xs")} {
-        background-image: url(${previousXS});
-      }
+      background-image: url(${previousXS});
 
-      ${theme.breakpoints.up("sm")} {
+      ${theme.mediaQueries.sm} {
         background-image: url(${previousUpSM});
       }
     `}
@@ -122,11 +112,9 @@ export const NextButton = styled.button<MusicControlBaseStyleProps>`
   ${previousNextButtonSize}
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("xs")} {
-        background-image: url(${nextXS});
-      }
+      background-image: url(${nextXS});
 
-      ${theme.breakpoints.up("sm")} {
+      ${theme.mediaQueries.sm} {
         background-image: url(${nextUpSM});
       }
     `}
@@ -137,11 +125,9 @@ export const MusicNumber = styled.div`
 
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("xs")} {
-        font-size: 14px;
-      }
+      font-size: 14px;
 
-      ${theme.breakpoints.up("sm")} {
+      ${theme.mediaQueries.sm} {
         font-size: 18px;
       }
     `}
@@ -156,11 +142,11 @@ export const MusicControls = styled.div`
   ${({ theme }) => css`
     ${PreviousButton} {
       z-index: 100;
-      margin-right: -${theme.spacing(2)}px;
+      margin-right: -${theme.space[2]}px;
     }
     ${NextButton} {
       z-index: 100;
-      margin-left: -${theme.spacing(2)}px;
+      margin-left: -${theme.space[2]}px;
     }
   `}
 `;
@@ -179,26 +165,24 @@ export const MusicPlayerSoupRoot = styled.div`
 
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("xs")} {
-        width: ${soupImage.width.downXS}px;
-        height: ${soupImage.height.downXS}px;
+      width: ${soupImage.width.downXS}px;
+      height: ${soupImage.height.downXS}px;
 
-        ${MusicNumber} {
-          top: 88px;
-          left: 76px;
-        }
-        ${MusicName} {
-          top: 127px;
-        }
-        ${MusicControls} {
-          top: 186px;
-        }
-        ${AuthorName} {
-          top: 154px;
-        }
+      ${MusicNumber} {
+        top: 88px;
+        left: 76px;
+      }
+      ${MusicName} {
+        top: 127px;
+      }
+      ${MusicControls} {
+        top: 186px;
+      }
+      ${AuthorName} {
+        top: 154px;
       }
 
-      ${theme.breakpoints.up("sm")} {
+      ${theme.mediaQueries.sm} {
         width: ${soupImage.width.upSM}px;
         height: ${soupImage.height.upSM}px;
 
@@ -222,11 +206,9 @@ export const MusicPlayerSoupRoot = styled.div`
 export const ProgressLabel = styled.div`
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("xs")} {
-        font-size: 14px;
-      }
+      font-size: 14px;
 
-      ${theme.breakpoints.up("sm")} {
+      ${theme.mediaQueries.sm} {
         font-size: 18px;
       }
     `}
@@ -249,12 +231,10 @@ export const ProgressBar = styled(ProgressBarBase)`
 
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("xs")} {
-        width: ${progressBar.width.downXS}px;
-        height: ${progressBar.height.downXS}px;
-      }
+      width: ${progressBar.width.downXS}px;
+      height: ${progressBar.height.downXS}px;
 
-      ${theme.breakpoints.up("sm")} {
+      ${theme.mediaQueries.sm} {
         width: ${progressBar.width.upSM}px;
         height: ${progressBar.height.upSM}px;
       }
@@ -283,12 +263,10 @@ export const ChopstickImage = styled.div`
 
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("xs")} {
-        width: ${chopstickImage.width.downXS}px;
-        height: ${chopstickImage.height.downXS}px;
-      }
+      width: ${chopstickImage.width.downXS}px;
+      height: ${chopstickImage.height.downXS}px;
 
-      ${theme.breakpoints.up("sm")} {
+      ${theme.mediaQueries.sm} {
         width: ${chopstickImage.width.upSM}px;
         height: ${chopstickImage.height.upSM}px;
       }
@@ -311,11 +289,9 @@ export const MusicPlayerRoot = styled.div`
 
     ${({ theme }) =>
       css`
-        ${theme.breakpoints.down("xs")} {
-          width: ${progressBar.width.downXS}px;
-        }
+        width: ${progressBar.width.downXS}px;
 
-        ${theme.breakpoints.up("sm")} {
+        ${theme.mediaQueries.sm} {
           width: ${progressBar.width.upSM}px;
         }
       `}

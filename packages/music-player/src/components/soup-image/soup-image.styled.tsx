@@ -15,12 +15,10 @@ export const soupImage = {
 export const SoupImageRoot = styled(GIF)`
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("xs")} {
-        width: ${soupImage.width.downXS}px;
-        height: ${soupImage.height.downXS}px;
-      }
+      width: ${soupImage.width.downXS}px;
+      height: ${soupImage.height.downXS}px;
 
-      ${theme.breakpoints.up("sm")} {
+      ${theme.mediaQueries.sm} {
         width: ${soupImage.width.upSM}px;
         height: ${soupImage.height.upSM}px;
       }

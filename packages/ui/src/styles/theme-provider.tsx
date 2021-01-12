@@ -1,19 +1,25 @@
-import {
-  createMuiTheme,
-  ThemeProvider as MuiThemeProvider,
-} from "@material-ui/core";
+import { ThemeProvider as MuiThemeProvider } from "@material-ui/core";
 import React, { FC } from "react";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 import "./css/index.css";
+import { defaultTheme } from "./theme";
 
-const theme = createMuiTheme();
+interface ThemeProviderProps {
+  theme?: {
+    mui: Record<string, any>;
+    systemUI: Record<string, any>;
+  };
+}
 
-export type Theme = typeof theme;
-
-export const ThemeProvider: FC = ({ children }) => {
+export const ThemeProvider: FC<ThemeProviderProps> = ({
+  theme = defaultTheme,
+  children,
+}) => {
   return (
-    <MuiThemeProvider theme={theme}>
-      <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
+    <MuiThemeProvider theme={theme.mui}>
+      <StyledThemeProvider theme={theme.systemUI as any}>
+        {children}
+      </StyledThemeProvider>
     </MuiThemeProvider>
   );
 };

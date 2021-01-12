@@ -30,15 +30,13 @@ const bowlImage = {
 
 export const ChopsticksImage = styled.div`
   background-repeat: no-repeat;
+
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("md")} {
-        width: ${chopsticksImage.width.downMD}px;
-        height: ${chopsticksImage.height.downMD}px;
-        background-image: url(${chopsticksDownMD});
-      }
-
-      ${theme.breakpoints.up("lg")} {
+      width: ${chopsticksImage.width.downMD}px;
+      height: ${chopsticksImage.height.downMD}px;
+      background-image: url(${chopsticksDownMD});
+      ${theme.mediaQueries.lg} {
         width: ${chopsticksImage.width.upLG}px;
         height: ${chopsticksImage.height.upLG}px;
         background-image: url(${chopsticksUpLG});
@@ -55,13 +53,10 @@ export const BowlImage = styled.div`
 
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("md")} {
-        width: ${bowlImage.width.downMD}px;
-        height: ${bowlImage.height.downMD}px;
-        background-image: url(${bowlDownMd});
-      }
-
-      ${theme.breakpoints.up("lg")} {
+      width: ${bowlImage.width.downMD}px;
+      height: ${bowlImage.height.downMD}px;
+      background-image: url(${bowlDownMd});
+      ${theme.mediaQueries.lg} {
         width: ${bowlImage.width.upLG}px;
         height: ${bowlImage.height.upLG}px;
         background-image: url(${bowlUpLg});
@@ -89,11 +84,8 @@ export const DownArrow = styled.div`
 export const ScrollMeLabel = styled.div`
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("md")} {
-        font-size: 20px;
-      }
-
-      ${theme.breakpoints.up("lg")} {
+      font-size: 20px;
+      ${theme.mediaQueries.lg} {
         font-size: 30px;
       }
     `}
@@ -113,16 +105,14 @@ export const InfiniteScrollRoot = styled.div`
 
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("md")} {
-        --top-bottom-space: calc(
-          (
-              100vh - ${chopsticksImage.height.downMD}px -
-                ${bowlImage.height.downMD}px
-            ) / 2
-        );
-      }
+      --top-bottom-space: calc(
+        (
+            100vh - ${chopsticksImage.height.downMD}px -
+              ${bowlImage.height.downMD}px
+          ) / 2
+      );
 
-      ${theme.breakpoints.up("lg")} {
+      ${theme.mediaQueries.lg} {
         --top-bottom-space: calc(
           (
               100vh - ${chopsticksImage.height.upLG}px -
@@ -139,15 +129,13 @@ export const InfiniteScrollRoot = styled.div`
 
     ${({ theme }) =>
       css`
-        ${theme.breakpoints.down("md")} {
-          left: calc(
-            100vw / 2 + ${bowlImage.width.downMD}px / 2 + ${theme.spacing(1)}px
-          );
-        }
+        left: calc(
+          100vw / 2 + ${bowlImage.width.downMD}px / 2 + ${theme.space[1]}px
+        );
 
-        ${theme.breakpoints.up("lg")} {
+        ${theme.mediaQueries.lg} {
           left: calc(
-            100vw / 2 + ${bowlImage.width.upLG}px / 2 + ${theme.spacing(2)}px
+            100vw / 2 + ${bowlImage.width.upLG}px / 2 + ${theme.space[2]}px
           );
         }
       `}

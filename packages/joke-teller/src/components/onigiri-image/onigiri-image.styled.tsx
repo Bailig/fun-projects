@@ -8,12 +8,10 @@ export const onigiriImage = {
 export const OnigiriGIFRoot = styled(GIF)`
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("xs")} {
-        width: 361px;
-        height: 470px;
-      }
+      width: 361px;
+      height: 470px;
 
-      ${theme.breakpoints.up("sm")} {
+      ${theme.mediaQueries.sm} {
         width: 665px;
         height: 867px;
       }

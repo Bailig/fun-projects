@@ -9,16 +9,14 @@ export const ImageListRoot = styled.div`
 
   ${({ theme }) =>
     css`
-      ${theme.breakpoints.down("md")} {
-        width: 179px;
-        background-image: url(${noodlesDownMD});
-        grid-row-gap: ${theme.spacing(1)}px;
-      }
+      width: 179px;
+      background-image: url(${noodlesDownMD});
+      grid-row-gap: ${theme.space[1]}px;
 
-      ${theme.breakpoints.up("lg")} {
+      ${theme.mediaQueries.lg} {
         width: 308px;
         background-image: url(${noodlesUpLG});
-        grid-row-gap: ${theme.spacing(2)}px;
+        grid-row-gap: ${theme.space[2]}px;
       }
     `};
 `;

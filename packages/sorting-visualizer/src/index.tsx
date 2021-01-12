@@ -1,1 +1,1 @@
-export { SortingVisualizerContainer as default } from "./containers/sorting-visualizer";
+export { App as default } from "./app";

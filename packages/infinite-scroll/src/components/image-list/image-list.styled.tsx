@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import noodlesDownMD from "../../assets/noodles-down-md.png";
-import noodlesUpLG from "../../assets/noodles-up-lg.png";
+import noodlesImg from "../../assets/noodles-down-md.png";
+import noodlesImgLG from "../../assets/noodles-up-lg.png";
 
 export const ImageListRoot = styled.div`
   display: grid;
@@ -10,12 +10,12 @@ export const ImageListRoot = styled.div`
   ${({ theme }) =>
     css`
       width: 179px;
-      background-image: url(${noodlesDownMD});
+      background-image: url(${noodlesImg});
       grid-row-gap: ${theme.space[1]}px;
 
       ${theme.mediaQueries.lg} {
         width: 308px;
-        background-image: url(${noodlesUpLG});
+        background-image: url(${noodlesImgLG});
         grid-row-gap: ${theme.space[2]}px;
       }
     `};

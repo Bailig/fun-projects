@@ -1,30 +1,30 @@
 import styled, { css } from "styled-components";
-import bowlDownMd from "../../assets/bowl-down-md.png";
-import bowlUpLg from "../../assets/bowl-up-lg.png";
-import chopsticksDownMD from "../../assets/chopsticks-noodles-down-md.png";
-import chopsticksUpLG from "../../assets/chopsticks-noodles-up-lg.png";
-import downArrow from "../../assets/down-arrow.gif";
+import bowlImg from "../../assets/bowl-down-md.png";
+import bowlImgLG from "../../assets/bowl-up-lg.png";
+import chopsticksImg from "../../assets/chopsticks-noodles-down-md.png";
+import chopsticksImgLG from "../../assets/chopsticks-noodles-up-lg.png";
+import downArrowImg from "../../assets/down-arrow.gif";
 
 const backgroundColor = "#f2ebdf";
 const chopsticksImage = {
   height: {
-    downMD: 290,
-    upLG: 500,
+    xs: 290,
+    lg: 500,
   },
   width: {
-    downMD: 206,
-    upLG: 354,
+    xs: 206,
+    lg: 354,
   },
 };
 
 const bowlImage = {
   height: {
-    downMD: 150,
-    upLG: 258,
+    xs: 150,
+    lg: 258,
   },
   width: {
-    downMD: 180,
-    upLG: 309,
+    xs: 180,
+    lg: 309,
   },
 };
 
@@ -33,13 +33,13 @@ export const ChopsticksImage = styled.div`
 
   ${({ theme }) =>
     css`
-      width: ${chopsticksImage.width.downMD}px;
-      height: ${chopsticksImage.height.downMD}px;
-      background-image: url(${chopsticksDownMD});
+      width: ${chopsticksImage.width.xs}px;
+      height: ${chopsticksImage.height.xs}px;
+      background-image: url(${chopsticksImg});
       ${theme.mediaQueries.lg} {
-        width: ${chopsticksImage.width.upLG}px;
-        height: ${chopsticksImage.height.upLG}px;
-        background-image: url(${chopsticksUpLG});
+        width: ${chopsticksImage.width.lg}px;
+        height: ${chopsticksImage.height.lg}px;
+        background-image: url(${chopsticksImgLG});
       }
     `}
 `;
@@ -53,13 +53,13 @@ export const BowlImage = styled.div`
 
   ${({ theme }) =>
     css`
-      width: ${bowlImage.width.downMD}px;
-      height: ${bowlImage.height.downMD}px;
-      background-image: url(${bowlDownMd});
+      width: ${bowlImage.width.xs}px;
+      height: ${bowlImage.height.xs}px;
+      background-image: url(${bowlImg});
       ${theme.mediaQueries.lg} {
-        width: ${bowlImage.width.upLG}px;
-        height: ${bowlImage.height.upLG}px;
-        background-image: url(${bowlUpLg});
+        width: ${bowlImage.width.lg}px;
+        height: ${bowlImage.height.lg}px;
+        background-image: url(${bowlImgLG});
       }
     `}
 `;
@@ -78,7 +78,7 @@ export const BowlImageWrapper = styled.div`
 export const DownArrow = styled.div`
   width: 49px;
   height: 49px;
-  background-image: url(${downArrow});
+  background-image: url(${downArrowImg});
 `;
 
 export const ScrollMeLabel = styled.div`
@@ -106,18 +106,13 @@ export const InfiniteScrollRoot = styled.div`
   ${({ theme }) =>
     css`
       --top-bottom-space: calc(
-        (
-            100vh - ${chopsticksImage.height.downMD}px -
-              ${bowlImage.height.downMD}px
-          ) / 2
+        (100vh - ${chopsticksImage.height.xs}px - ${bowlImage.height.xs}px) / 2
       );
 
       ${theme.mediaQueries.lg} {
         --top-bottom-space: calc(
-          (
-              100vh - ${chopsticksImage.height.upLG}px -
-                ${bowlImage.height.upLG}px
-            ) / 2
+          (100vh - ${chopsticksImage.height.lg}px - ${bowlImage.height.lg}px) /
+            2
         );
       }
     `}
@@ -130,12 +125,12 @@ export const InfiniteScrollRoot = styled.div`
     ${({ theme }) =>
       css`
         left: calc(
-          100vw / 2 + ${bowlImage.width.downMD}px / 2 + ${theme.space[1]}px
+          100vw / 2 + ${bowlImage.width.xs}px / 2 + ${theme.space[1]}px
         );
 
         ${theme.mediaQueries.lg} {
           left: calc(
-            100vw / 2 + ${bowlImage.width.upLG}px / 2 + ${theme.space[2]}px
+            100vw / 2 + ${bowlImage.width.lg}px / 2 + ${theme.space[2]}px
           );
         }
       `}

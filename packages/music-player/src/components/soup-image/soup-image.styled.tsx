@@ -3,24 +3,24 @@ import styled, { css } from "styled-components";
 
 export const soupImage = {
   width: {
-    downXS: 290,
-    upSM: 426,
+    xs: 290,
+    sm: 426,
   },
   height: {
-    downXS: 290,
-    upSM: 426,
+    xs: 290,
+    sm: 426,
   },
 };
 
 export const SoupImageRoot = styled(GIF)`
   ${({ theme }) =>
     css`
-      width: ${soupImage.width.downXS}px;
-      height: ${soupImage.height.downXS}px;
+      width: ${soupImage.width.xs}px;
+      height: ${soupImage.height.xs}px;
 
       ${theme.mediaQueries.sm} {
-        width: ${soupImage.width.upSM}px;
-        height: ${soupImage.height.upSM}px;
+        width: ${soupImage.width.sm}px;
+        height: ${soupImage.height.sm}px;
       }
     `}
 `;

@@ -4,14 +4,14 @@ import {
 } from "@fun-projects/ui";
 import styled, { css } from "styled-components";
 import chopstick from "../../assets/chopstick.svg";
-import nextUpSM from "../../assets/next-up-sm.png";
-import nextXS from "../../assets/next-xs.png";
-import pauseUpSM from "../../assets/pause-up-sm.png";
-import pauseXS from "../../assets/pause-xs.png";
-import playUpSM from "../../assets/play-up-sm.png";
-import playXS from "../../assets/play-xs.png";
-import previousUpSM from "../../assets/previous-up-sm.png";
-import previousXS from "../../assets/previous-xs.png";
+import nextImgSM from "../../assets/next-up-sm.png";
+import nextImg from "../../assets/next-xs.png";
+import pauseImgSM from "../../assets/pause-up-sm.png";
+import pauseImg from "../../assets/pause-xs.png";
+import playImgSM from "../../assets/play-up-sm.png";
+import playImg from "../../assets/play-xs.png";
+import previousImgSM from "../../assets/previous-up-sm.png";
+import previousImg from "../../assets/previous-xs.png";
 import { soupImage } from "../soup-image/soup-image.styled";
 
 export const MusicName = styled.a`
@@ -84,12 +84,12 @@ export const PlayButton = styled.button<PlayButtonProps>`
     css`
       width: 55px;
       height: 49px;
-      background-image: url(${playing ? pauseXS : playXS});
+      background-image: url(${playing ? pauseImg : playImg});
 
       ${theme.mediaQueries.sm} {
         width: 81px;
         height: 71px;
-        background-image: url(${playing ? pauseUpSM : playUpSM});
+        background-image: url(${playing ? pauseImgSM : playImgSM});
       }
     `}
 `;
@@ -99,10 +99,10 @@ export const PreviousButton = styled.button<MusicControlBaseStyleProps>`
   ${previousNextButtonSize}
   ${({ theme }) =>
     css`
-      background-image: url(${previousXS});
+      background-image: url(${previousImg});
 
       ${theme.mediaQueries.sm} {
-        background-image: url(${previousUpSM});
+        background-image: url(${previousImgSM});
       }
     `}
 `;
@@ -112,10 +112,10 @@ export const NextButton = styled.button<MusicControlBaseStyleProps>`
   ${previousNextButtonSize}
   ${({ theme }) =>
     css`
-      background-image: url(${nextXS});
+      background-image: url(${nextImg});
 
       ${theme.mediaQueries.sm} {
-        background-image: url(${nextUpSM});
+        background-image: url(${nextImgSM});
       }
     `}
 `;
@@ -165,8 +165,8 @@ export const MusicPlayerSoupRoot = styled.div`
 
   ${({ theme }) =>
     css`
-      width: ${soupImage.width.downXS}px;
-      height: ${soupImage.height.downXS}px;
+      width: ${soupImage.width.xs}px;
+      height: ${soupImage.height.xs}px;
 
       ${MusicNumber} {
         top: 88px;
@@ -183,8 +183,8 @@ export const MusicPlayerSoupRoot = styled.div`
       }
 
       ${theme.mediaQueries.sm} {
-        width: ${soupImage.width.upSM}px;
-        height: ${soupImage.height.upSM}px;
+        width: ${soupImage.width.sm}px;
+        height: ${soupImage.height.sm}px;
 
         ${MusicNumber} {
           top: 129px;

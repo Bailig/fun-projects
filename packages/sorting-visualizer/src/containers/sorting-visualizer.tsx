@@ -1,6 +1,8 @@
 import { randomArray } from "@fun-projects/utils";
 import { max, range, scaleBand, scaleLinear, select } from "d3";
 import React, { FC, useEffect, useMemo, useRef, useState } from "react";
+import { Button, Slider } from "../components";
+import { ThemeProvider } from "../styles";
 
 const width = 500;
 const height = 500;
@@ -258,47 +260,29 @@ export const SortingVisualizerContainer: FC = () => {
   };
 
   return (
-    <div style={{ display: "grid", rowGap: 18, width }}>
-      <button type="button" onClick={handleBubbleSort}>
-        bubble sort
-      </button>
-      <button type="button" onClick={handleSelectionSort}>
-        selection sort
-      </button>
-      <button type="button" onClick={handleMergeSort}>
-        merge sort
-      </button>
-      <button type="button" onClick={handleQuickSort}>
-        quick sort
-      </button>
-      <input
-        type="number"
-        minLength={1}
-        min={2}
-        max={60}
-        defaultValue={numberCountRef.current}
-        onChange={(e) => {
-          numberCountRef.current = +e.currentTarget.value;
-        }}
-      />
-      <button
-        type="button"
-        onClick={() =>
-          setArray(
-            randomArray(numberCountRef.current, numberCountRef.current * 2),
-          )
-        }
-      >
-        Generate
-      </button>
-      <input
-        type="range"
-        min="1"
-        max="100"
-        defaultValue={speed}
-        onMouseUp={(e) => setSpeed(+e.currentTarget.value)}
-      />
-      <svg ref={svgRef} width={width} height={height} />
-    </div>
+    <ThemeProvider>
+      <div style={{ display: "grid", rowGap: 18, width }}>
+        <Button onClick={handleBubbleSort}>bubble sort</Button>
+        <Button onClick={handleSelectionSort}>selection sort</Button>
+        <Button onClick={handleMergeSort}>merge sort</Button>
+        <Button onClick={handleQuickSort}>quick sort</Button>
+        <Slider
+          min={2}
+          max={60}
+          defaultValue={numberCountRef.current}
+          onChangeCommitted={(value) => {
+            numberCountRef.current = value;
+            setArray(randomArray(value, value * 2));
+          }}
+        />
+        <Slider
+          min={4}
+          max={100}
+          defaultValue={speed}
+          onChangeCommitted={(value) => setSpeed(value)}
+        />
+        <svg ref={svgRef} width={width} height={height} />
+      </div>
+    </ThemeProvider>
   );
 };

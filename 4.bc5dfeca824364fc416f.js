@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{200:function(e,a,t){"use strict";t.r(a),t.d(a,"JokeTeller",(function(){return p})),t.d(a,"Button",(function(){return u})),t.d(a,"JokeTellerRoot",(function(){return b})),t.d(a,"OnigiriImage",(function(){return l})),t.d(a,"onigiriImage",(function(){return s})),t.d(a,"OnigiriGIFRoot",(function(){return c})),t.d(a,"default",(function(){return x}));var n=t(0),i=t.n(n),d=t(81),o=t(37),r=t(5);const s={duration:3e3},c=Object(r.d)(o.a)`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{203:function(e,a,t){"use strict";t.r(a),t.d(a,"JokeTeller",(function(){return p})),t.d(a,"Button",(function(){return u})),t.d(a,"JokeTellerRoot",(function(){return b})),t.d(a,"OnigiriImage",(function(){return l})),t.d(a,"onigiriImage",(function(){return s})),t.d(a,"OnigiriGIFRoot",(function(){return c})),t.d(a,"default",(function(){return x}));var n=t(0),i=t.n(n),d=t(82),o=t(22),r=t(3);const s={duration:3e3},c=Object(r.d)(o.a)`
   ${({theme:e})=>r.c`
       width: 361px;
       height: 470px;

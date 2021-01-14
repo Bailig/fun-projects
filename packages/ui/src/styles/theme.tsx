@@ -25,6 +25,7 @@ const space = [
   mui.spacing(2),
   mui.spacing(3),
   mui.spacing(4),
+  mui.spacing(5),
 ];
 
 const breakpoints = pipe<BreakpointValues, number[], number[], number[]>(

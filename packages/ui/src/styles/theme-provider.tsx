@@ -1,8 +1,13 @@
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core";
-import React, { FC } from "react";
-import { ThemeProvider as StyledThemeProvider } from "styled-components";
+import React, { FC, useContext } from "react";
+import {
+  ThemeContext,
+  ThemeProvider as StyledThemeProvider,
+} from "styled-components";
 import "./css/index.css";
 import { defaultTheme } from "./theme";
+
+export const useTheme = () => useContext(ThemeContext);
 
 interface ThemeProviderProps {
   theme?: {

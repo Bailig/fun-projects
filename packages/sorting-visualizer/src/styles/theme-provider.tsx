@@ -2,7 +2,6 @@ import { defaultTheme } from "@fun-projects/ui";
 import { mergeDeepRight } from "ramda";
 import React, { FC } from "react";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
-import { Base } from "./base.styled";
 
 const theme = mergeDeepRight(defaultTheme.systemUI, {
   colors: {
@@ -21,9 +20,5 @@ const theme = mergeDeepRight(defaultTheme.systemUI, {
 export type Theme = typeof theme;
 
 export const ThemeProvider: FC = ({ children }) => {
-  return (
-    <StyledThemeProvider theme={theme}>
-      <Base>{children}</Base>
-    </StyledThemeProvider>
-  );
+  return <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>;
 };

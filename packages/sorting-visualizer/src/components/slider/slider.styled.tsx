@@ -3,42 +3,28 @@ import styled, { css } from "styled-components";
 
 const slider = {
   thumb: {
-    height: {
-      xs: 25,
-      sm: 36,
-    },
+    height: 48,
   },
   track: {
-    height: {
-      xs: 8,
-      sm: 12,
-    },
+    height: 12,
   },
 };
 
-export const SLider = styled(MUISlider)`
+export const SliderRoot = styled(MUISlider)`
   ${({ theme }) => css`
     &.MuiSlider-root {
-      height: ${slider.track.height.xs}px;
-      padding: ${(slider.thumb.height.xs - slider.track.height.xs) / 2};
-      ${theme.mediaQueries.sm} {
-        height: ${slider.track.height.sm}px;
-        padding: ${(slider.thumb.height.sm - slider.track.height.sm) / 2};
-      }
+      height: ${slider.track.height}px;
+      padding: ${(slider.thumb.height - slider.track.height) / 2}px 0;
     }
 
     .MuiSlider-thumb {
-      width: 13px;
+      width: 12px;
       border-radius: 20px;
       box-shadow: ${theme.shadows[1]};
       background: ${theme.colors.yellow};
 
-      height: ${slider.thumb.height.xs}px;
-      margin-top: -${(slider.thumb.height.xs - slider.track.height.xs) / 2}px;
-      ${theme.mediaQueries.sm} {
-        height: ${slider.thumb.height.sm}px;
-        margin-top: -${(slider.thumb.height.sm - slider.track.height.sm) / 2}px;
-      }
+      height: ${slider.thumb.height}px;
+      margin-top: -${(slider.thumb.height - slider.track.height) / 2}px;
     }
 
     .MuiSlider-track,
@@ -46,10 +32,7 @@ export const SLider = styled(MUISlider)`
       border-radius: 20px;
       background: ${theme.colors.blue};
 
-      height: ${slider.track.height.xs}px;
-      ${theme.mediaQueries.sm} {
-        height: ${slider.track.height.sm}px;
-      }
+      height: ${slider.track.height}px;
     }
 
     .MuiSlider-rail {

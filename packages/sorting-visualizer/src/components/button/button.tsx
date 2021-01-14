@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 
 export interface ButtonProps {
   active?: boolean;
+  disabled?: boolean;
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -21,16 +22,25 @@ export const Button = styled.button<ButtonProps>`
     &:active {
       box-shadow: ${theme.shadows[0]};
     }
-    &:hover {
-      background: ${theme.colors.yellow};
-    }
 
     ${theme.mediaQueries.sm} {
       font-size: ${theme.fontSizes[3]}px;
     }
   `}
 
-  ${({ active, theme }) =>
+  ${({ disabled = false, theme }) =>
+    disabled
+      ? css`
+          cursor: default;
+        `
+      : css`
+          &:hover {
+            background: ${theme.colors.yellow};
+          }
+        `}
+
+    
+  ${({ active = false, theme }) =>
     active &&
     css`
       background: ${theme.colors.yellow};

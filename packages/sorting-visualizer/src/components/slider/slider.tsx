@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import { SLider as SliderStyled } from "./slider.styled";
+import React, { FC, useState } from "react";
+import { SliderRoot } from "./slider.styled";
 
 export interface SliderProps {
   value?: number;
@@ -11,10 +11,11 @@ export interface SliderProps {
 }
 
 export const Slider: FC<SliderProps> = (props) => {
-  const { min, max, value, defaultValue, onChange, onChangeCommitted } = props;
+  const { min, max, value, onChange, onChangeCommitted } = props;
+  const [defaultValue] = useState(() => props.defaultValue);
 
   return (
-    <SliderStyled
+    <SliderRoot
       min={min}
       max={max}
       value={value}

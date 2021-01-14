@@ -1,0 +1,218 @@
+import { useCallback, useRef } from "react";
+import { Bar, useBars } from "./use-bars";
+
+type UseSortDeps = ReturnType<typeof useBars> & {
+  array: number[];
+};
+
+export const useSorts = ({
+  highlight,
+  unhighlight,
+  swap,
+  array,
+}: UseSortDeps) => {
+  const barsRef = useRef<Bar[]>();
+
+  const handleBubbleSort = useCallback(async () => {
+    if (!barsRef.current) return;
+    const bars = barsRef.current;
+
+    for (let j = 1; j < bars.length; j++) {
+      for (let i = 0; i < bars.length - j; i++) {
+        const bar1 = bars[i];
+        const bar2 = bars[i + 1];
+        highlight(bar1);
+        highlight(bar2);
+        if (bar1.value > bar2.value) {
+          await swap(bars, i, i + 1);
+        }
+        unhighlight(bar1);
+        unhighlight(bar2);
+      }
+    }
+  }, [highlight, swap, unhighlight]);
+
+  const handleSelectionSort = useCallback(async () => {
+    if (!barsRef.current) return;
+    const bars = barsRef.current;
+
+    for (let j = 0; j < bars.length; j++) {
+      let minIndex = j;
+      highlight(bars[j]);
+      for (let i = j; i < bars.length; i++) {
+        const bar = bars[i];
+        highlight(bar);
+        if (bar.value < bars[minIndex].value) {
+          if (minIndex !== j) {
+            unhighlight(bars[minIndex]);
+          }
+          minIndex = i;
+        } else if (i !== j) {
+          unhighlight(bar);
+        }
+      }
+      if (j !== minIndex) {
+        await swap(bars, j, minIndex);
+        unhighlight(bars[j]);
+        unhighlight(bars[minIndex]);
+      } else {
+        unhighlight(bars[j]);
+      }
+    }
+  }, [highlight, swap, unhighlight]);
+
+  const mergeSort = useCallback(
+    async (bars: Bar[], left = 0, right = bars.length - 1) => {
+      if (left >= right) return;
+      const mid = Math.floor((left + right) / 2);
+      await mergeSort(bars, left, mid);
+      await mergeSort(bars, mid + 1, right);
+
+      const result = [];
+      let i = left;
+      let j = mid + 1;
+      while (i <= mid && j <= right) {
+        const first = bars[i];
+        const second = bars[j];
+
+        highlight(first);
+        highlight(second);
+
+        if (first.value === second.value) {
+          result.push(first);
+          result.push(second);
+          i++;
+          j++;
+        } else if (first.value < second.value) {
+          result.push(first);
+          i++;
+        } else if (first.value > second.value) {
+          result.push(second);
+          j++;
+        }
+        unhighlight(first);
+        unhighlight(second);
+      }
+
+      while (i <= mid) {
+        const bar = bars[i];
+        highlight(bar);
+        result.push(bar);
+        i++;
+        unhighlight(bar);
+      }
+      while (j <= right) {
+        const bar = bars[j];
+        highlight(bar);
+        result.push(bar);
+        j++;
+        unhighlight(bar);
+      }
+
+      // put result back to original array
+      // eslint-disable-next-line no-shadow
+      for (let i = left; i < right + 1; i++) {
+        const bar1 = bars[i];
+        const bar2 = result[i - left];
+        const bar2Index = bars.indexOf(bar2);
+        if (i !== bar2Index) {
+          highlight(bar1);
+          highlight(bar2);
+          await swap(bars, i, bar2Index);
+          unhighlight(bar1);
+          unhighlight(bar2);
+        }
+      }
+    },
+    [highlight, swap, unhighlight],
+  );
+
+  const handleMergeSort = useCallback(async () => {
+    if (!barsRef.current) return;
+    const bars = barsRef.current;
+
+    await mergeSort(bars);
+  }, [mergeSort]);
+
+  const positionItem = useCallback(
+    async (bars: Bar[], left: number, right: number) => {
+      const pivot = bars[right];
+      let pivotIndex = left;
+      highlight(pivot);
+      highlight(bars[pivotIndex]);
+
+      for (let i = left; i < right; i++) {
+        const bar = bars[i];
+        highlight(bar);
+
+        if (bar.value < pivot.value) {
+          if (pivotIndex !== i) {
+            await swap(bars, pivotIndex, i);
+
+            unhighlight(bars[pivotIndex]);
+            unhighlight(bars[i]);
+          }
+          pivotIndex++;
+          highlight(bars[pivotIndex]);
+        }
+        if (pivotIndex !== i) {
+          unhighlight(bar);
+        }
+      }
+      if (right !== pivotIndex) {
+        await swap(bars, right, pivotIndex);
+
+        unhighlight(bars[right]);
+        unhighlight(bars[pivotIndex]);
+      } else {
+        unhighlight(bars[pivotIndex]);
+      }
+
+      return pivotIndex;
+    },
+    [highlight, swap, unhighlight],
+  );
+
+  const quickSort = useCallback(
+    async (bars: Bar[], left = 0, right = bars.length - 1) => {
+      if (left >= right) return bars;
+      const partitionIndex = await positionItem(bars, left, right);
+      await quickSort(bars, left, partitionIndex - 1);
+      await quickSort(bars, partitionIndex + 1, right);
+      return bars;
+    },
+    [positionItem],
+  );
+
+  const handleQuickSort = useCallback(async () => {
+    if (!barsRef.current) return;
+    const bars = barsRef.current;
+
+    await quickSort(bars);
+  }, [quickSort]);
+
+  const setBars = useCallback(
+    (bars: SVGRectElement[]) => {
+      barsRef.current = bars.map((bar, index) => ({
+        value: array[index],
+        node: bar,
+      }));
+    },
+    [array],
+  );
+
+  return {
+    barsRef,
+    sortHandlerMap: {
+      bubble: handleBubbleSort,
+      selection: handleSelectionSort,
+      merge: handleMergeSort,
+      quick: handleQuickSort,
+    },
+    handleBubbleSort,
+    handleSelectionSort,
+    handleMergeSort,
+    handleQuickSort,
+    setBars,
+  };
+};

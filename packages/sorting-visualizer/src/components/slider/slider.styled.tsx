@@ -30,7 +30,7 @@ export const SliderRoot = styled(MUISlider)`
     .MuiSlider-track,
     .MuiSlider-rail {
       border-radius: 20px;
-      background: ${theme.colors.blue};
+      background: ${theme.colors.blue[0]};
 
       height: ${slider.track.height}px;
     }

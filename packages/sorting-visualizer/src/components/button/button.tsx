@@ -15,7 +15,7 @@ export const Button = styled.button<ButtonProps>`
     box-shadow: ${theme.shadows[1]};
     transition-duration: ${theme.transitions.duration.shorter}ms;
     padding: ${theme.space[1]}px ${theme.space[3]}px;
-    background: ${theme.colors.blue};
+    background: ${theme.colors.blue[0]};
     color: ${theme.colors.white};
     font-size: ${theme.fontSizes[1]}px;
 

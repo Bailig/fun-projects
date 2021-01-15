@@ -21,13 +21,11 @@ export const useSorts = ({
       for (let i = 0; i < bars.length - j; i++) {
         const bar1 = bars[i];
         const bar2 = bars[i + 1];
-        highlight(bar1);
-        highlight(bar2);
+        await Promise.all([highlight(bar1), highlight(bar2)]);
         if (bar1.value > bar2.value) {
           await swap(bars, i, i + 1);
         }
-        unhighlight(bar1);
-        unhighlight(bar2);
+        await Promise.all([unhighlight(bar1), unhighlight(bar2)]);
       }
     }
   }, [highlight, swap, unhighlight]);
@@ -38,25 +36,24 @@ export const useSorts = ({
 
     for (let j = 0; j < bars.length; j++) {
       let minIndex = j;
-      highlight(bars[j]);
+      await highlight(bars[j]);
       for (let i = j; i < bars.length; i++) {
         const bar = bars[i];
-        highlight(bar);
+        await highlight(bar);
         if (bar.value < bars[minIndex].value) {
           if (minIndex !== j) {
-            unhighlight(bars[minIndex]);
+            await unhighlight(bars[minIndex]);
           }
           minIndex = i;
         } else if (i !== j) {
-          unhighlight(bar);
+          await unhighlight(bar);
         }
       }
       if (j !== minIndex) {
         await swap(bars, j, minIndex);
-        unhighlight(bars[j]);
-        unhighlight(bars[minIndex]);
+        await Promise.all([unhighlight(bars[j]), unhighlight(bars[minIndex])]);
       } else {
-        unhighlight(bars[j]);
+        await unhighlight(bars[j]);
       }
     }
   }, [highlight, swap, unhighlight]);
@@ -75,8 +72,7 @@ export const useSorts = ({
         const first = bars[i];
         const second = bars[j];
 
-        highlight(first);
-        highlight(second);
+        await Promise.all([highlight(first), highlight(second)]);
 
         if (first.value === second.value) {
           result.push(first);
@@ -90,23 +86,22 @@ export const useSorts = ({
           result.push(second);
           j++;
         }
-        unhighlight(first);
-        unhighlight(second);
+        await Promise.all([unhighlight(first), unhighlight(second)]);
       }
 
       while (i <= mid) {
         const bar = bars[i];
-        highlight(bar);
+        await highlight(bar);
         result.push(bar);
         i++;
-        unhighlight(bar);
+        await unhighlight(bar);
       }
       while (j <= right) {
         const bar = bars[j];
-        highlight(bar);
+        await highlight(bar);
         result.push(bar);
         j++;
-        unhighlight(bar);
+        await unhighlight(bar);
       }
 
       // put result back to original array
@@ -116,11 +111,9 @@ export const useSorts = ({
         const bar2 = result[i - left];
         const bar2Index = bars.indexOf(bar2);
         if (i !== bar2Index) {
-          highlight(bar1);
-          highlight(bar2);
+          await Promise.all([highlight(bar1), highlight(bar2)]);
           await swap(bars, i, bar2Index);
-          unhighlight(bar1);
-          unhighlight(bar2);
+          await Promise.all([unhighlight(bar1), unhighlight(bar2)]);
         }
       }
     },
@@ -138,32 +131,35 @@ export const useSorts = ({
     async (bars: Bar[], left: number, right: number) => {
       const pivot = bars[right];
       let pivotIndex = left;
-      highlight(pivot);
-      highlight(bars[pivotIndex]);
+      await Promise.all([highlight(pivot), highlight(bars[pivotIndex])]);
 
       for (let i = left; i < right; i++) {
         const bar = bars[i];
-        highlight(bar);
+        await highlight(bar);
 
         if (bar.value < pivot.value) {
           if (pivotIndex !== i) {
             await swap(bars, pivotIndex, i);
 
-            unhighlight(bars[pivotIndex]);
-            unhighlight(bars[i]);
+            await Promise.all([
+              unhighlight(bars[pivotIndex]),
+              unhighlight(bars[i]),
+            ]);
           }
           pivotIndex++;
-          highlight(bars[pivotIndex]);
+          await highlight(bars[pivotIndex]);
         }
         if (pivotIndex !== i) {
-          unhighlight(bar);
+          await unhighlight(bar);
         }
       }
       if (right !== pivotIndex) {
         await swap(bars, right, pivotIndex);
 
-        unhighlight(bars[right]);
-        unhighlight(bars[pivotIndex]);
+        await Promise.all([
+          unhighlight(bars[right]),
+          unhighlight(bars[pivotIndex]),
+        ]);
       } else {
         unhighlight(bars[pivotIndex]);
       }

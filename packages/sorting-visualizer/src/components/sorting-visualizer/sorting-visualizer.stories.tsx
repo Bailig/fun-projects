@@ -10,7 +10,7 @@ export const Default = () => {
 };
 
 export default {
-  title: "quote-generator/SortingVisualizer",
+  title: "sorting-visualizer/SortingVisualizer",
   component: SortingVisualizer,
   decorators: [
     (Story: any) => (

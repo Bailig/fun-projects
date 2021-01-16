@@ -40,6 +40,7 @@ module.exports = {
     "jsx-a11y/media-has-caption": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/interactive-supports-focus": "off",
+    "jsx-a11y/no-autofocus": "off",
     "no-lonely-if": "off",
   },
   overrides: [

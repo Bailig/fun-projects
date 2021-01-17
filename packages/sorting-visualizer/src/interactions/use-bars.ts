@@ -6,17 +6,30 @@ export interface Bar {
   value: number;
 }
 
-const setFill = (color: string) => (bar: Bar) => {
-  return select(bar.node).attr("fill", color);
-};
-
 export const useBars = (
   colors: { default: string; highlight: string },
   wait: number,
 ) => {
-  const highlight = useCallback(setFill(colors.highlight), [colors.highlight]);
+  const setFill = useCallback(
+    (color: string, bar: Bar) => {
+      return select(bar.node)
+        .transition()
+        .duration(wait)
+        .attr("fill", color)
+        .end();
+    },
+    [wait],
+  );
 
-  const unhighlight = useCallback(setFill(colors.default), [colors.default]);
+  const highlight = useCallback((bar: Bar) => setFill(colors.highlight, bar), [
+    colors.highlight,
+    setFill,
+  ]);
+
+  const unhighlight = useCallback((bar: Bar) => setFill(colors.default, bar), [
+    colors.default,
+    setFill,
+  ]);
 
   const swap = useCallback(
     async (bars: Bar[], index1: number, index2: number) => {

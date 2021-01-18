@@ -1,0 +1,12 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{206:function(e,t,n){"use strict";n.r(t),n.d(t,"default",(function(){return b}));var a=n(0),l=n.n(a),r=n(22),c=n(59);const u=[.5,.75,1,1.5,2],o=({totalTime:e,currentTime:t=0,playing:n=!1,onToggle:o=(()=>{}),onVolumeChange:s=(()=>{}),onProgressChange:i=(()=>{}),onPlaybackSpeedChange:m=(()=>{}),onFullScreen:b=(()=>{})})=>{const[p,d]=Object(a.useState)(.5),[g,v]=Object(a.useState)(!1),[h,y]=Object(a.useState)(1);return l.a.createElement(l.a.Fragment,null,l.a.createElement(r.b,{value:t,max:e,onClick:i}),l.a.createElement("button",{type:"button",title:n?"Pause":"Play",onClick:()=>o()},n?"Pause":"Play"),l.a.createElement("button",{type:"button",title:g?"Unmute":"Mute",onClick:()=>g?(v(!1),void s(p)):(v(!0),void s(0))},g?"unmute":"mute"),l.a.createElement("div",null,"Volume"),l.a.createElement(r.b,{value:g?0:p,max:1,onClick:e=>{const t=e<.1?0:e>.9?1:e;d(t),s(t)}}),l.a.createElement("select",{title:"Playback speed",value:h,onChange:e=>{const t=parseFloat(e.target.value);y(t),m(t)}},u.map(e=>l.a.createElement("option",{key:e,value:e},e," x"))),l.a.createElement("div",null,Object(c.b)(t)," / ",Object(c.b)(e)),l.a.createElement("button",{type:"button",title:"Full screen",onClick:()=>b()},"full screen"))};var s=n(2);const i=s.d.video`
+  cursor: pointer;
+`,m=s.d.div`
+  max-width: 80vw;
+  max-height: 80vh;
+  position: relative;
+
+  ${i} {
+    width: 100%;
+    height: auto;
+  }
+`,b=()=>{const e=Object(a.useRef)(null),[t,n]=Object(a.useState)(0),[r,c]=Object(a.useState)(0),[u,s]=Object(a.useState)(!1),b=Object(a.useRef)(!1),p=()=>{const t=e.current;u?(t.pause(),s(!1)):(t.play(),s(!0))},d=()=>{const t=e.current;n(t.currentTime)};return l.a.createElement(m,null,l.a.createElement(i,{ref:e,src:"assets/travel.b6deaf83e610a7fb5922932d00b6a849.mp4",playsInline:!0,onClick:p,onTimeUpdate:d,onCanPlay:d,onDurationChange:e=>{c(e.currentTarget.duration)}}),l.a.createElement(o,{currentTime:t,totalTime:r,playing:u,onToggle:p,onProgressChange:t=>{e.current.currentTime=t*r,n(t*r)},onVolumeChange:t=>{e.current.volume=t},onPlaybackSpeedChange:t=>{e.current.playbackRate=t},onFullScreen:()=>{const t=e.current,n=b.current;n?document.exitFullscreen():t.requestFullscreen(),b.current=!n}}))}}}]);

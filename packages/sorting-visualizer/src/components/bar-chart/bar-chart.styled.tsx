@@ -2,18 +2,17 @@ import styled, { css } from "styled-components";
 
 export const BarChartRoot = styled.div`
   ${({ theme }) => css`
-    background: ${theme.colors.purple};
-    border-radius: 20px;
-
-    height: 216px;
+    background: ${theme.colors.blue[2]};
+    border-radius: 6px;
+    height: 229px;
     padding: ${theme.space[3]}px;
     ${theme.mediaQueries.sm} {
-      height: 352px;
+      height: 503px;
       padding: ${theme.space[4]}px;
     }
-    ${theme.mediaQueries.lg} {
-      height: 392px;
-      padding: ${theme.space[5]}px;
-    }
   `}
+
+  rect {
+    border-radius: 6px;
+  }
 `;

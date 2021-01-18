@@ -20,7 +20,7 @@ export const SortingVisualizerContainer: FC = () => {
     speed,
   ]);
   const { highlight, unhighlight, swap } = useBars(
-    { default: theme.colors.yellow, highlight: theme.colors.white },
+    { default: theme.colors.white, highlight: theme.colors.yellow[0] },
     waitTime,
   );
   const { sortHandlerMap, setBars } = useSorts({
@@ -38,6 +38,7 @@ export const SortingVisualizerContainer: FC = () => {
       chart={<BarChart ref={svgRef} numbers={array} onLoadedBars={setBars} />}
       buttons={buttonTypes.map((bt) => (
         <Button
+          key={bt}
           active={buttonType === bt}
           disabled={buttonType !== undefined}
           onClick={async () => {

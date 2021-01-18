@@ -44,7 +44,7 @@ export const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>(
         .data(numbers)
         .enter()
         .append("rect")
-        .attr("fill", theme.colors.yellow)
+        .attr("fill", theme.colors.white)
         .attr("width", xScale.bandwidth())
         .attr("height", yScale)
         .attr("x", (_, i) => xScale(i) || null)
@@ -58,7 +58,7 @@ export const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>(
       return () => {
         g.remove();
       };
-    }, [numbers, onLoadedBars, rootWidth, theme.colors.yellow]);
+    }, [numbers, onLoadedBars, rootWidth, theme.colors.white]);
 
     return (
       <BarChartRoot ref={rootRef}>

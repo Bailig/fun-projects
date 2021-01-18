@@ -6,25 +6,25 @@ export interface ButtonProps {
 }
 
 export const Button = styled.button<ButtonProps>`
-  border-radius: 20px;
-  font-weight: 800;
+  border-radius: 6px;
   text-align: center;
   text-transform: uppercase;
 
   ${({ theme }) => css`
-    box-shadow: ${theme.shadows[1]};
+    box-shadow: ${theme.shadows[0]};
     transition-duration: ${theme.transitions.duration.shorter}ms;
     padding: ${theme.space[1]}px ${theme.space[3]}px;
-    background: ${theme.colors.blue[0]};
+    background: ${theme.colors.blue[2]};
     color: ${theme.colors.white};
-    font-size: ${theme.fontSizes[1]}px;
+    font-size: ${theme.fontSizes[0]}px;
+    font-weight: ${theme.fontWeights[1]};
 
     &:active {
       box-shadow: ${theme.shadows[0]};
     }
 
     ${theme.mediaQueries.sm} {
-      font-size: ${theme.fontSizes[3]}px;
+      font-size: ${theme.fontSizes[1]}px;
     }
   `}
 

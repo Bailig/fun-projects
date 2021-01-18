@@ -1,16 +1,24 @@
 import { Container, Grid } from "@material-ui/core";
-import React, { FC, ReactElement, ReactNode } from "react";
+import React, { FC, ReactNode } from "react";
+import { Button } from "../button/button";
 import { Slider } from "../slider/slider";
 import {
-  SliderField,
+  ButtonSection,
+  Controls,
+  Divider,
+  Headline,
   SliderLabel,
   SliderSection,
   SortingVisualizerRoot,
 } from "./sorting-visualizer.styled";
 
+export type SortType = "bubble" | "selection" | "merge" | "quick";
+
+export const sortTypes: SortType[] = ["bubble", "selection", "merge", "quick"];
+
 export interface SortingVisualizerProps {
   chart?: ReactNode;
-  buttons?: ReactElement[];
+  buttons?: ReactNode[];
   defaultSpeed?: number;
   defaultArrayLength?: number;
   onArrayLengthChange?: (value: number) => void;
@@ -20,7 +28,7 @@ export interface SortingVisualizerProps {
 export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
   const {
     chart,
-    buttons = [],
+    buttons,
     defaultArrayLength,
     defaultSpeed,
     onSpeedChange,
@@ -30,53 +38,43 @@ export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
   return (
     <SortingVisualizerRoot>
       <Container>
-        <Grid container spacing={2} justify="center">
-          {buttons.map((button) => (
-            <Grid
-              key={button.props.children as string}
-              item
-              xs={6}
-              sm={3}
-              lg={2}
-            >
-              {button}
-            </Grid>
-          ))}
-        </Grid>
-
-        <Grid container justify="center">
-          <Grid item xs={12} lg={8}>
+        <Grid container justify="center" spacing={2}>
+          <Grid item xs={12}>
+            <Headline>sorting visualizer</Headline>
+          </Grid>
+          <Grid item xs={12} lg={9}>
             {chart}
           </Grid>
-        </Grid>
-
-        <Grid container justify="center">
-          <Grid item xs={12} lg={8}>
-            <SliderSection>
-              <SliderField>
-                <SliderLabel>array length</SliderLabel>
-                <Slider
-                  min={2}
-                  max={200}
-                  defaultValue={defaultArrayLength}
-                  onChangeCommitted={(value) =>
-                    onArrayLengthChange && onArrayLengthChange(value)
-                  }
-                />
-              </SliderField>
-
-              <SliderField>
-                <SliderLabel>speed</SliderLabel>
-                <Slider
-                  min={4}
-                  max={100}
-                  defaultValue={defaultSpeed}
-                  onChangeCommitted={(value) =>
-                    onSpeedChange && onSpeedChange(value)
-                  }
-                />
-              </SliderField>
-            </SliderSection>
+          <Grid item xs={12} lg={3}>
+            <Controls>
+              <SliderSection>
+                <div>
+                  <SliderLabel>array length</SliderLabel>
+                  <Slider
+                    min={2}
+                    max={200}
+                    defaultValue={defaultArrayLength}
+                    onChangeCommitted={(value) =>
+                      onArrayLengthChange && onArrayLengthChange(value)
+                    }
+                  />
+                </div>
+                <div>
+                  <SliderLabel>speed</SliderLabel>
+                  <Slider
+                    min={4}
+                    max={100}
+                    defaultValue={defaultSpeed}
+                    onChangeCommitted={(value) =>
+                      onSpeedChange && onSpeedChange(value)
+                    }
+                  />
+                </div>
+                <Button>generate array</Button>
+              </SliderSection>
+              <Divider />
+              <ButtonSection>{buttons}</ButtonSection>
+            </Controls>
           </Grid>
         </Grid>
       </Container>

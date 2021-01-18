@@ -5,16 +5,13 @@ import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
 const theme = mergeDeepRight(defaultTheme.systemUI, {
   colors: {
-    blue: ["#8ce1fc", "#E0E0E0"],
-    yellow: "#fcca1d",
-    purple: "#8C44FD",
+    blue: ["#F2F4F8", "#9DACC9", "#1A3263"],
+    yellow: ["#FAB92B"],
     white: "#ffffff",
   },
-  fontSizes: [18, 22, 28, 30, 36],
-  shadows: [
-    "1px 1px 1px rgba(0, 0, 0, 0.25)",
-    "2px 4px 4px rgba(0, 0, 0, 0.1)",
-  ],
+  fontSizes: [14, 16, 24, 36, 48],
+  fontWeights: [400, 800],
+  shadows: ["0px 4px 4px rgba(0, 0, 0, 0.25)"],
 });
 
 export type Theme = typeof theme;

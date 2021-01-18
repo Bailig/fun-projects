@@ -36,7 +36,7 @@ export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
   return (
     <SortingVisualizerRoot>
       <Container>
-        <Grid container justify="center" spacing={2}>
+        <Grid container justify="center" spacing={3}>
           <Grid item xs={12}>
             <Headline>sorting visualizer</Headline>
           </Grid>

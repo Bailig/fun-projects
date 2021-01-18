@@ -274,6 +274,7 @@ export const ChopstickImage = styled.div`
 `;
 
 export const MusicPlayerRoot = styled.div`
+  font-family: OzCaramel, sans-serif;
   background: #f2ebdf;
   color: #ffc700;
   text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);

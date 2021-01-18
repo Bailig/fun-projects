@@ -34,6 +34,7 @@ export const Button = styled.button<{ disabled: boolean }>`
 `;
 
 export const JokeTellerRoot = styled.div`
+  font-family: OzCaramel, sans-serif;
   position: relative;
   display: flex;
   justify-content: center;

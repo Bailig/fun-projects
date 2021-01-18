@@ -5,10 +5,6 @@ export const ListWrapper = styled.div`
 `;
 
 export const BoardRoot = styled.div`
-  /* TODO move font family to project root */
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-
   ${({ theme }) => css`
     padding: ${theme.space[2]}px;
     display: grid;

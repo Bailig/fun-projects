@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import { useMeasure } from "react-use";
+import { Textarea } from "../textarea/textarea";
 import { ListCardRoot, PopoverRoot } from "./list-card.styled";
 
 export interface ItemCardProps {
@@ -20,6 +21,11 @@ export const ListCard: FC<ItemCardProps> = (props) => {
     setRef(rootRef.current as any);
   });
 
+  const handleUpdate = () => {
+    if (onUpdate) onUpdate(newText);
+    setEditing(false);
+  };
+
   return (
     <>
       <ListCardRoot
@@ -37,20 +43,13 @@ export const ListCard: FC<ItemCardProps> = (props) => {
         onClose={() => setEditing(false)}
       >
         <div style={{ width }}>
-          <textarea
-            autoFocus
+          <Textarea
             value={newText}
             style={{ width: "100%" }}
             onChange={(e) => setNewText(e.currentTarget.value)}
-            onFocus={(e) => e.currentTarget.select()}
+            onEnter={handleUpdate}
           />
-          <button
-            type="button"
-            onClick={() => {
-              if (onUpdate) onUpdate(newText);
-              setEditing(false);
-            }}
-          >
+          <button type="button" onClick={handleUpdate}>
             save
           </button>
           <button type="button" onClick={() => setEditing(false)}>

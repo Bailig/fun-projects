@@ -97,7 +97,7 @@ export const ScrollMe = styled.div`
 `;
 
 export const InfiniteScrollRoot = styled.div`
-  font-family: OzCaramel;
+  font-family: OzCaramel, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;

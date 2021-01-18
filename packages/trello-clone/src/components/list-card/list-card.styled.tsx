@@ -16,9 +16,6 @@ export const IconButton = styled(MUIIconButton)`
 `;
 
 export const ListCardRoot = styled.div`
-  /* TODO move font family to project root */
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   ${({ theme }) => css`
     position: relative;
     padding: ${theme.space[1]}px;
@@ -39,9 +36,6 @@ export const ListCardRoot = styled.div`
 `;
 
 export const PopoverRoot = styled(Popover)`
-  /* TODO move font family to project root */
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   &.MuiPopover-root {
     background-color: rgba(0, 0, 0, 0.6);
   }

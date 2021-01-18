@@ -32,10 +32,6 @@ export const ListButton = styled(Button)`
 `;
 
 export const ListRoot = styled.div`
-  /* TODO move font family to project root */
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-
   background-color: #ebecf0;
   border-radius: 3px;
   max-height: 100%;

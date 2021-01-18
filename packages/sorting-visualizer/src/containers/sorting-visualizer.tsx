@@ -52,9 +52,11 @@ export const SortingVisualizerContainer: FC = () => {
       ))}
       onArrayLengthChange={(value) => {
         numberCountRef.current = value;
-        setArray(randomArray(value, value * 2));
       }}
       onSpeedChange={setSpeed}
+      onGenerateNew={() =>
+        randomArray(numberCountRef.current, numberCountRef.current * 2)
+      }
     />
   );
 };

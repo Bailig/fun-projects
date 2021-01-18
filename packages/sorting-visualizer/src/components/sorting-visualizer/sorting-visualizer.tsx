@@ -23,6 +23,7 @@ export interface SortingVisualizerProps {
   defaultArrayLength?: number;
   onArrayLengthChange?: (value: number) => void;
   onSpeedChange?: (value: number) => void;
+  onGenerateNew?: (value: number) => void;
 }
 
 export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
@@ -70,7 +71,9 @@ export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
                     }
                   />
                 </div>
-                <Button>generate array</Button>
+                <Button onClick={() => onGenerateNew && onGenerateNew()}>
+                  generate array
+                </Button>
               </SliderSection>
               <Divider />
               <ButtonSection>{buttons}</ButtonSection>

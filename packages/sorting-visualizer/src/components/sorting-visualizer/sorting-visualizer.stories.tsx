@@ -13,6 +13,7 @@ export const Default = () => {
       buttons={buttons.map((b) => (
         <Button key={b}>{b}</Button>
       ))}
+      generateNewButton={<Button color="yellow">generate new</Button>}
     />
   );
 };

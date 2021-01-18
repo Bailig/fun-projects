@@ -76,7 +76,7 @@ export const Controls = styled.div`
   ${({ theme }) => css`
     padding: ${theme.space[3]}px;
     background-color: ${theme.colors.blue[0]};
-    border-radius: 6px;
+    border-radius: ${theme.radii}px;
     display: grid;
     gap: ${theme.space[2]}px;
 

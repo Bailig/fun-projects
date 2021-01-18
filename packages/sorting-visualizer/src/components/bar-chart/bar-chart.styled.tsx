@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const BarChartRoot = styled.div`
   ${({ theme }) => css`
     background: ${theme.colors.blue[2]};
-    border-radius: 6px;
+    border-radius: ${theme.radii}px;
     height: 229px;
     padding: ${theme.space[3]}px;
     ${theme.mediaQueries.sm} {
@@ -11,8 +11,4 @@ export const BarChartRoot = styled.div`
       padding: ${theme.space[4]}px;
     }
   `}
-
-  rect {
-    border-radius: 6px;
-  }
 `;

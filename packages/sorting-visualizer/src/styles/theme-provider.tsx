@@ -12,6 +12,7 @@ const theme = mergeDeepRight(defaultTheme.systemUI, {
   fontSizes: [14, 16, 24, 36, 48],
   fontWeights: [400, 800],
   shadows: ["0px 4px 4px rgba(0, 0, 0, 0.25)"],
+  radii: 6,
 });
 
 export type Theme = typeof theme;

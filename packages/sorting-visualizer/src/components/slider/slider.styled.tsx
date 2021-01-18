@@ -19,7 +19,7 @@ export const SliderRoot = styled(MUISlider)`
 
     .MuiSlider-thumb {
       width: 12px;
-      border-radius: 20px;
+      border-radius: 6px;
       background: ${theme.colors.yellow[0]};
 
       height: ${slider.thumb.height}px;

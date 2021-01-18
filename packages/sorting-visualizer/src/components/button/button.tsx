@@ -6,11 +6,11 @@ export interface ButtonProps {
 }
 
 export const Button = styled.button<ButtonProps>`
-  border-radius: 6px;
   text-align: center;
   text-transform: uppercase;
 
   ${({ theme }) => css`
+    border-radius: ${theme.radii}px;
     box-shadow: ${theme.shadows[0]};
     transition-duration: ${theme.transitions.duration.shorter}ms;
     padding: ${theme.space[1]}px ${theme.space[3]}px;

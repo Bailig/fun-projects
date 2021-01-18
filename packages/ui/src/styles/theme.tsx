@@ -6,6 +6,8 @@ const mui = createMuiTheme();
 
 const fontSizes = [12, 14, 16, 20, 24, 32, 48, 64];
 
+const fontWeights = [100, 200, 300, 400, 500, 600, 700, 800, 900];
+
 const colors = {
   primary: [
     mui.palette.primary.dark,
@@ -45,6 +47,7 @@ export const defaultTheme = {
   mui,
   systemUI: {
     fontSizes,
+    fontWeights,
     colors,
     space,
     breakpoints,

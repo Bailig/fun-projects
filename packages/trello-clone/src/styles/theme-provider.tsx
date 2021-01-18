@@ -12,5 +12,7 @@ const theme = mergeDeepRight(defaultTheme.systemUI, {
 export type Theme = typeof theme;
 
 export const ThemeProvider: FC = ({ children }) => {
-  return <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>;
+  return (
+    <StyledThemeProvider theme={theme as any}>{children}</StyledThemeProvider>
+  );
 };

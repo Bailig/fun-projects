@@ -20,7 +20,7 @@ export const SortingVisualizerContainer: FC = () => {
     speed,
   ]);
   const { highlight, unhighlight, swap } = useBars(
-    { default: theme.colors.white, highlight: theme.colors.yellow[0] },
+    { default: theme.colors.white, highlight: theme.colors.yellow[2] },
     waitTime,
   );
   const { sortHandlerMap, setBars } = useSorts({
@@ -30,6 +30,7 @@ export const SortingVisualizerContainer: FC = () => {
     array,
   });
   const [buttonType, setButtonType] = useState<SortType>();
+  const sorting = buttonType !== undefined;
 
   return (
     <SortingVisualizer
@@ -40,7 +41,7 @@ export const SortingVisualizerContainer: FC = () => {
         <Button
           key={bt}
           active={buttonType === bt}
-          disabled={buttonType !== undefined}
+          disabled={sorting}
           onClick={async () => {
             setButtonType(bt);
             await sortHandlerMap[bt]();
@@ -50,6 +51,7 @@ export const SortingVisualizerContainer: FC = () => {
           {bt}
         </Button>
       ))}
+      generateNewButtonDisabled={sorting}
       onArrayLengthChange={(value) => {
         numberCountRef.current = value;
       }}

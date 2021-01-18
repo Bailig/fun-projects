@@ -6,7 +6,7 @@ export const Headline = styled.h1`
     font-weight: ${theme.fontWeights[1]};
     font-size: ${theme.fontSizes[2]}px;
     text-transform: uppercase;
-    color: ${theme.colors.yellow[0]};
+    color: ${theme.colors.yellow[2]};
 
     ${theme.mediaQueries.sm} {
       font-size: ${theme.fontSizes[3]}px;

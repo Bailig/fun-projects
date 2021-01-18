@@ -2,8 +2,20 @@ import React from "react";
 import { ThemeProvider } from "../../styles";
 import { Button } from "./button";
 
-export const Default = () => <Button>Click</Button>;
-export const Active = () => <Button active>Click</Button>;
+export const States = () => (
+  <>
+    <Button>Click</Button>
+    <Button active>Click</Button>
+    <Button disabled>Click</Button>
+    <Button color="yellow">Click</Button>
+    <Button active color="yellow">
+      Click
+    </Button>
+    <Button disabled color="yellow">
+      Click
+    </Button>
+  </>
+);
 
 export default {
   title: "sorting-visualizer/Button",
@@ -11,7 +23,9 @@ export default {
   decorators: [
     (Story: any) => (
       <ThemeProvider>
-        <Story />
+        <div style={{ display: "grid", gap: 8, justifyContent: "start" }}>
+          <Story />
+        </div>
       </ThemeProvider>
     ),
   ],

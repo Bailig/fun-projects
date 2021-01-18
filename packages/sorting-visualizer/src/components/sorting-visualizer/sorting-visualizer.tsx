@@ -17,6 +17,7 @@ export interface SortingVisualizerProps {
   buttons?: ReactNode[];
   defaultSpeed?: number;
   defaultArrayLength?: number;
+  generateNewButtonDisabled?: boolean;
   onArrayLengthChange?: (value: number) => void;
   onSpeedChange?: (value: number) => void;
   onGenerateNew?: () => void;
@@ -28,6 +29,7 @@ export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
     buttons,
     defaultArrayLength,
     defaultSpeed,
+    generateNewButtonDisabled = false,
     onSpeedChange,
     onArrayLengthChange,
     onGenerateNew,
@@ -50,7 +52,7 @@ export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
                   <SliderLabel>array length</SliderLabel>
                   <Slider
                     min={2}
-                    max={200}
+                    max={80}
                     defaultValue={defaultArrayLength}
                     onChangeCommitted={(value) =>
                       onArrayLengthChange && onArrayLengthChange(value)
@@ -68,7 +70,11 @@ export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
                     }
                   />
                 </div>
-                <Button onClick={() => onGenerateNew && onGenerateNew()}>
+                <Button
+                  disabled={generateNewButtonDisabled}
+                  color="yellow"
+                  onClick={() => onGenerateNew && onGenerateNew()}
+                >
                   generate array
                 </Button>
               </SliderSection>

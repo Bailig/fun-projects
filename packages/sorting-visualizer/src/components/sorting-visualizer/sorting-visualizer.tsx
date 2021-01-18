@@ -12,10 +12,6 @@ import {
   SortingVisualizerRoot,
 } from "./sorting-visualizer.styled";
 
-export type SortType = "bubble" | "selection" | "merge" | "quick";
-
-export const sortTypes: SortType[] = ["bubble", "selection", "merge", "quick"];
-
 export interface SortingVisualizerProps {
   chart?: ReactNode;
   buttons?: ReactNode[];

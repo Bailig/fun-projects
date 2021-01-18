@@ -5,8 +5,8 @@ import React, { FC, useMemo, useRef, useState } from "react";
 import { BarChart, Button, SortingVisualizer } from "../components";
 import { useBars, useSorts } from "../interactions";
 
-type ButtonType = "bubble" | "selection" | "merge" | "quick";
-const buttonTypes: ButtonType[] = ["bubble", "selection", "merge", "quick"];
+type SortType = "bubble" | "selection" | "merge" | "quick";
+const sortTypes: SortType[] = ["bubble", "selection", "merge", "quick"];
 
 export const SortingVisualizerContainer: FC = () => {
   const theme = useTheme();
@@ -29,14 +29,14 @@ export const SortingVisualizerContainer: FC = () => {
     swap,
     array,
   });
-  const [buttonType, setButtonType] = useState<ButtonType>();
+  const [buttonType, setButtonType] = useState<SortType>();
 
   return (
     <SortingVisualizer
       defaultArrayLength={numberCountRef.current}
       defaultSpeed={speed}
       chart={<BarChart ref={svgRef} numbers={array} onLoadedBars={setBars} />}
-      buttons={buttonTypes.map((bt) => (
+      buttons={sortTypes.map((bt) => (
         <Button
           key={bt}
           active={buttonType === bt}

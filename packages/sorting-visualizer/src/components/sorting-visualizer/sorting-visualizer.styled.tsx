@@ -5,7 +5,6 @@ export const Headline = styled.h1`
   ${({ theme }) => css`
     font-weight: ${theme.fontWeights[1]};
     font-size: ${theme.fontSizes[2]}px;
-    text-align: center;
     text-transform: uppercase;
     color: ${theme.colors.yellow[0]};
 

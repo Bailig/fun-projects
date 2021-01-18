@@ -20,8 +20,8 @@ export const SliderRoot = styled(MUISlider)`
     .MuiSlider-thumb {
       width: 12px;
       border-radius: 6px;
-      background: ${theme.colors.yellow[0]};
-
+      background: ${theme.colors.yellow[2]};
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
       height: ${slider.thumb.height}px;
       margin-top: -${(slider.thumb.height - slider.rail.height) / 2}px;
     }
@@ -39,9 +39,11 @@ export const SliderRoot = styled(MUISlider)`
     }
 
     .MuiSlider-rail,
-    .MuiSlider-thumb:hover,
-    .MuiSlider-thumb.Mui-focusVisible {
+    .MuiSlider-thumb:hover {
       box-shadow: none;
+    }
+    .MuiSlider-thumb.Mui-focusVisible {
+      box-shadow: 0px 0px 10px ${theme.colors.yellow[2]};
     }
   `}
 `;

@@ -11,7 +11,7 @@ const buttonTypes: ButtonType[] = ["bubble", "selection", "merge", "quick"];
 export const SortingVisualizerContainer: FC = () => {
   const theme = useTheme();
   const svgRef = useRef<HTMLDivElement>(null);
-  const numberCountRef = useRef(10);
+  const numberCountRef = useRef(15);
   const [array, setArray] = useState(
     randomArray(numberCountRef.current, numberCountRef.current * 2),
   );

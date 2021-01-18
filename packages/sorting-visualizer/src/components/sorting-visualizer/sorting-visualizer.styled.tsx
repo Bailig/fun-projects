@@ -90,5 +90,8 @@ export const Controls = styled.div`
 `;
 
 export const SortingVisualizerRoot = styled.div`
-  font-family: "Changa", sans-serif;
+  ${({ theme }) => css`
+    font-family: "Changa", sans-serif;
+    padding: ${theme.space[4]}px 0;
+  `}
 `;

@@ -54,9 +54,12 @@ export const SortingVisualizerContainer: FC = () => {
         numberCountRef.current = value;
       }}
       onSpeedChange={setSpeed}
-      onGenerateNew={() =>
-        randomArray(numberCountRef.current, numberCountRef.current * 2)
-      }
+      onGenerateNew={() => {
+        setArray(
+          randomArray(numberCountRef.current, numberCountRef.current * 2),
+        );
+        setButtonType(undefined);
+      }}
     />
   );
 };

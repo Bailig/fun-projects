@@ -23,7 +23,7 @@ export interface SortingVisualizerProps {
   defaultArrayLength?: number;
   onArrayLengthChange?: (value: number) => void;
   onSpeedChange?: (value: number) => void;
-  onGenerateNew?: (value: number) => void;
+  onGenerateNew?: () => void;
 }
 
 export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
@@ -34,6 +34,7 @@ export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
     defaultSpeed,
     onSpeedChange,
     onArrayLengthChange,
+    onGenerateNew,
   } = props;
 
   return (

@@ -1,6 +1,5 @@
 import { Container, Grid } from "@material-ui/core";
 import React, { FC, ReactNode } from "react";
-import { Button } from "../button/button";
 import { Slider } from "../slider/slider";
 import {
   ButtonSection,
@@ -15,12 +14,11 @@ import {
 export interface SortingVisualizerProps {
   chart?: ReactNode;
   buttons?: ReactNode[];
+  generateNewButton: ReactNode;
   defaultSpeed?: number;
   defaultArrayLength?: number;
-  generateNewButtonDisabled?: boolean;
   onArrayLengthChange?: (value: number) => void;
   onSpeedChange?: (value: number) => void;
-  onGenerateNew?: () => void;
 }
 
 export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
@@ -29,10 +27,9 @@ export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
     buttons,
     defaultArrayLength,
     defaultSpeed,
-    generateNewButtonDisabled = false,
+    generateNewButton,
     onSpeedChange,
     onArrayLengthChange,
-    onGenerateNew,
   } = props;
 
   return (
@@ -70,13 +67,7 @@ export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
                     }
                   />
                 </div>
-                <Button
-                  disabled={generateNewButtonDisabled}
-                  color="yellow"
-                  onClick={() => onGenerateNew && onGenerateNew()}
-                >
-                  generate array
-                </Button>
+                {generateNewButton}
               </SliderSection>
               <Divider />
               <ButtonSection>{buttons}</ButtonSection>

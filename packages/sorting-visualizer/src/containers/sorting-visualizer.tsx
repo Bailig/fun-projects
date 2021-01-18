@@ -1,9 +1,8 @@
 import { useTheme } from "@fun-projects/ui";
-import { randomArray } from "@fun-projects/utils";
 import { scaleLinear } from "d3";
 import React, { FC, useMemo, useRef, useState } from "react";
 import { BarChart, Button, SortingVisualizer } from "../components";
-import { useBars, useSorts } from "../interactions";
+import { useArray, useBars, useSorts } from "../interactions";
 
 type SortType = "bubble" | "selection" | "merge" | "quick";
 const sortTypes: SortType[] = ["bubble", "selection", "merge", "quick"];
@@ -11,10 +10,7 @@ const sortTypes: SortType[] = ["bubble", "selection", "merge", "quick"];
 export const SortingVisualizerContainer: FC = () => {
   const theme = useTheme();
   const svgRef = useRef<HTMLDivElement>(null);
-  const numberCountRef = useRef(15);
-  const [array, setArray] = useState(
-    randomArray(numberCountRef.current, numberCountRef.current * 2),
-  );
+  const { arrayLengthRef, array, setRandomArray } = useArray();
   const [speed, setSpeed] = useState(80);
   const waitTime = useMemo(() => scaleLinear([100, 1], [0, 1000])(speed), [
     speed,
@@ -34,7 +30,7 @@ export const SortingVisualizerContainer: FC = () => {
 
   return (
     <SortingVisualizer
-      defaultArrayLength={numberCountRef.current}
+      defaultArrayLength={arrayLengthRef.current}
       defaultSpeed={speed}
       chart={<BarChart ref={svgRef} numbers={array} onLoadedBars={setBars} />}
       buttons={sortTypes.map((bt) => (
@@ -51,17 +47,22 @@ export const SortingVisualizerContainer: FC = () => {
           {bt}
         </Button>
       ))}
-      generateNewButtonDisabled={sorting}
+      generateNewButton={
+        <Button
+          disabled={sorting}
+          color="yellow"
+          onClick={() => {
+            setRandomArray();
+            setButtonType(undefined);
+          }}
+        >
+          generate array
+        </Button>
+      }
       onArrayLengthChange={(value) => {
-        numberCountRef.current = value;
+        arrayLengthRef.current = value;
       }}
       onSpeedChange={setSpeed}
-      onGenerateNew={() => {
-        setArray(
-          randomArray(numberCountRef.current, numberCountRef.current * 2),
-        );
-        setButtonType(undefined);
-      }}
     />
   );
 };

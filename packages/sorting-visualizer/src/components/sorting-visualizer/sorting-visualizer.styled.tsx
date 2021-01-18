@@ -77,12 +77,14 @@ export const Controls = styled.div`
     background-color: ${theme.colors.blue[0]};
     border-radius: ${theme.radii}px;
     display: grid;
-    gap: ${theme.space[2]}px;
+    gap: ${theme.space[3]}px;
+    align-content: center;
 
     ${theme.mediaQueries.sm} {
       grid-template-columns: 1fr auto 1fr;
     }
     ${theme.mediaQueries.lg} {
+      height: 503px;
       grid-template-columns: 1fr;
     }
   `}

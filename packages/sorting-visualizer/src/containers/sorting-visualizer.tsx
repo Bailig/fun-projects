@@ -2,9 +2,8 @@ import { useTheme } from "@fun-projects/ui";
 import { scaleLinear } from "d3";
 import React, { FC, useMemo, useRef, useState } from "react";
 import { BarChart, Button, SortingVisualizer } from "../components";
-import { useArray, useBars, useSorts } from "../interactions";
+import { SortType, useArray, useBars, useSorts } from "../interactions";
 
-type SortType = "bubble" | "selection" | "merge" | "quick";
 const sortTypes: SortType[] = ["bubble", "selection", "merge", "quick"];
 
 export const SortingVisualizerContainer: FC = () => {
@@ -19,14 +18,12 @@ export const SortingVisualizerContainer: FC = () => {
     { default: theme.colors.white, highlight: theme.colors.yellow[2] },
     waitTime,
   );
-  const { sortHandlerMap, setBars } = useSorts({
+  const { sorting, sortType, handleSort, setBars } = useSorts({
     highlight,
     unhighlight,
     swap,
     array,
   });
-  const [buttonType, setButtonType] = useState<SortType>();
-  const sorting = buttonType !== undefined;
 
   return (
     <SortingVisualizer
@@ -36,24 +33,18 @@ export const SortingVisualizerContainer: FC = () => {
       buttons={sortTypes.map((bt) => (
         <Button
           key={bt}
-          active={buttonType === bt}
+          active={sortType === bt}
           disabled={sorting}
-          onClick={async () => {
-            setButtonType(bt);
-            await sortHandlerMap[bt]();
-            setButtonType(undefined);
-          }}
+          onClick={() => handleSort(bt)}
         >
           {bt}
         </Button>
       ))}
       generateNewButton={
         <Button
-          disabled={sorting}
           color="yellow"
           onClick={() => {
             setRandomArray();
-            setButtonType(undefined);
           }}
         >
           generate array
@@ -61,6 +52,7 @@ export const SortingVisualizerContainer: FC = () => {
       }
       onArrayLengthChange={(value) => {
         arrayLengthRef.current = value;
+        setRandomArray();
       }}
       onSpeedChange={setSpeed}
     />

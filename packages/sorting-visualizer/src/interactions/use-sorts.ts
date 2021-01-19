@@ -1,5 +1,7 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { Bar, useBars } from "./use-bars";
+
+export type SortType = "bubble" | "selection" | "merge" | "quick";
 
 type UseSortDeps = ReturnType<typeof useBars> & {
   array: number[];
@@ -187,8 +189,35 @@ export const useSorts = ({
     await quickSort(bars);
   }, [quickSort]);
 
+  const sortHandlerMap = useMemo(
+    () => ({
+      bubble: handleBubbleSort,
+      selection: handleSelectionSort,
+      merge: handleMergeSort,
+      quick: handleQuickSort,
+    }),
+    [handleBubbleSort, handleMergeSort, handleQuickSort, handleSelectionSort],
+  );
+
+  const sortingCountRef = useRef(0);
+  const [sortType, setSortType] = useState<SortType>();
+
+  const handleSort = useCallback(
+    async (type: SortType) => {
+      setSortType(type);
+      sortingCountRef.current++;
+      await sortHandlerMap[type]();
+      sortingCountRef.current--;
+      if (sortingCountRef.current === 0) {
+        setSortType(undefined);
+      }
+    },
+    [sortHandlerMap],
+  );
+
   const setBars = useCallback(
     (bars: SVGRectElement[]) => {
+      setSortType(undefined);
       barsRef.current = bars.map((bar, index) => ({
         value: array[index],
         node: bar,
@@ -199,16 +228,9 @@ export const useSorts = ({
 
   return {
     barsRef,
-    sortHandlerMap: {
-      bubble: handleBubbleSort,
-      selection: handleSelectionSort,
-      merge: handleMergeSort,
-      quick: handleQuickSort,
-    },
-    handleBubbleSort,
-    handleSelectionSort,
-    handleMergeSort,
-    handleQuickSort,
+    sorting: sortType !== undefined,
+    sortType,
+    handleSort,
     setBars,
   };
 };

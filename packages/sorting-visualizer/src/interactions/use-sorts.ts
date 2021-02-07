@@ -7,6 +7,8 @@ type UseSortDeps = ReturnType<typeof useBars> & {
   array: number[];
 };
 
+const getRandomId = () => Math.floor(Math.random() * 100000);
+
 export const useSorts = ({
   highlight,
   unhighlight,
@@ -199,20 +201,20 @@ export const useSorts = ({
     [handleBubbleSort, handleMergeSort, handleQuickSort, handleSelectionSort],
   );
 
-  const sortingCountRef = useRef(0);
+  const sortingId = useRef<number>();
   const [sortType, setSortType] = useState<SortType>("bubble");
   const [sorting, setSorting] = useState(false);
 
-  // TODO: bug - current logic waits for all the sort. should only weight for the latest sort. could be accomplished like the setTimeout
   const handleSort = useCallback(async () => {
+    if (sorting) return;
     setSorting(true);
-    sortingCountRef.current++;
+    const sortId = getRandomId();
+    sortingId.current = sortId;
     await sortHandlerMap[sortType]();
-    sortingCountRef.current--;
-    if (sortingCountRef.current === 0) {
+    if (sortingId.current === sortId) {
       setSorting(false);
     }
-  }, [sortHandlerMap, sortType]);
+  }, [sortHandlerMap, sortType, sorting]);
 
   const setBars = useCallback(
     (bars: SVGRectElement[]) => {

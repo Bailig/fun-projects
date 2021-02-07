@@ -4,14 +4,32 @@ import { Button } from "./button";
 
 export const States = () => (
   <>
+    default:
     <Button>Click</Button>
+    active:
     <Button active>Click</Button>
+    disabled:
     <Button disabled>Click</Button>
-    <Button color="yellow">Click</Button>
-    <Button active color="yellow">
+    white:
+    <Button color="white">Click</Button>
+    white and active:
+    <Button active color="white">
       Click
     </Button>
-    <Button disabled color="yellow">
+    white and disabled:
+    <Button disabled color="white">
+      Click
+    </Button>
+    outlined white:
+    <Button variant="outlined" color="white">
+      Click
+    </Button>
+    outlined white and active:
+    <Button variant="outlined" active color="white">
+      Click
+    </Button>
+    outlined white and disabled:
+    <Button variant="outlined" disabled color="white">
       Click
     </Button>
   </>

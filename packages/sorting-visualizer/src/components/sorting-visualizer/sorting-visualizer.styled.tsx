@@ -1,18 +1,17 @@
 import styled, { css } from "styled-components";
+import { BarChartRoot } from "../bar-chart/bar-chart.styled";
 import { Button } from "../button/button";
+import { SliderRoot } from "../slider/slider.styled";
 
 export const Headline = styled.h1`
   ${({ theme }) => css`
-    font-weight: ${theme.fontWeights[1]};
-    font-size: ${theme.fontSizes[2]}px;
-    text-transform: uppercase;
-    color: ${theme.colors.yellow[2]};
+    color: ${theme.colors.black};
+    font-size: 24px;
+    text-align: center;
+    text-transform: capitalize;
 
     ${theme.mediaQueries.sm} {
-      font-size: ${theme.fontSizes[3]}px;
-    }
-    ${theme.mediaQueries.lg} {
-      font-size: ${theme.fontSizes[4]}px;
+      font-size: 36px;
     }
   `}
 `;
@@ -20,79 +19,132 @@ export const Headline = styled.h1`
 export const SliderLabel = styled.div`
   ${({ theme }) =>
     css`
-      font-weight: ${theme.fontWeights[0]};
-      font-size: ${theme.fontSizes[0]}px;
-      text-align: center;
-      text-transform: uppercase;
-      color: ${theme.colors.blue[2]};
+      color: ${theme.colors.black};
+      font-size: 14px;
+      text-transform: capitalize;
       ${theme.mediaQueries.sm} {
-        font-size: ${theme.fontSizes[1]}px;
+        font-size: 16px;
       }
     `};
 `;
 
-export const Divider = styled.div`
+export const Paper = styled.div`
   ${({ theme }) => css`
-    height: 1px;
-    width: auto;
-    background: ${theme.colors.blue[1]};
-    ${theme.mediaQueries.sm} {
-      width: 1px;
-      height: auto;
-    }
-    ${theme.mediaQueries.lg} {
-      height: 1px;
-      width: auto;
-    }
-  `}
-`;
-
-export const SliderSection = styled.section`
-  ${({ theme }) => css`
-    display: grid;
-    align-content: center;
-    row-gap: ${theme.space[1]}px;
-    ${Button} {
-      margin-top: ${theme.space[1]}px;
-    }
-  `}
-`;
-
-export const ButtonSection = styled.section`
-  ${({ theme }) => css`
-    display: grid;
-    align-content: center;
-    gap: ${theme.space[2]}px;
-    grid-template-columns: 1fr 1fr;
-
-    ${theme.mediaQueries.lg} {
-      grid-template-columns: 1fr;
-    }
-  `}
-`;
-
-export const Controls = styled.div`
-  ${({ theme }) => css`
-    padding: ${theme.space[3]}px;
-    background-color: ${theme.colors.blue[0]};
+    background: ${theme.colors.white};
+    box-shadow: ${theme.shadows[0]};
     border-radius: ${theme.radii}px;
+    padding: ${theme.space[2]}px;
+  `}
+`;
+
+export const SliderSection = styled(Paper)`
+  ${({ theme }) => css`
     display: grid;
-    gap: ${theme.space[3]}px;
-    align-content: center;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "array-length-label array-length-slider array-length-slider"
+      "slow-label speed-slider fast-label";
+    align-items: center;
+    row-gap: ${theme.space[3]}px;
+    column-gap: ${theme.space[2]}px;
+
+    ${SliderLabel}:nth-child (1) {
+      grid-area: array-length-label;
+    }
+    ${SliderLabel}:nth-child(3) {
+      grid-area: slow-label;
+    }
+    ${SliderLabel}:nth-child(5) {
+      grid-area: fast-label;
+    }
+
+    ${SliderRoot}:nth-child(2) {
+      grid-area: array-length-slider;
+    }
+    ${SliderRoot}:nth-child(4) {
+      grid-area: speed-slider;
+    }
+  `}
+`;
+
+export const SortTypeSection = styled(Paper)`
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: ${theme.space[2]}px;
+  `}
+`;
+
+export interface ActionSectionProps {
+  showGenerateNewButton: boolean;
+}
+
+export const ActionSection = styled.div<ActionSectionProps>`
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: ${theme.space[2]}px;
+
+    --button-padding-x: ${theme.space[2]}px;
+    ${Button} {
+      padding-left: var(--button-padding-x);
+      padding-right: var(--button-padding-x);
+    }
 
     ${theme.mediaQueries.sm} {
-      grid-template-columns: 1fr auto 1fr;
+      justify-content: center;
+      grid-template-columns: auto auto;
+      --button-padding-x: ${theme.space[3]}px;
     }
     ${theme.mediaQueries.lg} {
-      height: 503px;
-      grid-template-columns: 1fr;
+      justify-content: stretch;
+      grid-template-columns: 3fr 2fr;
+      --button-padding-x: ${theme.space[2]}px;
     }
   `}
 `;
 
 export const SortingVisualizerRoot = styled.div`
   ${({ theme }) => css`
-    font-family: "Changa", sans-serif;
-    padding: ${theme.space[4]}px 0;
+    margin: ${theme.space[3]}px 0;
+    ${BarChartRoot} {
+      margin-top: 60px;
+    }
+    ${SliderSection} {
+      margin-top: ${theme.space[2]}px;
+    }
+    ${SortTypeSection} {
+      margin-top: ${theme.space[2]}px;
+    }
+    ${ActionSection} {
+      margin-top: ${theme.space[4]}px;
+    }
+
+    ${theme.mediaQueries.sm} {
+      margin: 64px 0;
+      ${BarChartRoot} {
+        margin-top: 140px;
+      }
+      ${SliderSection} {
+        margin-top: ${theme.space[4]}px;
+        height: calc(100% - ${theme.space[4]}px);
+      }
+      ${SortTypeSection} {
+        margin-top: ${theme.space[4]}px;
+      }
+      ${ActionSection} {
+        margin-top: ${theme.space[4]}px;
+      }
+    }
+
+    ${theme.mediaQueries.lg} {
+      margin: 76px 0;
+      ${BarChartRoot},${SliderSection} {
+        margin-top: 150px;
+      }
+      ${SliderSection} {
+        height: auto;
+      }
+    }
   `}
 `;

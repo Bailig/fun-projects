@@ -15,10 +15,17 @@ export const SortingVisualizerContainer: FC = () => {
     speed,
   ]);
   const { highlight, unhighlight, swap } = useBars(
-    { default: theme.colors.white, highlight: theme.colors.yellow[2] },
+    { default: theme.colors.primary, highlight: theme.colors.black },
     waitTime,
   );
-  const { sorting, sortType, handleSort, setBars } = useSorts({
+  const {
+    sorting,
+    sortType,
+    handleSort,
+    handleSortType,
+    stopSorting,
+    setBars,
+  } = useSorts({
     highlight,
     unhighlight,
     swap,
@@ -27,32 +34,31 @@ export const SortingVisualizerContainer: FC = () => {
 
   return (
     <SortingVisualizer
+      sorting={sorting}
       defaultArrayLength={arrayLengthRef.current}
       defaultSpeed={speed}
       chart={<BarChart ref={svgRef} numbers={array} onLoadedBars={setBars} />}
-      buttons={sortTypes.map((bt) => (
+      buttons={sortTypes.map((s) => (
         <Button
-          key={bt}
-          active={sortType === bt}
-          disabled={sorting}
-          onClick={() => handleSort(bt)}
+          key={s}
+          color="white"
+          active={sortType === s}
+          disabled={sortType === s}
+          onClick={() => handleSortType(s)}
         >
-          {bt}
+          {s}
         </Button>
       ))}
-      generateNewButton={
-        <Button
-          color="yellow"
-          onClick={() => {
-            setRandomArray();
-          }}
-        >
-          generate array
-        </Button>
-      }
+      onSort={handleSort}
+      onGenerateNew={() => {
+        stopSorting();
+        setRandomArray();
+      }}
       onArrayLengthChange={(value) => {
         arrayLengthRef.current = value;
-        setRandomArray();
+        if (!sorting) {
+          setRandomArray();
+        }
       }}
       onSpeedChange={setSpeed}
     />

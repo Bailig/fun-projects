@@ -3,60 +3,60 @@ import styled, { css } from "styled-components";
 export interface ButtonProps {
   active?: boolean;
   disabled?: boolean;
-  color?: "yellow" | "blue";
+  color?: "white" | "primary";
+  variant?: "outlined" | "contained";
 }
 
 export const Button = styled.button<ButtonProps>`
-  ${({ theme, color = "blue" }) => css`
+  ${({ theme, color = "primary", variant = "contained" }) => css`
     text-align: center;
-    text-transform: uppercase;
+    text-transform: capitalize;
     border-radius: ${theme.radii}px;
-    box-shadow: ${theme.shadows[1]};
+    box-shadow: ${theme.button.shadows.default};
     transition-duration: ${theme.transitions.duration.shorter}ms;
-    background: ${theme.colors[color][2]};
-    color: ${theme.colors.white};
-    font-size: ${theme.fontSizes[0]}px;
-    font-weight: ${theme.fontWeights[1]};
-    border: 4px solid ${theme.colors[color][2]};
-    padding: ${theme.space[1] - 4}px ${theme.space[3]}px;
-
-    ${theme.mediaQueries.sm} {
-      font-size: ${theme.fontSizes[1]}px;
+    background: ${theme.colors[color]};
+    padding: ${theme.space[1]}px ${theme.space[2]}px;
+    border: 2px solid ${theme.colors[color]};
+    font-size: 18px;
+    &:hover {
+      box-shadow: ${theme.button.shadows.hover};
     }
-  `}
 
-  ${({ disabled = false, color = "blue", theme }) =>
-    disabled
+    ${color === "primary"
       ? css`
-          cursor: default;
-          background: ${theme.colors[color][1]};
-          border: 4px solid ${theme.colors[color][1]};
-          box-shadow: none;
+          font-weight: 900;
+          color: ${theme.colors.white};
         `
       : css`
-          &:hover,
-          &:active {
-            background: ${theme.colors.white};
-            color: ${theme.colors[color][2]};
-          }
-
-          &:active {
-            box-shadow: ${theme.shadows[0]};
-          }
+          font-weight: 600;
+          color: ${theme.colors.primary};
         `}
 
+    ${variant === "outlined" &&
+    css`
+      border-color: ${color === "white"
+        ? theme.colors.primary
+        : theme.colors.white};
+    `}
+  `}
+
+  ${({ disabled = false, theme }) =>
+    disabled &&
+    css`
+      cursor: default;
+      &:hover {
+        box-shadow: ${theme.button.shadows.default};
+      }
+    `}
+
     
-  ${({
-    active = false,
-    disabled = false,
-    color = "blue",
-    theme,
-  }) =>
+  ${({ active = false, theme }) =>
     active &&
     css`
       cursor: default;
-      background: ${theme.colors.white};
-      color: ${disabled ? theme.colors[color][1] : theme.colors[color][2]};
-      box-shadow: ${theme.shadows[0]};
+      box-shadow: ${theme.button.shadows.active};
+      &:hover {
+        box-shadow: ${theme.button.shadows.active};
+      }
     `}
 `;

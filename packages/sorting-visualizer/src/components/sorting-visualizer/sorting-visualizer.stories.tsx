@@ -9,11 +9,13 @@ const buttons = ["bubble", "selection", "merge", "quick"];
 export const Default = () => {
   return (
     <SortingVisualizer
+      defaultArrayLength={15}
       chart={<BarChart numbers={[5, 3, 2, 7, 2, 6, 2, 6, 3, 8, 3]} />}
       buttons={buttons.map((b) => (
-        <Button key={b}>{b}</Button>
+        <Button color="white" key={b}>
+          {b}
+        </Button>
       ))}
-      generateNewButton={<Button color="yellow">generate new</Button>}
     />
   );
 };

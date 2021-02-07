@@ -2,6 +2,7 @@ import { Container, Grid } from "@material-ui/core";
 import React, { FC, ReactNode, useState } from "react";
 import { Button } from "../button/button";
 import { Slider } from "../slider/slider";
+import { SortingText } from "./sorting-text";
 import {
   ActionSection,
   Headline,
@@ -14,7 +15,6 @@ import {
 export interface SortingVisualizerProps {
   chart?: ReactNode;
   buttons?: ReactNode[];
-
   sorting?: boolean;
   defaultArrayLength: number;
   defaultSpeed?: number;
@@ -30,7 +30,6 @@ export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
     buttons,
     defaultArrayLength,
     defaultSpeed,
-
     sorting = false,
     onSort = () => {},
     onSpeedChange = () => {},
@@ -48,7 +47,7 @@ export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
             <Headline>sorting visualizer</Headline>
           </Grid>
 
-          <Grid item xs={12} lg={9}>
+          <Grid item xs={12} lg={8}>
             {chart}
           </Grid>
 
@@ -57,7 +56,7 @@ export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
             item
             spacing={3}
             xs={12}
-            lg={3}
+            lg={4}
             style={{ paddingLeft: 0, paddingRight: 0, marginLeft: 0 }}
           >
             <Grid item xs={12} sm={6} lg={12}>
@@ -93,7 +92,7 @@ export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
                   variant="outlined"
                   onClick={onGenerateNew}
                 >
-                  generate array
+                  generate new
                 </Button>
 
                 <Button
@@ -104,7 +103,7 @@ export const SortingVisualizer: FC<SortingVisualizerProps> = (props) => {
                     onSort();
                   }}
                 >
-                  sort!
+                  {sorting ? <SortingText /> : "sort!"}
                 </Button>
               </ActionSection>
             </Grid>

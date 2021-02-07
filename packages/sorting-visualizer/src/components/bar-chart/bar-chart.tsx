@@ -35,7 +35,7 @@ export const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>(
       const xScale = scaleBand<number>()
         .domain(range(0, numbers.length))
         .range([0, width])
-        .padding(0.1);
+        .padding(0.5);
 
       const g = select(svgRef.current).append("g");
 
@@ -44,7 +44,7 @@ export const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>(
         .data(numbers)
         .enter()
         .append("rect")
-        .attr("fill", theme.colors.white)
+        .attr("fill", theme.colors.primary)
         .attr("width", xScale.bandwidth())
         .attr("height", yScale)
         .attr("x", (_, i) => xScale(i) || null)
@@ -58,7 +58,7 @@ export const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>(
       return () => {
         g.remove();
       };
-    }, [numbers, onLoadedBars, rootWidth, theme.colors.white]);
+    }, [numbers, onLoadedBars, rootWidth, theme.colors.primary]);
 
     return (
       <BarChartRoot ref={rootRef}>

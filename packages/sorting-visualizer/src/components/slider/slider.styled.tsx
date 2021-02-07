@@ -3,45 +3,59 @@ import styled, { css } from "styled-components";
 
 const slider = {
   thumb: {
-    height: 12,
+    height: 24,
+    shadow: "5px 5px 15px rgba(136, 160, 183, 0.25)",
   },
-  rail: {
-    height: 2,
+  track: {
+    height: 8,
   },
 };
 
 export const SliderRoot = styled(MUISlider)`
-  ${({ theme }) => css`
+  ${({ theme, value }) => css`
     &.MuiSlider-root {
-      height: ${slider.rail.height}px;
-      padding: ${(slider.thumb.height - slider.rail.height) / 2}px 0;
+      height: ${slider.track.height}px;
+      padding: ${(slider.thumb.height - slider.track.height) / 2}px 0;
     }
 
     .MuiSlider-thumb {
-      width: 12px;
-      border-radius: 6px;
-      background: ${theme.colors.yellow[0]};
-
+      margin-top: -${(slider.thumb.height - slider.track.height) / 2}px;
       height: ${slider.thumb.height}px;
-      margin-top: -${(slider.thumb.height - slider.rail.height) / 2}px;
+      width: ${slider.thumb.height}px;
+      background: ${theme.colors.primary};
+      border-radius: 20px;
+
+      &:hover,
+      &.MuiSlider-active,
+      &.Mui-focusVisible {
+        box-shadow: ${slider.thumb.shadow};
+      }
+
+      &::before {
+        content: "${value}";
+        line-height: ${slider.thumb.height}px;
+        padding: 0 12px;
+        font-size: 14px;
+        color: ${theme.colors.white};
+        background: ${theme.colors.primary};
+        box-shadow: ${slider.thumb.shadow};
+        border-radius: 20px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+      }
     }
 
     .MuiSlider-track,
     .MuiSlider-rail {
-      border-radius: 1px;
-      height: ${slider.rail.height}px;
-    }
-    .MuiSlider-rail {
-      background: ${theme.colors.blue[1]};
-    }
-    ..MuiSlider-track {
-      background: ${theme.colors.blue[2]};
-    }
-
-    .MuiSlider-rail,
-    .MuiSlider-thumb:hover,
-    .MuiSlider-thumb.Mui-focusVisible {
-      box-shadow: none;
+      height: ${slider.track.height}px;
+      background: ${theme.colors.white};
+      box-shadow: inset -5px -5px 3px rgba(255, 255, 255, 0.2),
+        inset 3px 3px 5px rgba(136, 160, 183, 0.35);
+      border-radius: 4px;
+      opacity: 1;
     }
   `}
 `;

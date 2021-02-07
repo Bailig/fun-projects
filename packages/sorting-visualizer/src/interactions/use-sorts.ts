@@ -1,9 +1,13 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { Bar, useBars } from "./use-bars";
+
+export type SortType = "bubble" | "selection" | "merge" | "quick";
 
 type UseSortDeps = ReturnType<typeof useBars> & {
   array: number[];
 };
+
+const getRandomId = () => Math.floor(Math.random() * 100000);
 
 export const useSorts = ({
   highlight,
@@ -187,6 +191,31 @@ export const useSorts = ({
     await quickSort(bars);
   }, [quickSort]);
 
+  const sortHandlerMap = useMemo(
+    () => ({
+      bubble: handleBubbleSort,
+      selection: handleSelectionSort,
+      merge: handleMergeSort,
+      quick: handleQuickSort,
+    }),
+    [handleBubbleSort, handleMergeSort, handleQuickSort, handleSelectionSort],
+  );
+
+  const sortingId = useRef<number>();
+  const [sortType, setSortType] = useState<SortType>("bubble");
+  const [sorting, setSorting] = useState(false);
+
+  const handleSort = useCallback(async () => {
+    if (sorting) return;
+    setSorting(true);
+    const sortId = getRandomId();
+    sortingId.current = sortId;
+    await sortHandlerMap[sortType]();
+    if (sortingId.current === sortId) {
+      setSorting(false);
+    }
+  }, [sortHandlerMap, sortType, sorting]);
+
   const setBars = useCallback(
     (bars: SVGRectElement[]) => {
       barsRef.current = bars.map((bar, index) => ({
@@ -197,18 +226,17 @@ export const useSorts = ({
     [array],
   );
 
+  const handleSortType = useCallback((s: SortType) => setSortType(s), []);
+
+  const stopSorting = useCallback(() => setSorting(false), []);
+
   return {
     barsRef,
-    sortHandlerMap: {
-      bubble: handleBubbleSort,
-      selection: handleSelectionSort,
-      merge: handleMergeSort,
-      quick: handleQuickSort,
-    },
-    handleBubbleSort,
-    handleSelectionSort,
-    handleMergeSort,
-    handleQuickSort,
+    sorting,
+    sortType,
+    handleSortType,
+    handleSort,
     setBars,
+    stopSorting,
   };
 };

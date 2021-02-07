@@ -1,65 +1,66 @@
 import { useTheme } from "@fun-projects/ui";
-import { randomArray } from "@fun-projects/utils";
 import { scaleLinear } from "d3";
 import React, { FC, useMemo, useRef, useState } from "react";
 import { BarChart, Button, SortingVisualizer } from "../components";
-import { useBars, useSorts } from "../interactions";
+import { SortType, useArray, useBars, useSorts } from "../interactions";
 
-type SortType = "bubble" | "selection" | "merge" | "quick";
 const sortTypes: SortType[] = ["bubble", "selection", "merge", "quick"];
 
 export const SortingVisualizerContainer: FC = () => {
   const theme = useTheme();
   const svgRef = useRef<HTMLDivElement>(null);
-  const numberCountRef = useRef(15);
-  const [array, setArray] = useState(
-    randomArray(numberCountRef.current, numberCountRef.current * 2),
-  );
+  const { arrayLengthRef, array, setRandomArray } = useArray();
   const [speed, setSpeed] = useState(80);
   const waitTime = useMemo(() => scaleLinear([100, 1], [0, 1000])(speed), [
     speed,
   ]);
   const { highlight, unhighlight, swap } = useBars(
-    { default: theme.colors.white, highlight: theme.colors.yellow[0] },
+    { default: theme.colors.primary, highlight: theme.colors.black },
     waitTime,
   );
-  const { sortHandlerMap, setBars } = useSorts({
+  const {
+    sorting,
+    sortType,
+    handleSort,
+    handleSortType,
+    stopSorting,
+    setBars,
+  } = useSorts({
     highlight,
     unhighlight,
     swap,
     array,
   });
-  const [buttonType, setButtonType] = useState<SortType>();
 
   return (
     <SortingVisualizer
-      defaultArrayLength={numberCountRef.current}
+      sorting={sorting}
+      defaultArrayLength={arrayLengthRef.current}
       defaultSpeed={speed}
       chart={<BarChart ref={svgRef} numbers={array} onLoadedBars={setBars} />}
-      buttons={sortTypes.map((bt) => (
+      buttons={sortTypes.map((s) => (
         <Button
-          key={bt}
-          active={buttonType === bt}
-          disabled={buttonType !== undefined}
-          onClick={async () => {
-            setButtonType(bt);
-            await sortHandlerMap[bt]();
-            setButtonType(undefined);
-          }}
+          key={s}
+          color="white"
+          active={sortType === s}
+          disabled={sortType === s}
+          onClick={() => handleSortType(s)}
         >
-          {bt}
+          {s}
         </Button>
       ))}
+      onSort={handleSort}
+      onGenerateNew={() => {
+        stopSorting();
+        setRandomArray();
+      }}
       onArrayLengthChange={(value) => {
-        numberCountRef.current = value;
+        arrayLengthRef.current = value;
+        if (!sorting) {
+          setRandomArray();
+        }
       }}
       onSpeedChange={setSpeed}
-      onGenerateNew={() => {
-        setArray(
-          randomArray(numberCountRef.current, numberCountRef.current * 2),
-        );
-        setButtonType(undefined);
-      }}
     />
   );
 };
